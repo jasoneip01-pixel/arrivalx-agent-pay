@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overview — ArrivalX</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.doc-page { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; }
+.doc-page h1 { font-size: 2rem; margin-bottom: 8px; }
+.doc-page h2 { font-size: 1.4rem; margin: 32px 0 12px; color: var(--accent); }
+.doc-page h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+.doc-page p, .doc-page li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
+.doc-page ul, .doc-page ol { padding-left: 20px; margin-bottom: 16px; }
+.doc-page li { margin-bottom: 4px; }
+.doc-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+.doc-page th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
+.doc-page td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.doc-page code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; color: var(--accent); }
+.doc-page hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.doc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); margin-bottom: 32px; font-size: 0.9rem; }
+.doc-back:hover { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <div class="nav-links">
+    <a href="../index.html#product">Product</a>
+    <a href="../index.html#playground">Playground</a>
+    <a href="../index.html#docs">Docs</a>
+  </div>
+</div></nav>
+
+<main class="doc-page">
+<a href="../index.html" class="doc-back">← Back to Home</a>
+<h1>🚀 ArrivalX — Settlement Layer for the Agent Economy</h1>
+
+<blockquote>x402-compatible · Multi-Jurisdiction Licensed · 5-line SDK</blockquote>
+
+<h2>What is ArrivalX?</h2>
+<p>AI agents are effectively <strong>unbanked</strong>. They cannot open bank accounts, pass KYC, or authorize payments — yet they need to pay for API access, compute, data, and other agents.</p>
+<p>ArrivalX is the <strong>licensed settlement infrastructure</strong> that solves this. Four live money transmission licenses (AU DCE, US MSB, HK MSO, CA MSB). Protocol-agnostic (x402, MPP, AP2). Compliance-first. 5 lines to integrate.</p>
+
+<h2>Documentation</h2>
+<table>
+<tr><th>Document</th><th>What's In It</th></tr>
+<tr><td><a href="product.html">📋 Product Definition</a></td><td>Elevator pitch, competitive analysis, roadmap, falsification conditions, acquisition logic</td></tr>
+<tr><td><a href="api.html">🔧 Agent Integration Guide</a></td><td>5-minute quickstart, full API reference, SDK examples, protocol support, compliance guarantees</td></tr>
+<tr><td><a href="business.html">💰 Business Model</a></td><td>Revenue model, unit economics, growth model, TAM/SAM/SOM, funding strategy, risk factors</td></tr>
+</table>
+
+<h2>Key Links</h2>
+<table>
+<tr><th>Resource</th><th>URL</th></tr>
+<tr><td>🌐 Live Site</td><td><a href="https://jasoneip01-pixel.github.io/arrivalx-agent-pay/">jasoneip01-pixel.github.io/arrivalx-agent-pay</a></td></tr>
+<tr><td>📦 Source Code</td><td><a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay-source">github.com/jasoneip01-pixel/arrivalx-agent-pay-source</a></td></tr>
+<tr><td>🌐 Public Repo</td><td><a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay">github.com/jasoneip01-pixel/arrivalx-agent-pay</a></td></tr>
+</table>
+
+<h2>Tech Stack</h2>
+<table>
+<tr><th>Layer</th><th>Technology</th></tr>
+<tr><td>Settlement</td><td>USDC (Circle) · Base L2 · Solana</td></tr>
+<tr><td>Wallet Infrastructure</td><td>Cobo MPC · Fireblocks</td></tr>
+<tr><td>Compliance</td><td>Regtank · Sumsub</td></tr>
+<tr><td>Blockchain Data</td><td>Elliptic · Chainalysis</td></tr>
+<tr><td>Fiat On/Off Ramp</td><td>ClearBank · BCB Group</td></tr>
+<tr><td>Agent Protocols</td><td>x402 · Stripe MPP · Cobo AP2</td></tr>
+</table>
+
+<h2>Licenses</h2>
+<table>
+<tr><th>Jurisdiction</th><th>License</th><th>Regulator</th></tr>
+<tr><td>🇦🇺 Australia</td><td>Digital Currency Exchange (DCE)</td><td>AUSTRAC</td></tr>
+<tr><td>🇺🇸 United States</td><td>Money Services Business (MSB)</td><td>FinCEN</td></tr>
+<tr><td>🇭🇰 Hong Kong</td><td>Money Service Operator (MSO)</td><td>HK C&amp;ED</td></tr>
+<tr><td>🇨🇦 Canada</td><td>Money Service Business (MSB)</td><td>FINTRAC</td></tr>
+</table>
+
+<hr>
+
+<h2>Team</h2>
+<p>Stable Chain Fintech Limited. Founded 2022. 8 engineers and compliance specialists across Sydney, Singapore, and Hong Kong.</p>
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <span>Stable Chain Fintech Limited</span>
+    <span>🇦🇺 DCE · 🇺🇸 MSB · 🇭🇰 MSO · 🇨🇦 MSB</span>
+  </div>
+</footer>
+</body>
+</html>
