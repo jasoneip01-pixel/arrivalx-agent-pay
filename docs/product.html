@@ -25,15 +25,15 @@
   <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
   <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
   <div class="nav-links">
-    <a href="../index.html#product">Product</a>
-    <a href="../index.html#playground">Playground</a>
-    <a href="../index.html#docs">Docs</a>
+    <a href="../index.html#product" data-en="Product" data-zh="产品">Product</a>
+    <a href="../index.html#playground" data-en="Playground" data-zh="Playground">Playground</a>
+    <a href="../index.html#docs" data-en="Docs" data-zh="文档">Docs</a>
     <button class="lang-toggle" id="langBtn" onclick="toggleLang()">中文</button>
   </div>
 </div></nav>
 
 <nav class="doc-sub-nav-wrap"><div class="doc-sub-nav">
-  <a href="../index.html"><span class="nav-arrow">←</span> Home</a>
+  <a href="../index.html"><span class="nav-arrow">←</span> <span data-en="Home" data-zh="首页">Home</span></a>
   <a href="overview.html" data-en="Overview" data-zh="总览">Overview</a>
   <a href="product.html" class="active" data-en="Product" data-zh="产品定义">Product</a>
   <a href="api.html" data-en="API / SDK" data-zh="API / SDK">API / SDK</a>
@@ -93,10 +93,10 @@
 <h2 id="competitive" data-en="4. Competitive Analysis" data-zh="4. 竞争分析">4. Competitive Analysis</h2>
 <h3 data-en="4.1 Positioning Matrix" data-zh="4.1 定位矩阵">4.1 Positioning Matrix</h3>
 <table>
-<tr><th>Player</th><th data-en="Protocol" data-zh="协议">Protocol</th><th>Wallet</th><th data-en="Compliance" data-zh="合规">Compliance</th><th data-en="Fiat Ramp" data-zh="法币">Fiat Ramp</th><th data-en="Licenses" data-zh="牌照">Licenses</th></tr>
-<tr><td><strong>ArrivalX</strong></td><td data-en="Multi (x402/MPP/AP2)" data-zh="多协议">Multi</td><td data-en="Cobo MPC" data-zh="Cobo MPC">Cobo MPC</td><td>✅ Multi</td><td>✅ 4</td><td data-en="4 live" data-zh="4 张生效">4 live</td></tr>
-<tr><td data-en="Coinbase x402" data-zh="Coinbase">Coinbase x402</td><td>x402 only</td><td>CDP</td><td>❌</td><td>❌</td><td>—</td></tr>
-<tr><td data-en="Stripe MPP" data-zh="Stripe">Stripe MPP</td><td>MPP only</td><td>—</td><td>❌</td><td data-en="Via Stripe" data-zh="通过 Stripe">Via Stripe</td><td>—</td></tr>
+<tr><th data-en="Player" data-zh="玩家">Player</th><th data-en="Protocol" data-zh="协议">Protocol</th><th data-en="Wallet" data-zh="钱包">Wallet</th><th data-en="Compliance" data-zh="合规">Compliance</th><th data-en="Fiat Ramp" data-zh="法币出入金">Fiat Ramp</th><th data-en="Licenses" data-zh="牌照">Licenses</th></tr>
+<tr><td><strong>ArrivalX</strong></td><td data-en="Multi (x402/MPP/AP2)" data-zh="多协议 (x402/MPP/AP2)">Multi</td><td data-en="Cobo MPC" data-zh="Cobo MPC">Cobo MPC</td><td data-en="✅ Multi" data-zh="✅ 多辖区">✅ Multi</td><td data-en="✅ 4 corridors" data-zh="✅ 4 通道">✅ 4</td><td data-en="4 live" data-zh="4 张生效">4 live</td></tr>
+<tr><td data-en="Coinbase x402" data-zh="Coinbase x402">Coinbase x402</td><td data-en="x402 only" data-zh="仅 x402">x402 only</td><td>CDP</td><td>❌</td><td>❌</td><td>—</td></tr>
+<tr><td data-en="Stripe MPP" data-zh="Stripe MPP">Stripe MPP</td><td data-en="MPP only" data-zh="仅 MPP">MPP only</td><td>—</td><td>❌</td><td data-en="Via Stripe" data-zh="通过 Stripe">Via Stripe</td><td>—</td></tr>
 <tr><td data-en="MoonPay" data-zh="MoonPay">MoonPay Agents</td><td>—</td><td data-en="Non-custodial" data-zh="非托管">Non-custodial</td><td>❌</td><td data-en="Crypto only" data-zh="仅加密">Crypto only</td><td>—</td></tr>
 <tr><td>Sapiom</td><td>Custom</td><td>—</td><td>❌</td><td>❌</td><td data-en="None (Seed)" data-zh="无（种子轮）">None</td></tr>
 <tr><td data-en="AWS AgentCore" data-zh="AWS">AWS AgentCore</td><td>x402</td><td data-en="Via Coinbase" data-zh="通过 Coinbase">Via Coinbase</td><td>❌</td><td>❌</td><td>—</td></tr>
@@ -116,7 +116,7 @@
 
 <h2 id="roadmap" data-en="5. Roadmap" data-zh="5. 路线图">5. Roadmap</h2>
 <table>
-<tr><th>Phase</th><th data-en="Timeline" data-zh="时间线">Timeline</th><th data-en="Key Deliverables" data-zh="关键交付">Key Deliverables</th><th>Milestone</th></tr>
+<tr><th data-en="Phase" data-zh="阶段">Phase</th><th data-en="Timeline" data-zh="时间线">Timeline</th><th data-en="Key Deliverables" data-zh="关键交付">Key Deliverables</th><th data-en="Milestone" data-zh="里程碑">Milestone</th></tr>
 <tr><td data-en="1 · MVP" data-zh="1 · MVP">1 · MVP</td><td>M1-M3</td><td data-en="Payment API, x402 Gateway, Agent KYB" data-zh="支付 API、x402 网关、Agent KYB">API, x402, KYB</td><td data-en="100 devs testing" data-zh="100 开发者测试">100 devs</td></tr>
 <tr><td data-en="2 · Multi-Protocol" data-zh="2 · 多协议">2 · Multi</td><td>M4-M6</td><td data-en="MPP Adapter, AP2 Bridge, Fiat Off-ramp" data-zh="MPP 适配器、AP2 桥、法币出金">MPP, AP2, Fiat</td><td data-en="First agent-agent payment" data-zh="首笔 Agent 间支付">1st A2A</td></tr>
 <tr><td data-en="3 · Ecosystem" data-zh="3 · 生态">3 · Ecosystem</td><td>M7-M9</td><td data-en="SDK release, Framework integrations, Seed $5-8M" data-zh="SDK 发布、框架集成、种子轮 5-8M">SDK, Integrations</td><td data-en="500+ devs, $1M+/mo" data-zh="500+ 开发者、月交易 $1M+">500+ devs</td></tr>
@@ -142,7 +142,7 @@
 
 <footer class="footer">
   <div class="footer-bottom">
-    <span>Stable Chain Fintech Limited</span>
+    <span data-en="Stable Chain Fintech Limited" data-zh="Stable Chain Fintech Limited">Stable Chain Fintech Limited</span>
     <span>🇦🇺 DCE · 🇺🇸 MSB · 🇭🇰 MSO · 🇨🇦 MSB</span>
   </div>
 </footer>
