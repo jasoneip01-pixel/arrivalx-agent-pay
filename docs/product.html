@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Definition Spec — ArrivalX</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.doc-page { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; }
+.doc-page h1 { font-size: 2rem; margin-bottom: 8px; }
+.doc-page h2 { font-size: 1.4rem; margin: 32px 0 12px; color: var(--accent); }
+.doc-page h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+.doc-page p, .doc-page li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
+.doc-page ul, .doc-page ol { padding-left: 20px; margin-bottom: 16px; }
+.doc-page li { margin-bottom: 4px; }
+.doc-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+.doc-page th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
+.doc-page td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.doc-page code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+.doc-page pre { background: #000; padding: 16px; border-radius: var(--radius-sm); overflow-x: auto; margin: 12px 0; }
+.doc-page pre code { background: none; padding: 0; }
+.doc-page hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.doc-page blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; background: var(--accent-dim); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.doc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); margin-bottom: 32px; font-size: 0.9rem; }
+.doc-back:hover { color: var(--accent); text-decoration: none; }
+.doc-toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 32px; }
+.doc-toc h3 { margin-top: 0 !important; }
+.doc-toc a { display: block; padding: 3px 0; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <div class="nav-links">
+    <a href="../index.html#product">Product</a>
+    <a href="../index.html#playground">Playground</a>
+    <a href="../index.html#docs">Docs</a>
+  </div>
+</div></nav>
+
+<main class="doc-page">
+<a href="../index.html#docs" class="doc-back">← Back to Docs</a>
+<h1>📋 Product Definition Specification</h1>
+
+<div class="doc-toc">
+<h3>Contents</h3>
+<a href="#elevator">1. Elevator Pitch</a>
+<a href="#problem">2. Problem Statement</a>
+<a href="#definition">3. Product Definition</a>
+<a href="#competitive">4. Competitive Analysis</a>
+<a href="#users">5. Target Users</a>
+<a href="#business">6. Business Model</a>
+<a href="#roadmap">7. Roadmap</a>
+<a href="#falsification">8. Falsification Conditions</a>
+<a href="#acquisition">9. Acquisition Logic</a>
+</div>
+
+<h2 id="elevator">1. Elevator Pitch</h2>
+<blockquote>"AI agents are effectively unbanked. $1.5 trillion in autonomous commerce has no compliance layer. ArrivalX is the licensed settlement infrastructure that lets any agent pay anyone, anywhere—with full regulatory compliance. Four live licenses. Working product. 5 lines to integrate."</blockquote>
+
+<h2 id="problem">2. Problem Statement</h2>
+<h3>Current State</h3>
+<p>Every payment rail in production today assumes a <strong>human</strong> is authorizing the transaction. Credit cards require cardholder verification (3DS, CVV, biometrics). Bank transfers require human-initiated KYC and manual authorization. Payment processors require multi-factor authentication from a person.</p>
+<p>AI agents <strong>cannot</strong> open bank accounts. They cannot pass KYC. They cannot click "Confirm" in a banking app. Yet they need to pay for API access, compute resources, data, and services from other agents.</p>
+
+<h3>The Gap</h3>
+<p>Protocols exist (x402, Stripe MPP, AP2) but nobody provides the <strong>compliance settlement layer</strong> — multi-jurisdiction, licensed, with fiat on/off ramps.</p>
+
+<h3>Why ArrivalX</h3>
+<p>ArrivalX holds <strong>4 money transmission licenses</strong> (AU DCE, US MSB, HK MSO, CA MSB). These are exactly the license types needed for agent payment settlement—not deposit-taking (which agents don't need), but money transmission and currency exchange (which agents need constantly).</p>
+
+<hr>
+
+<h2 id="definition">3. Product Definition</h2>
+<h3>3.1 Core Product</h3>
+<p><strong>ArrivalX Agent Payment Gateway</strong> — a protocol-agnostic, compliance-first settlement infrastructure.</p>
+
+<h3>3.2 Key Capabilities</h3>
+<table>
+<tr><th>Capability</th><th>Description</th></tr>
+<tr><td>x402 Gateway</td><td>Receive HTTP 402 requests, verify payment, settle in USDC</td></tr>
+<tr><td>MPP Adapter</td><td>Integrate with Stripe MPP for card-network agent payments</td></tr>
+<tr><td>AP2 Bridge</td><td>Agent-to-agent settlement via Cobo's AP2 protocol</td></tr>
+<tr><td>Compliance Router</td><td>Auto-route transactions through optimal licensed jurisdiction</td></tr>
+<tr><td>Agent Identity Binding</td><td>Link developer identity → agent → wallet → compliance profile</td></tr>
+<tr><td>AML/CFT Screening</td><td>Real-time Regtank integration, automatic SAR filing</td></tr>
+<tr><td>Fiat On/Off Ramp</td><td>USDC ↔ USD/EUR/HKD/CAD settlement</td></tr>
+<tr><td>Unified SDK</td><td>Python/JS/Go libraries, 5-line integration</td></tr>
+</table>
+
+<h3>3.3 What ArrivalX Is NOT</h3>
+<ul>
+<li>❌ A blockchain or L2</li>
+<li>❌ A new payment protocol (we support existing protocols)</li>
+<li>❌ A consumer neobank or wallet app</li>
+<li>❌ A deposit-taking institution (and we don't need to be)</li>
+</ul>
+
+<hr>
+
+<h2 id="competitive">4. Competitive Analysis</h2>
+<h3>4.1 Positioning Matrix</h3>
+<table>
+<tr><th>Player</th><th>Protocol</th><th>Wallet</th><th>Compliance</th><th>Fiat Ramp</th><th>Licenses</th></tr>
+<tr><td><strong>ArrivalX</strong></td><td>Multi (x402/MPP/AP2)</td><td>Cobo MPC</td><td>✅ Multi</td><td>✅ 4 corridors</td><td>4 live</td></tr>
+<tr><td>Coinbase x402</td><td>x402 only</td><td>CDP</td><td>❌</td><td>❌</td><td>—</td></tr>
+<tr><td>Stripe MPP</td><td>MPP only</td><td>—</td><td>❌</td><td>Via Stripe</td><td>—</td></tr>
+<tr><td>MoonPay Agents</td><td>—</td><td>Non-custodial</td><td>❌</td><td>❌ Crypto only</td><td>—</td></tr>
+<tr><td>Sapiom</td><td>Custom</td><td>—</td><td>❌</td><td>❌</td><td>None (Seed)</td></tr>
+<tr><td>AWS AgentCore</td><td>x402</td><td>Via Coinbase</td><td>❌</td><td>❌</td><td>—</td></tr>
+</table>
+
+<h3>4.2 Moat Analysis</h3>
+<table>
+<tr><th>Moat Type</th><th>Strength</th><th>Time to Replicate</th></tr>
+<tr><td>Regulatory (4 licenses)</td><td>🔴 High</td><td>12-18 months</td></tr>
+<tr><td>Multi-protocol integration</td><td>🟡 Medium</td><td>3-6 months</td></tr>
+<tr><td>Compliance engine</td><td>🟡 Medium</td><td>4-8 months</td></tr>
+<tr><td>Developer ecosystem</td><td>🟢 Low (not yet built)</td><td>2-4 months</td></tr>
+</table>
+<p><strong>Primary moat:</strong> Regulatory licenses. Code can be copied. Licenses cannot.</p>
+
+<hr>
+
+<h2 id="users">5. Target Users</h2>
+<h3>Primary: AI Agent Developers</h3>
+<ul><li>Building agents on LangChain, AI2, Codex, MCP. Need agents to pay for APIs, compute, data. Currently using manual pre-funding or nothing. Pain: agents hit paywalls and stop.</li></ul>
+<h3>Secondary: API/Service Providers</h3>
+<ul><li>SaaS tools, data APIs, compute providers. Want to monetize agent traffic without managing KYC. Pain: agents can't sign up for paid plans.</li></ul>
+<h3>Tertiary: Enterprise Platforms</h3>
+<ul><li>Companies deploying agent fleets internally. Need spending controls, audit trails, compliance. Pain: no off-the-shelf agent payment governance.</li></ul>
+
+<hr>
+
+<h2 id="roadmap">7. Roadmap</h2>
+<table>
+<tr><th>Phase</th><th>Timeline</th><th>Key Deliverables</th><th>Milestone</th></tr>
+<tr><td>1 · MVP</td><td>M1-M3</td><td>Agent Payment API, x402 Gateway, Agent KYB</td><td>100 developers testing</td></tr>
+<tr><td>2 · Multi-Protocol</td><td>M4-M6</td><td>MPP Adapter, AP2 Bridge, Fiat Off-ramp</td><td>First real agent-agent payment</td></tr>
+<tr><td>3 · Ecosystem</td><td>M7-M9</td><td>SDK release, Framework integrations, Seed round ($5-8M)</td><td>500+ devs, $1M+/mo volume</td></tr>
+<tr><td>4 · Scale</td><td>M10-M12</td><td>CaaS, Enterprise dashboard, New licenses</td><td>$10M+/mo volume, 50+ enterprise</td></tr>
+</table>
+
+<hr>
+
+<h2 id="falsification">8. Falsification Conditions</h2>
+<p>This thesis is <strong>falsified</strong> if any of the following occur within 6 months:</p>
+<ol>
+<li>Stripe or Coinbase launches a licensed settlement layer covering ≥3 jurisdictions</li>
+<li>Agent payment volume on x402/MPP stagnates (no 2x growth QoQ)</li>
+<li>Regulatory change makes crypto-native money transmission infeasible in ≥2 of our 4 jurisdictions</li>
+<li>No organic developer interest (≤10 API key requests in first month of public beta)</li>
+</ol>
+
+<hr>
+
+<h2 id="acquisition">9. Acquisition Logic</h2>
+<p>If ArrivalX proves PMF for the agent compliance settlement layer, the most likely exit is acquisition by Stripe, Coinbase, or Ramp. Target: <strong>18-24 months</strong> to acquisition signal.</p>
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <span>Stable Chain Fintech Limited</span>
+    <span>🇦🇺 DCE · 🇺🇸 MSB · 🇭🇰 MSO · 🇨🇦 MSB</span>
+  </div>
+</footer>
+</body>
+</html>
