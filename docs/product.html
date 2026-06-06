@@ -70,9 +70,9 @@
 <h3 data-en="3.2 Key Capabilities" data-zh="3.2 核心能力">3.2 Key Capabilities</h3>
 <table>
 <tr><th data-en="Capability" data-zh="能力">Capability</th><th data-en="Description" data-zh="描述">Description</th></tr>
-<tr><td>x402 Gateway</td><td data-en="Receive HTTP 402 requests, verify payment, settle in USDC" data-zh="接收 HTTP 402 请求，验证支付，以 USDC 结算">Receive HTTP 402 requests, verify payment, settle in USDC</td></tr>
-<tr><td>MPP Adapter</td><td data-en="Integrate with Stripe MPP for card-network agent payments" data-zh="接入 Stripe MPP，支持卡网络 Agent 支付">Integrate with Stripe MPP for card-network agent payments</td></tr>
-<tr><td>AP2 Bridge</td><td data-en="Agent-to-agent settlement via Cobo's AP2 protocol" data-zh="通过 Cobo AP2 协议实现 Agent 间结算">Agent-to-agent settlement via Cobo's AP2 protocol</td></tr>
+<tr><td data-en="x402 Gateway" data-zh="x402 网关">x402 Gateway</td><td data-en="Receive HTTP 402 requests, verify payment, settle in USDC" data-zh="接收 HTTP 402 请求，验证支付，以 USDC 结算">Receive HTTP 402 requests, verify payment, settle in USDC</td></tr>
+<tr><td data-en="MPP Adapter" data-zh="MPP 适配器">MPP Adapter</td><td data-en="Integrate with Stripe MPP for card-network agent payments" data-zh="接入 Stripe MPP，支持卡网络 Agent 支付">Integrate with Stripe MPP for card-network agent payments</td></tr>
+<tr><td data-en="AP2 Bridge" data-zh="AP2 桥接">AP2 Bridge</td><td data-en="Agent-to-agent settlement via Cobo's AP2 protocol" data-zh="通过 Cobo AP2 协议实现 Agent 间结算">Agent-to-agent settlement via Cobo's AP2 protocol</td></tr>
 <tr><td data-en="Compliance Router" data-zh="合规路由器">Compliance Router</td><td data-en="Auto-route transactions through optimal licensed jurisdiction" data-zh="自动将交易路由至最优持牌司法辖区">Auto-route transactions through optimal licensed jurisdiction</td></tr>
 <tr><td data-en="Agent Identity Binding" data-zh="Agent 身份绑定">Agent Identity Binding</td><td data-en="Link developer identity → agent → wallet → compliance profile" data-zh="链接开发者身份 → Agent → 钱包 → 合规档案">Link developer identity → agent → wallet → compliance profile</td></tr>
 <tr><td data-en="AML/CFT Screening" data-zh="AML/CFT 筛查">AML/CFT Screening</td><td data-en="Real-time Regtank integration, automatic SAR filing" data-zh="实时 Regtank 集成，自动提交可疑活动报告">Real-time Regtank integration, automatic SAR filing</td></tr>
@@ -98,7 +98,7 @@
 <tr><td data-en="Coinbase x402" data-zh="Coinbase x402">Coinbase x402</td><td data-en="x402 only" data-zh="仅 x402">x402 only</td><td>CDP</td><td>❌</td><td>❌</td><td>—</td></tr>
 <tr><td data-en="Stripe MPP" data-zh="Stripe MPP">Stripe MPP</td><td data-en="MPP only" data-zh="仅 MPP">MPP only</td><td>—</td><td>❌</td><td data-en="Via Stripe" data-zh="通过 Stripe">Via Stripe</td><td>—</td></tr>
 <tr><td data-en="MoonPay" data-zh="MoonPay">MoonPay Agents</td><td>—</td><td data-en="Non-custodial" data-zh="非托管">Non-custodial</td><td>❌</td><td data-en="Crypto only" data-zh="仅加密">Crypto only</td><td>—</td></tr>
-<tr><td>Sapiom</td><td>Custom</td><td>—</td><td>❌</td><td>❌</td><td data-en="None (Seed)" data-zh="无（种子轮）">None</td></tr>
+<tr><td data-en="Sapiom" data-zh="Sapiom">Sapiom</td><td data-en="Custom" data-zh="自研">Custom</td><td>—</td><td>❌</td><td>❌</td><td data-en="None (Seed)" data-zh="无（种子轮）">None</td></tr>
 <tr><td data-en="AWS AgentCore" data-zh="AWS">AWS AgentCore</td><td>x402</td><td data-en="Via Coinbase" data-zh="通过 Coinbase">Via Coinbase</td><td>❌</td><td>❌</td><td>—</td></tr>
 </table>
 
@@ -117,10 +117,10 @@
 <h2 id="roadmap" data-en="5. Roadmap" data-zh="5. 路线图">5. Roadmap</h2>
 <table>
 <tr><th data-en="Phase" data-zh="阶段">Phase</th><th data-en="Timeline" data-zh="时间线">Timeline</th><th data-en="Key Deliverables" data-zh="关键交付">Key Deliverables</th><th data-en="Milestone" data-zh="里程碑">Milestone</th></tr>
-<tr><td data-en="1 · MVP" data-zh="1 · MVP">1 · MVP</td><td>M1-M3</td><td data-en="Payment API, x402 Gateway, Agent KYB" data-zh="支付 API、x402 网关、Agent KYB">API, x402, KYB</td><td data-en="100 devs testing" data-zh="100 开发者测试">100 devs</td></tr>
-<tr><td data-en="2 · Multi-Protocol" data-zh="2 · 多协议">2 · Multi</td><td>M4-M6</td><td data-en="MPP Adapter, AP2 Bridge, Fiat Off-ramp" data-zh="MPP 适配器、AP2 桥、法币出金">MPP, AP2, Fiat</td><td data-en="First agent-agent payment" data-zh="首笔 Agent 间支付">1st A2A</td></tr>
-<tr><td data-en="3 · Ecosystem" data-zh="3 · 生态">3 · Ecosystem</td><td>M7-M9</td><td data-en="SDK release, Framework integrations, Seed $5-8M" data-zh="SDK 发布、框架集成、种子轮 5-8M">SDK, Integrations</td><td data-en="500+ devs, $1M+/mo" data-zh="500+ 开发者、月交易 $1M+">500+ devs</td></tr>
-<tr><td data-en="4 · Scale" data-zh="4 · 规模化">4 · Scale</td><td>M10-M12</td><td data-en="CaaS, Enterprise dashboard, New licenses" data-zh="CaaS、企业面板、新牌照">CaaS, Enterprise</td><td data-en="$10M+/mo, 50+ enterprise" data-zh="月交易 $10M+、50+ 企业">$10M+/mo</td></tr>
+<tr><td data-en="1 · MVP" data-zh="1 · MVP">1 · MVP</td><td data-en="M1-M3" data-zh="M1-M3">M1-M3</td><td data-en="Payment API, x402 Gateway, Agent KYB" data-zh="支付 API、x402 网关、Agent KYB">API, x402, KYB</td><td data-en="100 devs testing" data-zh="100 开发者测试">100 devs</td></tr>
+<tr><td data-en="2 · Multi-Protocol" data-zh="2 · 多协议">2 · Multi</td><td data-en="M4-M6" data-zh="M4-M6">M4-M6</td><td data-en="MPP Adapter, AP2 Bridge, Fiat Off-ramp" data-zh="MPP 适配器、AP2 桥、法币出金">MPP, AP2, Fiat</td><td data-en="First agent-agent payment" data-zh="首笔 Agent 间支付">1st A2A</td></tr>
+<tr><tr><td data-en="3 · Ecosystem" data-zh="3 · 生态">3 · Ecosystem</td><td data-en="M7-M9" data-zh="M7-M9">M7-M9</td><td data-en="SDK release, Framework integrations, Seed $5-8M" data-zh="SDK 发布、框架集成、种子轮 5-8M">SDK, Integrations</td><td data-en="500+ devs, $1M+/mo" data-zh="500+ 开发者、月交易 $1M+">500+ devs</td></tr>
+<tr><tr><td data-en="4 · Scale" data-zh="4 · 规模化">4 · Scale</td><td data-en="M10-M12" data-zh="M10-M12">M10-M12</td><td data-en="CaaS, Enterprise dashboard, New licenses" data-zh="CaaS、企业面板、新牌照">CaaS, Enterprise</td><td data-en="$10M+/mo, 50+ enterprise" data-zh="月交易 $10M+、50+ 企业">$10M+/mo</td></tr>
 </table>
 
 <hr>
