@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo — ArrivalX Settlement Layer</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ===== Demo-specific styles ===== */
+.demo-page {
+  padding-top: 70px;
+  min-height: 100vh;
+}
+.demo-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+/* Scenario selector */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.scenario-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.scenario-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.scenario-card.active {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(0,255,136,0.08), rgba(0,0,0,0.3));
+  box-shadow: 0 0 20px rgba(0,255,136,0.1);
+}
+.scenario-card .sc-icon { font-size: 1.5rem; margin-bottom: 4px; }
+.scenario-card .sc-title { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.scenario-card .sc-desc { font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px; line-height: 1.4; }
+.scenario-card .sc-protocol {
+  display: inline-block;
+  font-size: 0.68rem;
+  padding: 1px 8px;
+  border-radius: 4px;
+  background: rgba(0,255,136,0.1);
+  color: var(--accent);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Demo split layout */
+.demo-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media (max-width: 860px) { .demo-layout { grid-template-columns: 1fr; } }
+
+/* Left panel - flow viz */
+.flow-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 400px;
+}
+.flow-panel h3 { margin-bottom: 16px; font-size: 1rem; }
+
+/* Flow diagram */
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid transparent;
+  transition: all 0.4s;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.flow-step.active {
+  border-color: var(--accent);
+  background: rgba(0,255,136,0.06);
+  color: var(--text);
+}
+.flow-step.done {
+  border-color: rgba(0,255,136,0.3);
+  background: rgba(0,255,136,0.04);
+  color: var(--text);
+}
+.flow-step.fail {
+  border-color: #ff4444;
+  background: rgba(255,68,68,0.06);
+  color: #ff6666;
+}
+.flow-step .step-num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+.flow-step.active .step-num { background: var(--accent); color: #000; }
+.flow-step.done .step-num { background: var(--accent); color: #000; }
+.flow-step.fail .step-num { background: #ff4444; color: #fff; }
+.flow-step .step-icon { font-size: 1rem; }
+.flow-step .step-label { flex: 1; }
+.flow-step .step-status { font-size: 0.75rem; }
+
+/* Right panel - output & controls */
+.output-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.output-panel h3 { margin-bottom: 12px; font-size: 1rem; }
+
+/* Controls */
+.demo-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.demo-controls select, .demo-controls input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+}
+.demo-controls select { flex: 1; min-width: 120px; }
+.demo-controls input { width: 100px; }
+.demo-controls button {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: opacity 0.2s;
+}
+.demo-controls button:hover { opacity: 0.85; }
+.demo-controls button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Log output */
+.demo-log {
+  flex: 1;
+  background: #0a0a0a;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'SF Mono', 'Cascadia Code', monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  overflow-y: auto;
+  min-height: 260px;
+  max-height: 400px;
+}
+.log-line {
+  padding: 2px 0;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+.log-line .ts { color: #666; margin-right: 8px; }
+.log-line.info { color: #9bb; }
+.log-line.success { color: var(--accent); }
+.log-line.warn { color: #ffaa44; }
+.log-line.fail { color: #ff4444; }
+.log-line.highlight { color: #fff; background: rgba(0,255,136,0.05); padding: 2px 6px; border-radius: 4px; }
+
+/* Result card */
+.demo-result {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  display: none;
+}
+.demo-result.show { display: block; }
+.demo-result.success {
+  background: rgba(0,255,136,0.06);
+  border: 1px solid rgba(0,255,136,0.2);
+  color: var(--accent);
+}
+.demo-result.fail {
+  background: rgba(255,68,68,0.06);
+  border: 1px solid rgba(255,68,68,0.2);
+  color: #ff6666;
+}
+.demo-result .res-row { display: flex; justify-content: space-between; padding: 2px 0; }
+.demo-result .res-label { color: var(--text-secondary); }
+.demo-result .res-value { color: var(--text); font-weight: 600; }
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* Scenario description banner */
+.scenario-banner {
+  background: linear-gradient(135deg, rgba(0,255,136,0.05), rgba(0,0,0,0.2));
+  border: 1px solid rgba(0,255,136,0.1);
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.scenario-banner strong { color: var(--accent); }
+
+/* Fee breakdown */
+.fee-table {
+  width: 100%;
+  font-size: 0.8rem;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.fee-table th {
+  text-align: left;
+  padding: 4px 8px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.fee-table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.fee-table td:last-child { text-align: right; font-weight: 600; }
+.fee-table .total td { border-top: 1px solid var(--accent); color: var(--accent); font-weight: 700; }
+
+/* Route visualization */
+.route-viz {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.route-node {
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+.route-node.active-node {
+  border-color: var(--accent);
+  background: rgba(0,255,136,0.06);
+  color: var(--accent);
+}
+.route-arrow { color: var(--text-secondary); font-size: 0.7rem; }
+
+/* Auto mode toggle */
+.auto-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.auto-toggle input { accent-color: var(--accent); }
+
+/* Compare mode */
+.compare-table {
+  width: 100%;
+  font-size: 0.78rem;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.compare-table th {
+  text-align: left;
+  padding: 6px 8px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+.compare-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.compare-table td:last-child { text-align: right; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="nav-inner">
+  <a href="index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <div class="nav-links">
+    <a href="index.html#product" data-en="Product" data-zh="产品">Product</a>
+    <a href="index.html#playground" data-en="Playground" data-zh="Playground">Playground</a>
+    <a href="index.html#architecture" data-en="Architecture" data-zh="架构">Architecture</a>
+    <a href="index.html#compliance" data-en="Compliance" data-zh="合规">Compliance</a>
+    <a href="index.html#docs" data-en="Docs" data-zh="文档">Docs</a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()" data-en="中文" data-zh="English">中文</button>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</div></nav>
+
+<main class="demo-page">
+<div class="demo-container">
+
+  <h1 style="margin-bottom:4px;" data-en="🧪 Interactive Demo" data-zh="🧪 交互演示">🧪 Interactive Demo</h1>
+  <p style="color:var(--text-secondary);margin-bottom:24px;font-size:0.9rem;" 
+     data-en="Explore how ArrivalX settles agent payments across 6 real-world scenarios."
+     data-zh="探索 ArrivalX 在 6 个真实场景中如何处理 Agent 支付结算。">
+    Explore how ArrivalX settles agent payments across 6 real-world scenarios.
+  </p>
+
+  <!-- Scenario selector -->
+  <div class="scenario-grid" id="scenarioGrid"></div>
+
+  <!-- Scenario banner -->
+  <div class="scenario-banner" id="scenarioBanner"></div>
+
+  <!-- Demo layout -->
+  <div class="demo-layout">
+    <!-- Left: Flow visualization -->
+    <div class="flow-panel">
+      <h3 data-en="⚡ Transaction Flow" data-zh="⚡ 交易流程">⚡ Transaction Flow</h3>
+      <div class="flow-steps" id="flowSteps"></div>
+      <div id="routeViz" style="margin-top:8px;"></div>
+      <div id="feeBreakdown" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- Right: Controls + logs -->
+    <div class="output-panel">
+      <h3 data-en="🎮 Simulation" data-zh="🎮 模拟控制台">🎮 Simulation</h3>
+      <div class="demo-controls">
+        <select id="demoAmount">
+          <option value="0.50">$0.50 USDC</option>
+          <option value="5.00">$5.00 USDC</option>
+          <option value="50.00" selected>$50.00 USDC</option>
+          <option value="500.00">$500.00 USDC</option>
+          <option value="5000.00">$5,000.00 USDC</option>
+        </select>
+        <button id="demoRunBtn" onclick="runDemo()" data-en="▶ Run Simulation" data-zh="▶ 运行模拟">▶ Run Simulation</button>
+        <label class="auto-toggle">
+          <input type="checkbox" id="autoMode" checked> <span data-en="Auto-play" data-zh="自动播放">Auto</span>
+        </label>
+      </div>
+      <div class="demo-log" id="demoLog">
+        <div class="log-line"><span class="ts">⏎</span> Select a scenario and run the simulation.</div>
+      </div>
+      <div class="demo-result" id="demoResult"></div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script src="docs/docs.js"></script>
+<script>
+// ===== Demo Engine =====
+
+const lang = () => document.documentElement.getAttribute('data-lang') || 'en';
+const t = (en, zh) => lang() === 'en' ? en : zh;
+
+// ===== 6 Scenarios =====
+const SCENARIOS = [
+  {
+    id: 'x402-api',
+    icon: '🤖',
+    protocol: 'x402',
+    titleEn: 'Agent → API',
+    titleZh: 'Agent 调用 API',
+    descEn: 'AI agent hits a paid API endpoint, receives HTTP 402, auto-pays in USDC.',
+    descZh: 'AI Agent 调用付费 API，收到 HTTP 402 后自动以 USDC 支付。',
+    bannerEn: '<strong>🤖 x402 Flow:</strong> Agent requests premium data → API returns <code>402 Payment Required</code> → ArrivalX handles payment & compliance → API delivers data.',
+    bannerZh: '<strong>🤖 x402 流程：</strong>Agent 请求付费数据 → API 返回 <code>402 Payment Required</code> → ArrivalX 处理支付与合规 → API 交付数据。',
+    counterparty: 'api',
+    jurisdiction: 'US',
+    steps: [
+      { icon: '🤖', en: 'Agent sends API request', zh: 'Agent 发送 API 请求' },
+      { icon: '📡', en: 'API responds HTTP 402', zh: 'API 响应 HTTP 402' },
+      { icon: '🔗', en: 'ArrivalX receives x402 handshake', zh: 'ArrivalX 接收 x402 握手' },
+      { icon: '🔍', en: 'AML/CFT screening', zh: 'AML/CFT 筛查' },
+      { icon: '🌐', en: 'Route through US (FinCEN MSB)', zh: '路由至美国 (FinCEN MSB)' },
+      { icon: '✅', en: 'Settle: USDC → USD, deliver API key', zh: '结算：USDC → USD, 交付 API 密钥' }
+    ],
+    route: ['Agent', 'ArrivalX Gateway', 'FinCEN MSB', 'API Provider'],
+    fees: [
+      { labelEn: 'Base Processing', labelZh: '基础处理费', pct: '0.5%', flat: '$0.05', usd: true },
+      { labelEn: 'Compliance Screening', labelZh: '合规筛查', pct: '—', flat: '$0.02', usd: true },
+      { labelEn: 'Network (USDC)', labelZh: '网络费 (USDC)', pct: '—', flat: '<$0.01', usd: true },
+      { labelEn: 'FX (USDC → USD)', labelZh: '汇兑 (USDC → USD)', pct: '0.1%', flat: '', usd: true }
+    ],
+    resultEn: '✅ API access granted. Agent consumed 0.5 compute credits.',
+    resultZh: '✅ API 访问已授权。Agent 消耗了 0.5 计算积分。',
+  },
+  {
+    id: 'mpp-merchant',
+    icon: '🏪',
+    protocol: 'MPP',
+    titleEn: 'Agent → Merchant',
+    titleZh: 'Agent 向商户支付',
+    descEn: 'Agent buys GPU compute via Stripe MPP, merchant receives fiat USD.',
+    descZh: 'Agent 通过 Stripe MPP 购买 GPU 算力，商户收到法币 USD。',
+    bannerEn: '<strong>🏪 MPP Flow:</strong> Agent needs GPU compute → Stripe MPP initiates payment → ArrivalX screens & settles → Merchant receives USD in bank account.',
+    bannerZh: '<strong>🏪 MPP 流程：</strong>Agent 需要 GPU 算力 → Stripe MPP 发起支付 → ArrivalX 筛查并结算 → 商户银行账户收到 USD。',
+    counterparty: 'compute',
+    jurisdiction: 'US',
+    steps: [
+      { icon: '🤖', en: 'Agent requests GPU compute', zh: 'Agent 请求 GPU 算力' },
+      { icon: '💳', en: 'Stripe MPP authorizes via card network', zh: 'Stripe MPP 通过卡网络授权' },
+      { icon: '🔗', en: 'ArrivalX receives MPP settlement request', zh: 'ArrivalX 接收 MPP 结算请求' },
+      { icon: '🔍', en: 'AML/CFT + merchant KYB', zh: 'AML/CFT + 商户 KYB' },
+      { icon: '🌐', en: 'Route through optimal jurisdiction', zh: '路由至最优司法辖区' },
+      { icon: '🏦', en: 'Settle: USDC → USD → merchant bank', zh: '结算：USDC → USD → 商户银行' }
+    ],
+    route: ['Agent', 'Stripe MPP', 'ArrivalX Gateway', 'FinCEN MSB', 'Merchant Bank'],
+    fees: [
+      { labelEn: 'Stripe MPP Fee', labelZh: 'Stripe MPP 费用', pct: '2.9%', flat: '$0.30', usd: true },
+      { labelEn: 'Compliance Screening', labelZh: '合规筛查', pct: '—', flat: '$0.02', usd: true },
+      { labelEn: 'Settlement (USDC→USD)', labelZh: '结算 (USDC→USD)', pct: '0.5%', flat: '', usd: true },
+      { labelEn: 'FX', labelZh: '汇兑', pct: '0.1%', flat: '', usd: true }
+    ],
+    resultEn: '✅ Compute provisioned. Merchant receives USD settlement (T+0).',
+    resultZh: '✅ 算力已分配。商户收到 USD 结算 (T+0)。',
+  },
+  {
+    id: 'ap2-agent',
+    icon: '🤝',
+    protocol: 'AP2',
+    titleEn: 'Agent → Agent',
+    titleZh: 'Agent 间支付',
+    descEn: 'Two AI agents negotiate and settle a service contract autonomously.',
+    descZh: '两个 AI Agent 自主协商并结算服务合约。',
+    bannerEn: '<strong>🤝 AP2 Flow:</strong> Agent A requests service from Agent B → Both sign via AP2 → Auto-settlement with compliance → Zero human touch.',
+    bannerZh: '<strong>🤝 AP2 流程：</strong>Agent A 请求 Agent B 的服务 → 双方通过 AP2 签名 → 自动合规结算 → 零人工介入。',
+    counterparty: 'agent',
+    jurisdiction: 'HK',
+    steps: [
+      { icon: '🤖', en: 'Agent A requests data processing', zh: 'Agent A 请求数据处理服务' },
+      { icon: '🤖', en: 'Agent B quotes 50 USDC via AP2', zh: 'Agent B 通过 AP2 报价 50 USDC' },
+      { icon: '📝', en: 'Both sign AP2 service agreement', zh: '双方签署 AP2 服务协议' },
+      { icon: '🔗', en: 'ArrivalX validates & screens', zh: 'ArrivalX 验证并筛查' },
+      { icon: '🌐', en: 'Route through HK (MSO)', zh: '路由至香港 (MSO)' },
+      { icon: '✅', en: 'USDC settles: Agent A → Agent B', zh: 'USDC 结算：Agent A → Agent B' }
+    ],
+    route: ['Agent A', 'ArrivalX Gateway', 'HK MSO', 'Agent B'],
+    fees: [
+      { labelEn: 'AP2 Protocol Fee', labelZh: 'AP2 协议费', pct: '0.3%', flat: '', usd: true },
+      { labelEn: 'Compliance (both sides)', labelZh: '合规（双方）', pct: '—', flat: '$0.04', usd: true },
+      { labelEn: 'Settlement', labelZh: '结算费', pct: '0.5%', flat: '', usd: true }
+    ],
+    resultEn: '✅ Agent B processed 2.3GB data. Payment settled in 12s.',
+    resultZh: '✅ Agent B 处理了 2.3GB 数据。支付在 12 秒内结算。',
+  },
+  {
+    id: 'cross-border',
+    icon: '🌍',
+    protocol: 'x402+MPP',
+    titleEn: '🌍 Cross-Border',
+    titleZh: '🌍 跨境支付',
+    descEn: 'US-based agent pays HK compute provider, multi-jurisdiction routing.',
+    descZh: '美国 Agent 向香港算力提供商付款，多司法辖区路由。',
+    bannerEn: '<strong>🌍 Cross-Border:</strong> US agent → x402 initiation → ArrivalX routes through HK MSO for optimal compliance → FX conversion → HK provider receives HKD.',
+    bannerZh: '<strong>🌍 跨境：</strong>美国 Agent → x402 发起 → ArrivalX 路由至香港 MSO 最优合规 → 汇兑转换 → 香港提供商收到 HKD。',
+    counterparty: 'compute',
+    jurisdiction: 'HK',
+    steps: [
+      { icon: '🤖', en: 'US Agent requests HK compute', zh: '美国 Agent 请求香港算力' },
+      { icon: '📡', en: 'x402 handshake with HK endpoint', zh: '与香港端点 x402 握手' },
+      { icon: '🔗', en: 'ArrivalX receives & routes', zh: 'ArrivalX 接收并路由' },
+      { icon: '🌐', en: 'Route through HK MSO (optimal)', zh: '路由至香港 MSO（最优）' },
+      { icon: '💱', en: 'FX: USDC → HKD', zh: '汇兑：USDC → HKD' },
+      { icon: '🏦', en: 'Settle: HKD to HK provider', zh: '结算：HKD 至香港提供商' }
+    ],
+    route: ['US Agent', 'ArrivalX Gateway', 'US FinCEN MSB', 'HK MSO', 'HK Provider'],
+    fees: [
+      { labelEn: 'Originating (US)', labelZh: '发起方 (US)', pct: '0.5%', flat: '', usd: true },
+      { labelEn: 'Destination (HK)', labelZh: '接收方 (HK)', pct: '0.3%', flat: '', usd: true },
+      { labelEn: 'FX: USDC → HKD', labelZh: '汇兑：USDC → HKD', pct: '0.15%', flat: '', usd: true },
+      { labelEn: 'Compliance (dual-juris)', labelZh: '合规（双辖区）', pct: '—', flat: '$0.06', usd: true }
+    ],
+    resultEn: '✅ HK provider received 386.42 HKD. Route: US → HK (2 jurisdictions).',
+    resultZh: '✅ 香港提供商收到 386.42 HKD。路由：美国 → 香港（2 司法辖区）。',
+  },
+  {
+    id: 'compliance-fail',
+    icon: '⚠️',
+    protocol: 'x402',
+    titleEn: 'Compliance Flag',
+    titleZh: '合规拦截',
+    descEn: 'High-risk transaction triggers AML alert, payment queued for review.',
+    descZh: '高风险交易触发 AML 告警，支付进入待审核队列。',
+    bannerEn: '<strong>⚠️ Compliance Fail:</strong> Agent attempts $5,000 payment → AML score exceeds threshold → Payment flagged → SAR auto-filed → Pending human review.',
+    bannerZh: '<strong>⚠️ 合规拦截：</strong>Agent 尝试支付 $5,000 → AML 评分超阈值 → 交易标记 → 自动申报可疑活动报告 → 等待人工审核。',
+    counterparty: 'saas',
+    jurisdiction: 'US',
+    steps: [
+      { icon: '🤖', en: 'Agent initiates $5,000 payment', zh: 'Agent 发起 $5,000 支付' },
+      { icon: '🔗', en: 'x402 handshake received', zh: '收到 x402 握手' },
+      { icon: '🔍', en: 'Regtank AML screening', zh: 'Regtank AML 筛查' },
+      { icon: '⚠️', en: '⚠️ Risk score 72/100 — FLAGGED', zh: '⚠️ 风险评分 72/100 — 标记' },
+      { icon: '📋', en: 'SAR automatically filed', zh: '自动申报可疑活动报告' },
+      { icon: '⏳', en: 'Payment queued for review', zh: '支付进入待审核队列' }
+    ],
+    route: ['Agent', 'ArrivalX Gateway', '⚠️ Blocked (Compliance)', 'Pending Review'],
+    fees: [],
+    resultEn: '⏳ Payment blocked. SAR reference: SAR-20260606-0842. Reviewing.',
+    resultZh: '⏳ 支付已拦截。SAR 编号：SAR-20260606-0842。审核中。',
+    fail: true
+  },
+  {
+    id: 'batch',
+    icon: '📦',
+    protocol: 'MPP+AP2',
+    titleEn: 'Batch Settlement',
+    titleZh: '批量结算',
+    descEn: '50 micro-payments aggregated into a single on-chain settlement.',
+    descZh: '50 笔微支付汇总为单次链上结算。',
+    bannerEn: '<strong>📦 Batch Settlement:</strong> 50 agents make $0.50 micro-payments → Aggregated = $25 → Single on-chain tx → $22.49 net to merchant after fees.',
+    bannerZh: '<strong>📦 批量结算：</strong>50 个 Agent 各支付 $0.50 → 汇总 $25 → 单次链上交易 → 商户净收 $22.49。',
+    counterparty: 'saas',
+    jurisdiction: 'CA',
+    steps: [
+      { icon: '📦', en: '50 micro-payments received ($0.50 each)', zh: '收到 50 笔微支付（每笔 $0.50）' },
+      { icon: '🔗', en: 'ArrivalX aggregates batch', zh: 'ArrivalX 汇总批量' },
+      { icon: '🔍', en: 'Batch compliance screening', zh: '批量合规筛查' },
+      { icon: '🌐', en: 'Route through CA (FINTRAC MSB)', zh: '路由至加拿大 (FINTRAC MSB)' },
+      { icon: '💰', en: 'Settle: 50tx → 1 on-chain tx', zh: '结算：50 笔 → 1 次链上交易' },
+      { icon: '✅', en: 'Merchant receives net settlement', zh: '商户收到净结算款' }
+    ],
+    route: ['50 Agents', 'ArrivalX Aggregator', 'FINTRAC MSB', 'Merchant'],
+    fees: [
+      { labelEn: 'Per-tx processing (×50)', labelZh: '单笔处理费 (×50)', pct: '—', flat: '$2.50 (50×$0.05)', usd: true },
+      { labelEn: 'Batch compliance', labelZh: '批量合规', pct: '—', flat: '$0.05', usd: true, note: t('(bulk discount)', '(批量折扣)') },
+      { labelEn: 'On-chain settlement', labelZh: '链上结算', pct: '—', flat: '$0.01', usd: true },
+      { labelEn: 'Savings vs individual', labelZh: '相比单笔节省', pct: '—', flat: '-$2.44', usd: true, save: true }
+    ],
+    resultEn: '✅ 50 tx → 1 tx. Saved $2.44 in gas fees. Net: $22.49 to merchant.',
+    resultZh: '✅ 50 笔 → 1 笔。节省 $2.44 Gas 费。商户净收 $22.49。',
+  }
+];
+
+const COUNTERPARTIES = {
+  api: 'api.dataprovider.io',
+  compute: 'gpu.rent',
+  agent: 'agent.market',
+  saas: 'saas.vendor.io'
+};
+
+// State
+let activeScenario = 0;
+let simRunning = false;
+let simTimer = null;
+
+// Initialize
+function init() {
+  renderScenarios();
+  selectScenario(0);
+}
+
+function renderScenarios() {
+  const grid = document.getElementById('scenarioGrid');
+  grid.innerHTML = '';
+  SCENARIOS.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'scenario-card' + (i === 0 ? ' active' : '');
+    card.dataset.index = i;
+    card.innerHTML = `
+      <div class="sc-icon">${s.icon}</div>
+      <div class="sc-title">${t(s.titleEn, s.titleZh)}</div>
+      <div class="sc-desc">${t(s.descEn, s.descZh)}</div>
+      <span class="sc-protocol">${s.protocol}</span>
+    `;
+    card.onclick = () => selectScenario(i);
+    grid.appendChild(card);
+  });
+}
+
+function selectScenario(i) {
+  activeScenario = i;
+  document.querySelectorAll('.scenario-card').forEach((c, j) => {
+    c.classList.toggle('active', j === i);
+  });
+  const s = SCENARIOS[i];
+  document.getElementById('scenarioBanner').innerHTML = t(s.bannerEn, s.bannerZh);
+  renderFlowSteps(s);
+  resetDemo();
+}
+
+function renderFlowSteps(s) {
+  const container = document.getElementById('flowSteps');
+  container.innerHTML = '';
+  s.steps.forEach((step, i) => {
+    const div = document.createElement('div');
+    div.className = 'flow-step';
+    div.id = 'fs-' + i;
+    div.innerHTML = `
+      <span class="step-num">${i + 1}</span>
+      <span class="step-icon">${step.icon}</span>
+      <span class="step-label">${t(step.en, step.zh)}</span>
+      <span class="step-status" id="fs-status-${i}"></span>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function resetDemo() {
+  if (simTimer) { clearTimeout(simTimer); simTimer = null; }
+  simRunning = false;
+  document.getElementById('demoRunBtn').disabled = false;
+  document.getElementById('demoRunBtn').textContent = t('▶ Run Simulation', '▶ 运行模拟');
+  document.getElementById('demoResult').className = 'demo-result';
+  document.getElementById('demoResult').style.display = 'none';
+  document.getElementById('demoLog').innerHTML = '<div class="log-line"><span class="ts">⏎</span> ' + t('Select a scenario and run the simulation.', '选择场景后运行模拟。') + '</div>';
+  document.getElementById('routeViz').innerHTML = '';
+  document.getElementById('feeBreakdown').innerHTML = '';
+  document.querySelectorAll('.flow-step').forEach(el => { el.className = 'flow-step'; });
+  document.querySelectorAll('.flow-step .step-status').forEach(el => { el.textContent = ''; });
+}
+
+function renderRoute(s) {
+  const viz = document.getElementById('routeViz');
+  viz.innerHTML = '<div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:6px;font-weight:500;">' + t('📍 Route', '📍 路由') + '</div><div class="route-viz">';
+  s.route.forEach((node, i) => {
+    if (i > 0) viz.innerHTML += '<span class="route-arrow">→</span>';
+    viz.innerHTML += '<span class="route-node" id="rn-' + i + '">' + node + '</span>';
+  });
+  viz.innerHTML += '</div>';
+}
+
+function renderFeeTable(s) {
+  if (!s.fees.length) {
+    document.getElementById('feeBreakdown').innerHTML = '';
+    return;
+  }
+  const totalUsd = s.fees.reduce((sum, f) => {
+    const flatMatch = f.flat.match(/[\d.]+/);
+    return sum + (flatMatch ? parseFloat(flatMatch[0]) : 0);
+  }, 0);
+  const totalPct = s.fees.reduce((sum, f) => {
+    const pctMatch = f.pct.match(/[\d.]+/);
+    return sum + (pctMatch ? parseFloat(pctMatch[0]) : 0);
+  }, 0);
+
+  const container = document.getElementById('feeBreakdown');
+  let html = '<div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:6px;font-weight:500;">' + t('💰 Fee Breakdown', '💰 费用明细') + '</div>';
+  html += '<table class="fee-table"><tr><th>' + t('Item', '项目') + '</th><th>' + t('Fee', '费率') + '</th></tr>';
+  s.fees.forEach(f => {
+    const label = t(f.labelEn, f.labelZh);
+    const feeStr = [f.pct, f.flat].filter(Boolean).join(' + ');
+    html += '<tr><td>' + label + (f.note ? ' <span style="color:#999;font-size:0.7rem">' + f.note + '</span>' : '') +
+      '</td><td style="' + (f.save ? 'color:var(--accent);' : '') + '">' + feeStr + '</td></tr>';
+  });
+  html += '<tr class="total"><td>' + t('Total Fees', '总费用') + '</td><td>' +
+    (totalPct > 0 ? totalPct.toFixed(1) + '%' : '') + (totalPct > 0 && totalUsd > 0 ? ' + ' : '') +
+    (totalUsd > 0 ? '$' + totalUsd.toFixed(2) : '') + '</td></tr>';
+  html += '</table>';
+  container.innerHTML = html;
+}
+
+// Demo runner
+function runDemo() {
+  if (simRunning) return;
+  const s = SCENARIOS[activeScenario];
+  const amount = parseFloat(document.getElementById('demoAmount').value);
+  const autoMode = document.getElementById('autoMode').checked;
+  const cname = COUNTERPARTIES[s.counterparty];
+  const log = document.getElementById('demoLog');
+  const result = document.getElementById('demoResult');
+  const btn = document.getElementById('demoRunBtn');
+
+  simRunning = true;
+  btn.disabled = true;
+  btn.textContent = t('⏳ Running...', '⏳ 运行中...');
+  result.style.display = 'none';
+  result.className = 'demo-result';
+  log.innerHTML = '';
+  document.querySelectorAll('.flow-step').forEach(el => { el.className = 'flow-step'; });
+  document.querySelectorAll('.flow-step .step-status').forEach(el => { el.textContent = ''; });
+
+  renderRoute(s);
+  renderFeeTable(s);
+
+  const doLog = (msg, cls) => {
+    const d = document.createElement('div');
+    d.className = 'log-line ' + cls;
+    const ts = new Date().toLocaleTimeString();
+    d.innerHTML = '<span class="ts">' + ts + '</span>' + msg;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  };
+
+  const doStep = (index, delay) => {
+    return new Promise(resolve => {
+      simTimer = setTimeout(() => {
+        const step = s.steps[index];
+        const el = document.getElementById('fs-' + index);
+        const status = document.getElementById('fs-status-' + index);
+
+        if (s.fail && index === s.steps.length - 1) {
+          el.className = 'flow-step fail';
+          status.textContent = '❌';
+        } else {
+          el.className = 'flow-step done';
+          status.textContent = '✅';
+        }
+        doLog(step.icon + ' ' + t(step.en, step.zh), index === 3 && s.fail ? 'warn' : 'info');
+        resolve();
+      }, delay || 600);
+    });
+  };
+
+  const run = async () => {
+    doLog(t('🚀 Scenario: ', '🚀 场景：') + t(s.titleEn, s.titleZh), 'highlight');
+    doLog(t('📤 Amount: ', '📤 金额：') + '$' + amount.toFixed(2) + ' USDC → ' + cname, 'info');
+
+    await doStep(0, autoMode ? 400 : 0);
+    if (autoMode) await doStep(1);
+    else { simTimer = setTimeout(async () => { await doStep(1); }, 400); return; }
+
+    await doStep(2);
+    await doStep(3);
+
+    if (s.fail) {
+      // Special: compliance fail path
+      await doStep(4);
+      await doStep(5);
+      simTimer = setTimeout(() => {
+        result.className = 'demo-result fail show';
+        result.innerHTML = '<strong>' + t('⚠️ Transaction Blocked', '⚠️ 交易已拦截') + '</strong><br>' + t(s.resultEn, s.resultZh);
+        btn.disabled = false;
+        btn.textContent = t('▶ Run Again', '▶ 再次运行');
+        simRunning = false;
+      }, 600);
+      return;
+    }
+
+    await doStep(4);
+
+    // Final settlement step with economics
+    simTimer = setTimeout(() => {
+      const settlePct = 0.995;
+      const feePct = s.fees.reduce((sum, f) => {
+        const p = parseFloat(f.pct);
+        return sum + (isNaN(p) ? 0 : p);
+      }, 0);
+      const settleAmount = (amount * settlePct).toFixed(2);
+      const totalFee = (amount - amount * settlePct).toFixed(2);
+
+      const step = s.steps[5];
+      document.getElementById('fs-5').className = 'flow-step done';
+      document.getElementById('fs-status-5').textContent = '✅';
+      doLog(step.icon + ' ' + t(step.en, step.zh), 'success');
+
+      setTimeout(() => {
+        // Show route nodes active
+        document.querySelectorAll('.route-node').forEach((el, i) => {
+          setTimeout(() => { el.classList.add('active-node'); }, i * 200);
+        });
+      }, 200);
+
+      simTimer = setTimeout(() => {
+        doLog(t('💵 Settled: ', '💵 已结算：') + '$' + settleAmount + ' USD → ' + cname, 'success');
+        doLog(t('💰 Fee: $', '💰 费用：$') + totalFee + ' (' + (feePct > 0 ? feePct.toFixed(1) + '%' : 'flat') + ')', 'info');
+        doLog(t('✅ Transaction complete. Compliant.', '✅ 交易完成。合规。'), 'success');
+
+        // Show result
+        result.className = 'demo-result success show';
+        result.innerHTML = '<strong>' + t('✅ Settlement Complete', '✅ 结算完成') + '</strong><br>' +
+          '<div class="res-row"><span class="res-label">' + t('Gross', '毛额') + '</span><span class="res-value">$' + amount.toFixed(2) + ' USDC</span></div>' +
+          '<div class="res-row"><span class="res-label">' + t('Fee', '费用') + '</span><span class="res-value">$' + totalFee + ' (' + (feePct > 0 ? feePct.toFixed(1) + '%' : 'flat') + ')</span></div>' +
+          '<div class="res-row"><span class="res-label">' + t('Net Settled', '净结算') + '</span><span class="res-value" style="color:var(--accent)">$' + settleAmount + ' USD</span></div>' +
+          '<div style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,255,136,0.1);font-size:0.75rem;color:var(--text-secondary)">' +
+          t(s.resultEn, s.resultZh) + '</div>';
+
+        btn.disabled = false;
+        btn.textContent = t('▶ Run Again', '▶ 再次运行');
+        simRunning = false;
+      }, autoMode ? 400 : 0);
+    }, autoMode ? 600 : 0);
+  };
+
+  // Handle non-auto mode by stepping sequentially
+  const chainSteps = () => {
+    let step = 0;
+    const nextStep = () => {
+      if (step >= s.steps.length) return;
+      const el = document.getElementById('fs-' + step);
+      const status = document.getElementById('fs-status-' + step);
+      const stepData = s.steps[step];
+      el.className = 'flow-step done';
+      status.textContent = '✅';
+      doLog(stepData.icon + ' ' + t(stepData.en, stepData.zh), 'info');
+      step++;
+      if (step < s.steps.length) {
+        simTimer = setTimeout(nextStep, 600);
+      } else {
+        // Show result
+        const settleAmount = (amount * 0.995).toFixed(2);
+        result.className = 'demo-result success show';
+        result.innerHTML = '<strong>' + t('✅ Settlement Complete', '✅ 结算完成') + '</strong><br>' +
+          '<div class="res-row"><span class="res-label">' + t('Gross', '毛额') + '</span><span class="res-value">$' + amount.toFixed(2) + ' USDC</span></div>' +
+          '<div class="res-row"><span class="res-label">' + t('Net Settled', '净结算') + '</span><span class="res-value" style="color:var(--accent)">$' + settleAmount + ' USD</span></div>';
+        btn.disabled = false;
+        btn.textContent = t('▶ Run Again', '▶ 再次运行');
+        simRunning = false;
+      }
+    };
+    nextStep();
+  };
+
+  if (autoMode) {
+    run();
+  } else {
+    doLog(t('🚀 Scenario: ', '🚀 场景：') + t(s.titleEn, s.titleZh), 'highlight');
+    doLog(t('📤 Amount: ', '📤 金额：') + '$' + amount + ' USDC → ' + cname, 'info');
+    chainSteps();
+  }
+}
+
+// Init on load
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
