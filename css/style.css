@@ -1,4 +1,4 @@
-/* === ArrivalX — Design System v2 · Fluid Responsive === */
+
 :root {
   --bg-primary: #0a0f1a;
   --bg-secondary: #111827;
@@ -23,13 +23,11 @@
   --transition: 0.25s ease;
   --max-width: 1200px;
 
-  /* Fluid spacing — clamps from mobile to desktop */
   --space-section: clamp(40px, 8vw, 80px);
   --space-section-px: clamp(16px, 4vw, 24px);
   --space-card: clamp(16px, 3vw, 28px);
   --space-gap: clamp(12px, 2vw, 20px);
 
-  /* Fluid typography */
   --fs-hero: clamp(1.8rem, 5vw, 3.2rem);
   --fs-section: clamp(1.5rem, 3.5vw, 2.2rem);
   --fs-body: clamp(0.9rem, 1.2vw, 1.1rem);
@@ -42,7 +40,7 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', 'PingFang SC', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -54,12 +52,10 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 img, svg { max-width: 100%; height: auto; }
 
-/* === Navigation === */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(10, 15, 26, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 15, 26, 0.96);
+  
   border-bottom: 1px solid var(--border);
   transition: var(--transition);
 }
@@ -116,7 +112,6 @@ img, svg { max-width: 100%; height: auto; }
   line-height: 1;
 }
 
-/* === Hero === */
 .hero {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -234,7 +229,6 @@ img, svg { max-width: 100%; height: auto; }
   letter-spacing: 0.5px;
 }
 
-/* Hero Code Card */
 .hero-visual { position: relative; }
 .hero-card {
   background: var(--bg-card);
@@ -270,7 +264,6 @@ img, svg { max-width: 100%; height: auto; }
 .code-string { color: #22c55e; }
 .code-var { color: #f59e0b; }
 
-/* === Sections === */
 .section {
   padding: var(--space-section) clamp(12px, 4vw, 24px);
   max-width: var(--max-width);
@@ -298,7 +291,6 @@ img, svg { max-width: 100%; height: auto; }
   line-height: 1.6;
 }
 
-/* === Cards === */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -316,7 +308,6 @@ img, svg { max-width: 100%; height: auto; }
 .card h3 { font-size: var(--fs-card-title); font-weight: 700; margin-bottom: 8px; }
 .card p { color: var(--text-secondary); font-size: clamp(0.82rem, 1vw, 0.93rem); line-height: 1.6; }
 
-/* === Playground === */
 .playground {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -478,7 +469,6 @@ img, svg { max-width: 100%; height: auto; }
 }
 .hidden { display: none !important; }
 
-/* === Architecture === */
 .arch-diagram {
   display: flex;
   flex-direction: column;
@@ -529,7 +519,6 @@ img, svg { max-width: 100%; height: auto; }
   color: var(--accent);
 }
 
-/* === Compliance === */
 .compliance-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -565,7 +554,6 @@ img, svg { max-width: 100%; height: auto; }
 .partner strong { display: block; margin-bottom: 4px; color: var(--accent); font-size: clamp(0.82rem, 1vw, 0.9rem); }
 .partner span { font-size: clamp(0.7rem, 0.85vw, 0.82rem); color: var(--text-muted); }
 
-/* === Docs === */
 .docs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -589,7 +577,6 @@ img, svg { max-width: 100%; height: auto; }
 .doc-card h3 { font-size: var(--fs-card-title); color: var(--text-primary); margin-bottom: 8px; }
 .doc-card p { color: var(--text-secondary); font-size: clamp(0.8rem, 0.95vw, 0.9rem); line-height: 1.5; }
 
-/* === CTA === */
 .cta-section {
   text-align: center;
   padding: var(--space-section) clamp(12px, 4vw, 24px);
@@ -598,7 +585,6 @@ img, svg { max-width: 100%; height: auto; }
 .cta-section p { color: var(--text-secondary); font-size: clamp(0.9rem, 1.2vw, 1.1rem); margin-bottom: clamp(20px, 3vw, 28px); }
 .cta-buttons { display: flex; gap: clamp(8px, 1.5vw, 12px); justify-content: center; flex-wrap: wrap; }
 
-/* === Footer === */
 .footer {
   border-top: 1px solid var(--border);
   padding: clamp(32px, 5vw, 48px) clamp(12px, 4vw, 24px) clamp(16px, 2vw, 24px);
@@ -635,7 +621,6 @@ img, svg { max-width: 100%; height: auto; }
   justify-content: center;
 }
 
-/* === Doc Sub-Navigation === */
 .doc-sub-nav-wrap {
   position: fixed;
   top: 56px;
@@ -674,7 +659,6 @@ img, svg { max-width: 100%; height: auto; }
 }
 .doc-sub-nav a .nav-arrow { margin-right: 4px; font-size: 0.75rem; }
 
-/* Doc pages need extra top padding for sub-nav */
 .doc-page { padding-top: 110px; }
 
 @media (max-width: 1023px) {
@@ -682,13 +666,6 @@ img, svg { max-width: 100%; height: auto; }
   .doc-sub-nav a { padding: 10px 14px; font-size: 0.78rem; }
 }
 
-/* ================================================================
-   RESPONSIVE BREAKPOINTS
-   Strategy: 4 tiers — Large Desktop (≥1400) / Tablet (<1024) /
-              Large Phone (<768) / Small Phone (<480)
-   ================================================================ */
-
-/* --- Large Desktop ≥1400px — wider, airier --- */
 @media (min-width: 1400px) {
   :root {
     --max-width: 1280px;
@@ -700,7 +677,6 @@ img, svg { max-width: 100%; height: auto; }
   .section { padding-top: 100px; padding-bottom: 100px; }
 }
 
-/* --- Tablet <1024px — stack grids, reduce columns --- */
 @media (max-width: 1023px) {
   .hero {
     grid-template-columns: 1fr;
@@ -723,14 +699,12 @@ img, svg { max-width: 100%; height: auto; }
   .footer-inner { grid-template-columns: 1fr; gap: 28px; }
   .footer-links { grid-template-columns: repeat(3, 1fr); }
 
-  /* Mobile nav */
   .nav-links {
     display: none;
     position: fixed;
     top: 56px; left: 0; right: 0;
     background: rgba(10, 15, 26, 0.96);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+
     padding: 20px clamp(12px, 4vw, 24px);
     border-bottom: 1px solid var(--border);
     flex-direction: column;
@@ -756,7 +730,6 @@ img, svg { max-width: 100%; height: auto; }
   }
   .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
 
-  /* Stack playground flow vertically on tablet */
   .pg-visual-flow {
     flex-direction: column;
     gap: 8px;
@@ -767,7 +740,6 @@ img, svg { max-width: 100%; height: auto; }
   }
 }
 
-/* --- Large Phone <768px — full stacking, touch optimized --- */
 @media (max-width: 767px) {
   .hero-stats { gap: 20px; }
   .hero-cta { flex-direction: column; width: 100%; }
@@ -790,7 +762,6 @@ img, svg { max-width: 100%; height: auto; }
   .section-alt .section-subtitle { padding-left: 16px; padding-right: 16px; }
 }
 
-/* --- Small Phone <480px — minimum viable --- */
 @media (max-width: 479px) {
   .hero { padding-top: 72px; gap: 24px; }
   .hero-stats { gap: 12px; justify-content: space-around; }
@@ -813,7 +784,6 @@ img, svg { max-width: 100%; height: auto; }
   .btn-primary, .btn-secondary { font-size: 0.9rem; }
 }
 
-/* --- Doc page mobile fixes --- */
 @media (max-width: 767px) {
   .doc-page { padding-top: 100px; }
   .doc-page-inner { padding: 0 16px 40px !important; }
@@ -832,7 +802,6 @@ img, svg { max-width: 100%; height: auto; }
   .doc-page-inner li { font-size: 0.82rem; }
 }
 
-/* --- Architecture diagram mobile --- */
 @media (max-width: 767px) {
   .arch-diagram { padding: 12px; }
   .arch-layer { padding: 14px; }
@@ -841,10 +810,8 @@ img, svg { max-width: 100%; height: auto; }
   .arch-module { font-size: 0.7rem; padding: 5px 8px; word-break: break-word; }
 }
 
-/* --- Table scroll helper --- */
 .table-wrap { overflow-x: auto; }
 
-/* --- Print --- */
 @media print {
   .nav, .footer, .cta-section, .playground, .hero-visual { display: none; }
   body { background: #fff; color: #000; font-size: 12pt; }
