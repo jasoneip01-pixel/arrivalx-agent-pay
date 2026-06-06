@@ -26,15 +26,15 @@
   <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
   <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
   <div class="nav-links">
-    <a href="../index.html#product">Product</a>
-    <a href="../index.html#playground">Playground</a>
-    <a href="../index.html#docs">Docs</a>
+    <a href="../index.html#product" data-en="Product" data-zh="产品">Product</a>
+    <a href="../index.html#playground" data-en="Playground" data-zh="Playground">Playground</a>
+    <a href="../index.html#docs" data-en="Docs" data-zh="文档">Docs</a>
     <button class="lang-toggle" id="langBtn" onclick="toggleLang()">中文</button>
   </div>
 </div></nav>
 
 <nav class="doc-sub-nav-wrap"><div class="doc-sub-nav">
-  <a href="../index.html"><span class="nav-arrow">←</span> Home</a>
+  <a href="../index.html"><span class="nav-arrow">←</span> <span data-en="Home" data-zh="首页">Home</span></a>
   <a href="overview.html" data-en="Overview" data-zh="总览">Overview</a>
   <a href="product.html" data-en="Product" data-zh="产品定义">Product</a>
   <a href="api.html" data-en="API / SDK" data-zh="API / SDK">API / SDK</a>
@@ -50,11 +50,11 @@
 <p data-en="ArrivalX is an infrastructure company. Revenue comes from a small percentage of every transaction flowing through the settlement layer." data-zh="ArrivalX 是基础设施公司。收入来自通过结算层的每一笔交易的小额分成。">ArrivalX is an infrastructure company. Revenue comes from a small percentage of every transaction flowing through the settlement layer.</p>
 
 <table>
-<tr><th data-en="Revenue Line" data-zh="收入线">Revenue Line</th><th data-en="Basis" data-zh="基础">Basis</th><th>Rate</th></tr>
+<tr><th data-en="Revenue Line" data-zh="收入线">Revenue Line</th><th data-en="Basis" data-zh="基础">Basis</th><th data-en="Rate" data-zh="费率">Rate</th></tr>
 <tr><td data-en="Agent→API Settlement" data-zh="Agent→API 结算">Agent→API</td><td data-en="Transaction volume" data-zh="交易量">Volume</td><td>0.50%</td></tr>
 <tr><td data-en="Agent→Merchant" data-zh="Agent→商户">Agent→Merchant</td><td data-en="Transaction volume" data-zh="交易量">Volume</td><td>0.80-1.20%</td></tr>
 <tr><td data-en="Agent→Agent" data-zh="Agent→Agent">Agent→Agent</td><td data-en="Per transaction" data-zh="每笔">Per tx</td><td>$0.10 + 15bp</td></tr>
-<tr><td data-en="FX Conversion" data-zh="外汇转换">FX</td><td>Notional</td><td>15bp</td></tr>
+<tr><td data-en="FX Conversion" data-zh="外汇转换">FX</td><td data-en="Notional" data-zh="名义金额">Notional</td><td>15bp</td></tr>
 <tr><td data-en="CaaS Platform" data-zh="CaaS 平台费">CaaS</td><td data-en="Monthly" data-zh="月付">Monthly</td><td>$500-5,000</td></tr>
 </table>
 
@@ -82,9 +82,9 @@
 <h2 data-en="2. Market Sizing" data-zh="2. 市场规模">2. Market Sizing</h2>
 <table>
 <tr><th data-en="Metric" data-zh="指标">Metric</th><th data-en="Value" data-zh="值">Value</th><th data-en="Source" data-zh="来源">Source</th></tr>
-<tr><td><strong>TAM</strong></td><td data-en="$1.5 trillion" data-zh="1.5 万亿美元">$1.5T</td><td data-en="Juniper Research (2030 autonomous AI commerce)" data-zh="Juniper Research（2030 自主 AI 商业）">Juniper</td></tr>
-<tr><td><strong>SAM</strong></td><td data-en="$150 billion" data-zh="1500 亿美元">$150B</td><td data-en="Agent payments on crypto rails (10% of TAM)" data-zh="加密轨道上的 Agent 支付（TAM 的 10%）">10% TAM</td></tr>
-<tr><td><strong>SOM</strong></td><td data-en="$1.5 billion" data-zh="15 亿美元">$1.5B</td><td data-en="1% of SAM (4-jurisdiction reach)" data-zh="SAM 的 1%（4 司法辖区覆盖）">1% SAM</td></tr>
+<tr><td><strong data-en="TAM" data-zh="TAM（总市场）">TAM</strong></td><td data-en="$1.5 trillion" data-zh="1.5 万亿美元">$1.5T</td><td data-en="Juniper Research (2030 autonomous AI commerce)" data-zh="Juniper Research（2030 自主 AI 商业）">Juniper</td></tr>
+<tr><td><strong data-en="SAM" data-zh="SAM（可服务市场）">SAM</strong></td><td data-en="$150 billion" data-zh="1500 亿美元">$150B</td><td data-en="Agent payments on crypto rails (10% of TAM)" data-zh="加密轨道上的 Agent 支付（TAM 的 10%）">10% TAM</td></tr>
+<tr><td><strong data-en="SOM" data-zh="SOM（可得市场）">SOM</strong></td><td data-en="$1.5 billion" data-zh="15 亿美元">$1.5B</td><td data-en="1% of SAM (4-jurisdiction reach)" data-zh="SAM 的 1%（4 司法辖区覆盖）">1% SAM</td></tr>
 </table>
 
 <h3 data-en="Market Signals (2026)" data-zh="市场信号（2026）">Market Signals (2026)</h3>
@@ -144,7 +144,7 @@
 
 <footer class="footer">
   <div class="footer-bottom">
-    <span>Stable Chain Fintech Limited · June 2026</span>
+    <span data-en="Stable Chain Fintech Limited · June 2026" data-zh="Stable Chain Fintech Limited · 2026年6月">Stable Chain Fintech Limited · June 2026</span>
   </div>
 </footer>
 <script src="docs.js"></script>
