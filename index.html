@@ -15,11 +15,11 @@
   <div class="nav-inner">
     <a href="#" class="logo">Arrival<span class="logo-accent">X</span></a>
     <div class="nav-links">
-      <a href="#product">Product</a>
-      <a href="#playground">Playground</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#compliance">Compliance</a>
-      <a href="#docs">Docs</a>
+      <a href="#product" data-en="Product" data-zh="产品">Product</a>
+      <a href="#playground" data-en="Playground" data-zh="Playground">Playground</a>
+      <a href="#architecture" data-en="Architecture" data-zh="架构">Architecture</a>
+      <a href="#compliance" data-en="Compliance" data-zh="合规">Compliance</a>
+      <a href="#docs" data-en="Docs" data-zh="文档">Docs</a>
       <button class="lang-toggle" onclick="toggleLang()" id="langBtn">中文</button>
     </div>
     <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
@@ -145,19 +145,19 @@
         <div class="pg-input-group">
           <label data-en="Counterparty" data-zh="交易对手方">Counterparty</label>
           <select id="pgCounterparty">
-            <option value="api">API Service (api.dataprovider.io)</option>
-            <option value="compute">Compute Provider (gpu.rent)</option>
-            <option value="agent">Another Agent (agent.market)</option>
-            <option value="saas">SaaS Tool (saas.vendor.io)</option>
+            <option value="api" data-en="API Service (api.dataprovider.io)" data-zh="API 服务 (api.dataprovider.io)">API Service (api.dataprovider.io)</option>
+            <option value="compute" data-en="Compute Provider (gpu.rent)" data-zh="计算提供商 (gpu.rent)">Compute Provider (gpu.rent)</option>
+            <option value="agent" data-en="Another Agent (agent.market)" data-zh="另一个 Agent (agent.market)">Another Agent (agent.market)</option>
+            <option value="saas" data-en="SaaS Tool (saas.vendor.io)" data-zh="SaaS 工具 (saas.vendor.io)">SaaS Tool (saas.vendor.io)</option>
           </select>
         </div>
         <div class="pg-input-group">
           <label data-en="Agent Jurisdiction" data-zh="Agent 所在司法辖区">Agent Jurisdiction</label>
           <select id="pgJurisdiction">
-            <option value="US">United States</option>
-            <option value="AU">Australia</option>
-            <option value="HK">Hong Kong</option>
-            <option value="CA">Canada</option>
+            <option value="US" data-en="United States" data-zh="美国">United States</option>
+            <option value="AU" data-en="Australia" data-zh="澳大利亚">Australia</option>
+            <option value="HK" data-en="Hong Kong" data-zh="香港">Hong Kong</option>
+            <option value="CA" data-en="Canada" data-zh="加拿大">Canada</option>
           </select>
         </div>
         <button class="btn-primary" onclick="runSimulation()" id="simBtn" data-en="Run Payment Simulation" data-zh="运行支付模拟">Run Payment Simulation</button>
@@ -181,23 +181,23 @@
         <div class="pg-visual-flow hidden" id="pgVisualFlow">
           <div class="flow-node agent-node" id="flowAgent">
             <span class="flow-icon">🤖</span>
-            <span class="flow-label">Agent</span>
+            <span class="flow-label" data-en="Agent" data-zh="Agent">Agent</span>
           </div>
           <div class="flow-arrow" id="flowArrow1">→</div>
           <div class="flow-node ax-node" id="flowAX">
             <span class="flow-icon">⚡</span>
-            <span class="flow-label">ArrivalX</span>
+            <span class="flow-label" data-en="ArrivalX" data-zh="ArrivalX">ArrivalX</span>
           </div>
           <div class="flow-arrow" id="flowArrow2">→</div>
           <div class="flow-node merchant-node" id="flowMerchant">
             <span class="flow-icon">🏪</span>
-            <span class="flow-label" id="flowMerchantLabel">Merchant</span>
+            <span class="flow-label" id="flowMerchantLabel" data-en="Merchant" data-zh="商户">Merchant</span>
           </div>
         </div>
         <div class="pg-compliance-badges hidden" id="pgBadges">
-          <div class="compliance-badge" id="badgeScreening">🔍 Screening</div>
-          <div class="compliance-badge" id="badgeRoute">🌐 Route</div>
-          <div class="compliance-badge" id="badgeSettle">✅ Settle</div>
+          <div class="compliance-badge" id="badgeScreening" data-en="🔍 Screening" data-zh="🔍 筛查">🔍 Screening</div>
+          <div class="compliance-badge" id="badgeRoute" data-en="🌐 Route" data-zh="🌐 路由">🌐 Route</div>
+          <div class="compliance-badge" id="badgeSettle" data-en="✅ Settle" data-zh="✅ 结算">✅ Settle</div>
         </div>
         <div class="pg-result hidden" id="pgResult"></div>
       </div>
@@ -210,7 +210,7 @@
   <h2 class="section-title" data-en="Architecture" data-zh="产品架构">Architecture</h2>
   <div class="arch-diagram">
     <div class="arch-layer arch-l3">
-      <div class="arch-layer-label">L3 · Agent Payment SDK & API</div>
+      <div class="arch-layer-label" data-en="L3 · Agent Payment SDK & API" data-zh="L3 · Agent 支付 SDK 和 API">L3 · Agent Payment SDK & API</div>
       <div class="arch-modules">
         <div class="arch-module" data-en="x402 Gateway" data-zh="x402 网关">x402 Gateway</div>
         <div class="arch-module" data-en="MPP Adapter" data-zh="MPP 适配器">MPP Adapter</div>
@@ -220,7 +220,7 @@
     </div>
     <div class="arch-arrow">↓</div>
     <div class="arch-layer arch-l2 highlight">
-      <div class="arch-layer-label">L2 · Compliance Settlement Engine ⚡ Core IP</div>
+      <div class="arch-layer-label" data-en="L2 · Compliance Settlement Engine ⚡ Core IP" data-zh="L2 · 合规结算引擎 ⚡ 核心 IP">L2 · Compliance Settlement Engine ⚡ Core IP</div>
       <div class="arch-modules">
         <div class="arch-module" data-en="Jurisdiction Router" data-zh="司法辖区路由">Jurisdiction Router</div>
         <div class="arch-module" data-en="Agent Identity Binding" data-zh="Agent 身份绑定">Agent Identity Binding</div>
@@ -230,12 +230,12 @@
     </div>
     <div class="arch-arrow">↓</div>
     <div class="arch-layer arch-l1">
-      <div class="arch-layer-label">L1 · Licensed Money Transmission</div>
+      <div class="arch-layer-label" data-en="L1 · Licensed Money Transmission" data-zh="L1 · 持牌资金传输">L1 · Licensed Money Transmission</div>
       <div class="arch-modules">
-        <div class="arch-module">🇦🇺 AUSTRAC DCE</div>
-        <div class="arch-module">🇺🇸 FinCEN MSB</div>
-        <div class="arch-module">🇭🇰 HK MSO</div>
-        <div class="arch-module">🇨🇦 FINTRAC MSB</div>
+        <div class="arch-module" data-en="🇦🇺 AUSTRAC DCE" data-zh="🇦🇺 AUSTRAC DCE">🇦🇺 AUSTRAC DCE</div>
+        <div class="arch-module" data-en="🇺🇸 FinCEN MSB" data-zh="🇺🇸 FinCEN MSB">🇺🇸 FinCEN MSB</div>
+        <div class="arch-module" data-en="🇭🇰 HK MSO" data-zh="🇭🇰 HK MSO">🇭🇰 HK MSO</div>
+        <div class="arch-module" data-en="🇨🇦 FINTRAC MSB" data-zh="🇨🇦 FINTRAC MSB">🇨🇦 FINTRAC MSB</div>
       </div>
     </div>
   </div>
@@ -246,19 +246,19 @@
   <h2 class="section-title" data-en="Compliance Infrastructure" data-zh="合规基础设施">Compliance Infrastructure</h2>
   <div class="compliance-grid">
     <div class="compliance-card">
-      <h3>🇦🇺 Australia DCE</h3>
+      <h3 data-en="🇦🇺 Australia DCE" data-zh="🇦🇺 澳大利亚 DCE">🇦🇺 Australia DCE</h3>
       <p data-en="Digital Currency Exchange registration with AUSTRAC. Enables fiat-crypto conversion and cross-border settlement through APAC corridors." data-zh="AUSTRAC 数字币兑换注册。支持法币-加密货币兑换和亚太走廊跨境结算。">Digital Currency Exchange registration with AUSTRAC. Enables fiat-crypto conversion and cross-border settlement through APAC corridors.</p>
     </div>
     <div class="compliance-card">
-      <h3>🇺🇸 United States MSB</h3>
+      <h3 data-en="🇺🇸 United States MSB" data-zh="🇺🇸 美国 MSB">🇺🇸 United States MSB</h3>
       <p data-en="Money Services Business registration with FinCEN. Covers money transmission across all 50 states with federal AML/CFT compliance." data-zh="FinCEN 货币服务商注册。覆盖全美 50 州资金传输，联邦级 AML/CFT 合规。">Money Services Business registration with FinCEN. Covers money transmission across all 50 states with federal AML/CFT compliance.</p>
     </div>
     <div class="compliance-card">
-      <h3>🇭🇰 Hong Kong MSO</h3>
+      <h3 data-en="🇭🇰 Hong Kong MSO" data-zh="🇭🇰 香港 MSO">🇭🇰 Hong Kong MSO</h3>
       <p data-en="Money Service Operator license from HK Customs. Gateway to Greater China and Southeast Asian agent payment corridors." data-zh="香港海关金钱服务经营者牌照。大中华区和东南亚 Agent 支付走廊的入口。">Money Service Operator license from HK Customs. Gateway to Greater China and Southeast Asian agent payment corridors.</p>
     </div>
     <div class="compliance-card">
-      <h3>🇨🇦 Canada MSB</h3>
+      <h3 data-en="🇨🇦 Canada MSB" data-zh="🇨🇦 加拿大 MSB">🇨🇦 Canada MSB</h3>
       <p data-en="Money Services Business registration with FINTRAC. Provides North American redundancy—dual coverage with US MSB for uninterrupted service." data-zh="FINTRAC 货币服务商注册。北美双覆盖——与 US MSB 形成冗余，保障服务不中断。">Money Services Business registration with FINTRAC. North American dual coverage with US MSB for uninterrupted service.</p>
     </div>
   </div>
@@ -268,27 +268,27 @@
     <div class="partners-grid">
       <div class="partner">
         <strong>Cobo</strong>
-        <span>MPC Wallet Infrastructure</span>
+        <span data-en="MPC Wallet Infrastructure" data-zh="MPC 钱包基础设施">MPC Wallet Infrastructure</span>
       </div>
       <div class="partner">
         <strong>Regtank</strong>
-        <span>KYB/KYC & AML Screening</span>
+        <span data-en="KYB/KYC & AML Screening" data-zh="KYB/KYC 和 AML 筛查">KYB/KYC & AML Screening</span>
       </div>
       <div class="partner">
         <strong>Beosin</strong>
-        <span>Smart Contract Auditing</span>
+        <span data-en="Smart Contract Auditing" data-zh="智能合约审计">Smart Contract Auditing</span>
       </div>
       <div class="partner">
         <strong>HashKey Global</strong>
-        <span>Licensed Liquidity</span>
+        <span data-en="Licensed Liquidity" data-zh="持牌流动性">Licensed Liquidity</span>
       </div>
       <div class="partner">
         <strong>WSPN</strong>
-        <span>Stablecoin Payment Network</span>
+        <span data-en="Stablecoin Payment Network" data-zh="稳定币支付网络">Stablecoin Payment Network</span>
       </div>
       <div class="partner">
         <strong>Man Kun Law</strong>
-        <span>Regulatory Counsel</span>
+        <span data-en="Regulatory Counsel" data-zh="监管法律顾问">Regulatory Counsel</span>
       </div>
     </div>
   </div>
@@ -339,24 +339,24 @@
     <div class="footer-links">
       <div>
         <strong data-en="Product" data-zh="产品">Product</strong>
-        <a href="#playground">Playground</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#compliance">Compliance</a>
+        <a href="#playground" data-en="Playground" data-zh="Playground">Playground</a>
+        <a href="#architecture" data-en="Architecture" data-zh="架构">Architecture</a>
+        <a href="#compliance" data-en="Compliance" data-zh="合规">Compliance</a>
       </div>
       <div>
         <strong data-en="Developers" data-zh="开发者">Developers</strong>
-        <a href="docs/api.html">API Reference</a>
-        <a href="docs/overview.html">Overview</a>
+        <a href="docs/api.html" data-en="API Reference" data-zh="API 参考">API Reference</a>
+        <a href="docs/overview.html" data-en="Overview" data-zh="总览">Overview</a>
       </div>
       <div>
         <strong data-en="Company" data-zh="公司">Company</strong>
-        <a href="docs/product.html">Product Spec</a>
-        <a href="docs/business.html">Business Model</a>
+        <a href="docs/product.html" data-en="Product Spec" data-zh="产品说明书">Product Spec</a>
+        <a href="docs/business.html" data-en="Business Model" data-zh="商业模式">Business Model</a>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Stable Chain Fintech Limited</span>
+    <span data-en="Stable Chain Fintech Limited" data-zh="Stable Chain Fintech Limited">Stable Chain Fintech Limited</span>
     <span>🇦🇺 DCE · 🇺🇸 MSB · 🇭🇰 MSO · 🇨🇦 MSB</span>
     <span>support@arrivalx.money</span>
   </div>
