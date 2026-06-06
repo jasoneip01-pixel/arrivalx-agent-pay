@@ -635,6 +635,53 @@ img, svg { max-width: 100%; height: auto; }
   justify-content: center;
 }
 
+/* === Doc Sub-Navigation === */
+.doc-sub-nav-wrap {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 98;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.doc-sub-nav-wrap::-webkit-scrollbar { display: none; }
+.doc-sub-nav {
+  display: flex;
+  gap: 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(12px, 4vw, 24px);
+}
+.doc-sub-nav a {
+  padding: 10px 18px;
+  font-size: clamp(0.78rem, 0.9vw, 0.85rem);
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.doc-sub-nav a:hover { color: var(--text-primary); text-decoration: none; }
+.doc-sub-nav a.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.doc-sub-nav a .nav-arrow { margin-right: 4px; font-size: 0.75rem; }
+
+/* Doc pages need extra top padding for sub-nav */
+.doc-page { padding-top: 110px; }
+
+@media (max-width: 1023px) {
+  .doc-sub-nav-wrap { top: 56px; }
+  .doc-sub-nav a { padding: 10px 14px; font-size: 0.78rem; }
+}
+
 /* ================================================================
    RESPONSIVE BREAKPOINTS
    Strategy: 4 tiers — Large Desktop (≥1400) / Tablet (<1024) /
