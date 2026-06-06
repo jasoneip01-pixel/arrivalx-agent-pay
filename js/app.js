@@ -101,18 +101,22 @@ window.runSimulation = function() {
   }
 
   const counterpartyNames = {
-    api: 'api.dataprovider.io',
-    compute: 'gpu.rent',
-    agent: 'agent.market',
-    saas: 'saas.vendor.io'
+    api: { en: 'api.dataprovider.io', zh: 'api.dataprovider.io' },
+    compute: { en: 'gpu.rent', zh: 'gpu.rent' },
+    agent: { en: 'agent.market', zh: 'agent.market' },
+    saas: { en: 'saas.vendor.io', zh: 'saas.vendor.io' }
   };
 
   const jurisdictionNames = {
-    US: 'United States (FinCEN MSB)',
-    AU: 'Australia (AUSTRAC DCE)',
-    HK: 'Hong Kong (HK MSO)',
-    CA: 'Canada (FINTRAC MSB)'
+    US: { en: 'United States (FinCEN MSB)', zh: '美国 (FinCEN MSB)' },
+    AU: { en: 'Australia (AUSTRAC DCE)', zh: '澳大利亚 (AUSTRAC DCE)' },
+    HK: { en: 'Hong Kong (HK MSO)', zh: '香港 (HK MSO)' },
+    CA: { en: 'Canada (FINTRAC MSB)', zh: '加拿大 (FINTRAC MSB)' }
   };
+
+  const t = (en, zh) => lang === 'en' ? en : zh;
+  const cname = counterpartyNames[counterparty][lang];
+  const jname = jurisdictionNames[jurisdiction][lang];
 
   const addLog = (msg, type) => {
     const line = document.createElement('div');
@@ -123,44 +127,44 @@ window.runSimulation = function() {
   };
 
   // Step 1
-  addLog('Agent requesting payment: ' + amount + ' USDC → ' + counterpartyNames[counterparty]);
+  addLog(t('Agent requesting payment: ','Agent 发起支付：') + amount + ' USDC → ' + cname);
   document.getElementById('flowAgent').classList.add('active');
 
   setTimeout(() => {
     // Step 2: x402
-    addLog('x402 handshake: HTTP 402 Payment Required received', 'info');
+    addLog(t('x402 handshake: HTTP 402 Payment Required received','x402 握手：收到 HTTP 402 Payment Required'), 'info');
     addLog('  → Wallet: 0x' + randomHex(40) + ' (Cobo MPC)', 'info');
     document.getElementById('flowArrow1').classList.add('active');
     document.getElementById('flowAX').classList.add('active');
 
     setTimeout(() => {
       // Step 3: Screening
-      addLog('Running AML/CFT screening (Regtank)...', 'info');
+      addLog(t('Running AML/CFT screening (Regtank)...','运行 AML/CFT 筛查 (Regtank)...'), 'info');
       document.getElementById('badgeScreening').classList.add('done');
 
       setTimeout(() => {
         const score = Math.floor(Math.random() * 20) + 1;
-        addLog('  → Risk score: ' + score + '/100 — ' + (score < 15 ? 'PASS ✅' : 'FLAGGED ⚠️'), score < 15 ? 'success' : 'warn');
+        addLog('  → ' + t('Risk score: ','风险评分：') + score + '/100 — ' + (score < 15 ? (lang==='en'?'PASS ✅':'通过 ✅') : (lang==='en'?'FLAGGED ⚠️':'标记 ⚠️')), score < 15 ? 'success' : 'warn');
 
         // Step 4: Routing
-        addLog('Routing through ' + jurisdictionNames[jurisdiction], 'info');
-        addLog('  → Exchange rate: 1 USDC = 0.9998 USD', 'info');
-        addLog('  → Fee: ' + (amount * 0.005).toFixed(4) + ' USDC (0.5%)', 'info');
+        addLog(t('Routing through ','路由通过 ') + jname, 'info');
+        addLog('  → ' + t('Exchange rate: 1 USDC = 0.9998 USD','汇率：1 USDC = 0.9998 USD'), 'info');
+        addLog('  → ' + t('Fee: ','手续费：') + (amount * 0.005).toFixed(4) + ' USDC (0.5%)', 'info');
         document.getElementById('badgeRoute').classList.add('done');
 
         setTimeout(() => {
           // Step 5: Settlement
           document.getElementById('flowArrow2').classList.add('active');
           document.getElementById('flowMerchant').classList.add('active');
-          document.getElementById('flowMerchantLabel').textContent = counterpartyNames[counterparty];
+          document.getElementById('flowMerchantLabel').textContent = cname;
 
           const settleAmount = (amount * 0.995).toFixed(4);
           const fee = (amount * 0.005).toFixed(4);
           const txHex = randomHex(64);
 
-          addLog('Settled: ' + settleAmount + ' USD → ' + counterpartyNames[counterparty], 'success');
+          addLog(t('Settled: ','已结算：') + settleAmount + ' USD → ' + cname, 'success');
           addLog('  → tx: 0x' + txHex, 'success');
-          addLog('✅ Payment complete. Compliant. 4 jurisdictions.', 'success');
+          addLog(t('✅ Payment complete. Compliant. 4 jurisdictions.','✅ 支付完成。合规。4 司法辖区。'), 'success');
           document.getElementById('badgeSettle').classList.add('done');
 
           // Show result
@@ -172,14 +176,14 @@ window.runSimulation = function() {
               + 'Amount: <b>' + amount + ' USDC</b><br>'
               + 'Settled: <b>' + settleAmount + ' USD</b><br>'
               + 'Fee: <b>' + fee + ' USDC</b> (0.5%)<br>'
-              + 'Route: <b>' + jurisdictionNames[jurisdiction] + '</b><br>'
+              + 'Route: <b>' + jurisdictionNames[jurisdiction].en + '</b><br>'
               + 'Risk: <b>' + score + '/100</b><br>'
               + '<small>tx: 0x' + txHex + '</small>'
             : '<strong>✅ 支付成功</strong><br>'
               + '金额: <b>' + amount + ' USDC</b><br>'
               + '结算: <b>' + settleAmount + ' USD</b><br>'
               + '手续费: <b>' + fee + ' USDC</b> (0.5%)<br>'
-              + '路由: <b>' + jurisdictionNames[jurisdiction] + '</b><br>'
+              + '路由: <b>' + jurisdictionNames[jurisdiction].zh + '</b><br>'
               + '风险评分: <b>' + score + '/100</b><br>'
               + '<small>tx: 0x' + txHex + '</small>');
 
