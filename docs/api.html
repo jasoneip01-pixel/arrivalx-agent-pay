@@ -34,15 +34,15 @@
   <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
   <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
   <div class="nav-links">
-    <a href="../index.html#product">Product</a>
-    <a href="../index.html#playground">Playground</a>
-    <a href="../index.html#docs">Docs</a>
+    <a href="../index.html#product" data-en="Product" data-zh="产品">Product</a>
+    <a href="../index.html#playground" data-en="Playground" data-zh="Playground">Playground</a>
+    <a href="../index.html#docs" data-en="Docs" data-zh="文档">Docs</a>
     <button class="lang-toggle" id="langBtn" onclick="toggleLang()">中文</button>
   </div>
 </div></nav>
 
 <nav class="doc-sub-nav-wrap"><div class="doc-sub-nav">
-  <a href="../index.html"><span class="nav-arrow">←</span> Home</a>
+  <a href="../index.html"><span class="nav-arrow">←</span> <span data-en="Home" data-zh="首页">Home</span></a>
   <a href="overview.html" data-en="Overview" data-zh="总览">Overview</a>
   <a href="product.html" data-en="Product" data-zh="产品定义">Product</a>
   <a href="api.html" class="active" data-en="API / SDK" data-zh="API / SDK">API / SDK</a>
@@ -110,14 +110,14 @@ console.log(payment.status); // → "settled"</code></pre>
 <h3 data-en="Base URL" data-zh="基础地址">Base URL</h3>
 <pre><code>https://api.arrivalx.money/v0</code></pre>
 
-<h3>Wallets</h3>
+<h3 data-en="Wallets" data-zh="钱包">Wallets</h3>
 <div class="endpoint"><span class="method post">POST</span> /wallets <span data-en="— Create an agent wallet" data-zh="— 创建 Agent 钱包">— Create an agent wallet</span></div>
 <div class="endpoint"><span class="method get">GET</span> /wallets <span data-en="— List all wallets" data-zh="— 列出所有钱包">— List all wallets</span></div>
 <div class="endpoint"><span class="method get">GET</span> /wallets/:id <span data-en="— Get wallet details" data-zh="— 获取钱包详情">— Get wallet details</span></div>
 <div class="endpoint"><span class="method patch">PATCH</span> /wallets/:id <span data-en="— Update wallet config" data-zh="— 更新钱包配置">— Update wallet config</span></div>
 <div class="endpoint"><span class="method delete">DELETE</span> /wallets/:id <span data-en="— Archive wallet" data-zh="— 归档钱包">— Archive wallet</span></div>
 
-<h3>Payments</h3>
+<h3 data-en="Payments" data-zh="支付">Payments</h3>
 <div class="endpoint"><span class="method post">POST</span> /payments <span data-en="— Initiate payment" data-zh="— 发起支付">— Initiate payment</span></div>
 <div class="endpoint"><span class="method get">GET</span> /payments/:id <span data-en="— Get payment status" data-zh="— 获取支付状态">— Get payment status</span></div>
 <div class="endpoint"><span class="method get">GET</span> /payments <span data-en="— List payments (filterable)" data-zh="— 列出支付（可筛选）">— List payments (filterable)</span></div>
@@ -167,7 +167,7 @@ console.log(payment.status); // → "settled"</code></pre>
 
 <h2 data-en="SDK Examples" data-zh="SDK 示例">SDK Examples</h2>
 
-<h3>Python</h3>
+<h3 data-en="Python" data-zh="Python">Python</h3>
 <pre><code>from arrivalx import ArrivalX
 
 ax = ArrivalX(api_key="ax_live_...")
@@ -199,11 +199,11 @@ payment, _ := wallet.Pay(arrivalx.PayParams{
 
 <h2 data-en="Rate Limits" data-zh="速率限制">Rate Limits</h2>
 <table>
-<tr><th>Tier</th><th data-en="Requests/min" data-zh="请求/分钟">Req/min</th><th>Wallets</th><th data-en="Monthly Volume" data-zh="月交易额">Volume/mo</th></tr>
-<tr><td>Sandbox</td><td>30</td><td>5</td><td>$100</td></tr>
-<tr><td>Developer</td><td>300</td><td>50</td><td>$10,000</td></tr>
-<tr><td>Business</td><td>1,000</td><td>500</td><td>$100,000</td></tr>
-<tr><td>Enterprise</td><td>Custom</td><td>Custom</td><td>Custom</td></tr>
+<tr><th data-en="Tier" data-zh="等级">Tier</th><th data-en="Requests/min" data-zh="请求/分钟">Req/min</th><th data-en="Wallets" data-zh="钱包数">Wallets</th><th data-en="Monthly Volume" data-zh="月交易额">Volume/mo</th></tr>
+<tr><td data-en="Sandbox" data-zh="沙盒">Sandbox</td><td>30</td><td>5</td><td>$100</td></tr>
+<tr><td data-en="Developer" data-zh="开发者">Developer</td><td>300</td><td>50</td><td>$10,000</td></tr>
+<tr><td data-en="Business" data-zh="商业">Business</td><td>1,000</td><td>500</td><td>$100,000</td></tr>
+<tr><td data-en="Enterprise" data-zh="企业">Enterprise</td><td data-en="Custom" data-zh="定制">Custom</td><td data-en="Custom" data-zh="定制">Custom</td><td data-en="Custom" data-zh="定制">Custom</td></tr>
 </table>
 
 </div>
@@ -211,7 +211,7 @@ payment, _ := wallet.Pay(arrivalx.PayParams{
 
 <footer class="footer">
   <div class="footer-bottom">
-    <span>API Version: v0 (Beta) · June 2026</span>
+    <span data-en="API Version: v0 (Beta) · June 2026" data-zh="API 版本：v0 (Beta) · 2026年6月">API Version: v0 (Beta) · June 2026</span>
   </div>
 </footer>
 <script src="docs.js"></script>
