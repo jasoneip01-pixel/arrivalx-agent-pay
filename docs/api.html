@@ -145,20 +145,20 @@ console.log(payment.status); // → "settled"</code></pre>
 <h3 data-en="Jurisdiction Routing" data-zh="司法辖区路由">Jurisdiction Routing</h3>
 <table>
 <tr><th data-en="Agent Location" data-zh="Agent 位置">Agent</th><th data-en="Counterparty" data-zh="对手方">Counterparty</th><th data-en="Routed Through" data-zh="路由至">Route</th><th data-en="Reason" data-zh="原因">Reason</th></tr>
-<tr><td>US</td><td>US</td><td>🇺🇸 FinCEN MSB</td><td data-en="Domestic, lowest latency" data-zh="境内，最低延迟">Domestic</td></tr>
-<tr><td>US</td><td>APAC</td><td>🇭🇰 MSO</td><td data-en="Asia corridor" data-zh="亚洲通道">Asia corridor</td></tr>
-<tr><td>APAC</td><td>US</td><td>🇦🇺 DCE</td><td data-en="US-friendly APAC hub" data-zh="对美友好的亚太枢纽">APAC hub</td></tr>
-<tr><td>APAC</td><td>APAC</td><td>🇭🇰 MSO</td><td data-en="Regional efficiency" data-zh="区域效率">Regional</td></tr>
-<tr><td>CA</td><td>US</td><td>🇨🇦 FINTRAC</td><td data-en="North American redundancy" data-zh="北美冗余">NA redundancy</td></tr>
+<tr><td data-en="US" data-zh="美国">US</td><td data-en="US" data-zh="美国">US</td><td>🇺🇸 FinCEN MSB</td><td data-en="Domestic, lowest latency" data-zh="境内，最低延迟">Domestic</td></tr>
+<tr><td data-en="US" data-zh="美国">US</td><td data-en="APAC" data-zh="亚太">APAC</td><td>🇭🇰 MSO</td><td data-en="Asia corridor" data-zh="亚洲通道">Asia corridor</td></tr>
+<tr><td data-en="APAC" data-zh="亚太">APAC</td><td data-en="US" data-zh="美国">US</td><td>🇦🇺 DCE</td><td data-en="US-friendly APAC hub" data-zh="对美友好的亚太枢纽">APAC hub</td></tr>
+<tr><td data-en="APAC" data-zh="亚太">APAC</td><td data-en="APAC" data-zh="亚太">APAC</td><td>🇭🇰 MSO</td><td data-en="Regional efficiency" data-zh="区域效率">Regional</td></tr>
+<tr><td data-en="CA" data-zh="加拿大">CA</td><td data-en="US" data-zh="美国">US</td><td>🇨🇦 FINTRAC</td><td data-en="North American redundancy" data-zh="北美冗余">NA redundancy</td></tr>
 </table>
 
 <h3 data-en="Compliance Guarantees" data-zh="合规保障">Compliance Guarantees</h3>
 <table>
 <tr><th data-en="Check" data-zh="检查项">Check</th><th data-en="Method" data-zh="方法">Method</th></tr>
-<tr><td>KYB</td><td data-en="Developer identity verification (Regtank)" data-zh="开发者身份验证（Regtank）">Regtank</td></tr>
+<tr><td data-en="KYB" data-zh="KYB">KYB</td><td data-en="Developer identity verification (Regtank)" data-zh="开发者身份验证（Regtank）">Regtank</td></tr>
 <tr><td data-en="Agent KYC" data-zh="Agent KYC">Agent KYC</td><td data-en="Agent-to-wallet binding + transaction patterns" data-zh="Agent-钱包绑定 + 交易模式分析">Wallet binding</td></tr>
 <tr><td data-en="Sanctions Screening" data-zh="制裁筛查">Sanctions</td><td data-en="OFAC, UN, EU, HK, AU consolidated lists" data-zh="OFAC、UN、EU、HK、AU 联合名单">Multi-list</td></tr>
-<tr><td>AML/CFT</td><td data-en="Regtank real-time risk scoring" data-zh="Regtank 实时风险评分">Regtank</td></tr>
+<tr><td data-en="AML/CFT" data-zh="AML/CFT">AML/CFT</td><td data-en="Regtank real-time risk scoring" data-zh="Regtank 实时风险评分">Regtank</td></tr>
 <tr><td data-en="SAR Filing" data-zh="可疑报告">SAR Filing</td><td data-en="Automatic at risk > 75" data-zh="风险评分 >75 自动提交">Auto >75</td></tr>
 <tr><td data-en="Audit Trail" data-zh="审计追踪">Audit</td><td data-en="Immutable transaction logs" data-zh="不可篡改的交易日志">Immutable</td></tr>
 </table>
