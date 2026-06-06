@@ -813,6 +813,37 @@ img, svg { max-width: 100%; height: auto; }
   .btn-primary, .btn-secondary { font-size: 0.9rem; }
 }
 
+/* --- Doc page mobile fixes --- */
+@media (max-width: 767px) {
+  .doc-page { padding-top: 100px; }
+  .doc-page-inner { padding: 0 16px 40px !important; }
+  .doc-page-inner h1 { font-size: 1.2rem !important; }
+  .doc-page-inner h2 { font-size: 1.05rem !important; margin: 24px 0 10px !important; }
+  .doc-page-inner h3 { font-size: 0.95rem !important; }
+  .doc-page-inner p { font-size: 0.85rem; }
+  .doc-page-inner table { font-size: 0.75rem; }
+  .doc-page-inner td, .doc-page-inner th { padding: 6px 8px; }
+  .doc-sub-nav a { padding: 8px 10px; font-size: 0.72rem; }
+  .doc-sub-nav { gap: 0; }
+}
+@media (max-width: 479px) {
+  .doc-page-inner td, .doc-page-inner th { padding: 4px 6px; font-size: 0.68rem; }
+  .doc-page-inner ul, .doc-page-inner ol { padding-left: 14px; }
+  .doc-page-inner li { font-size: 0.82rem; }
+}
+
+/* --- Architecture diagram mobile --- */
+@media (max-width: 767px) {
+  .arch-diagram { padding: 12px; }
+  .arch-layer { padding: 14px; }
+  .arch-layer-label { font-size: 0.78rem !important; }
+  .arch-modules { gap: 6px; }
+  .arch-module { font-size: 0.7rem; padding: 5px 8px; word-break: break-word; }
+}
+
+/* --- Table scroll helper --- */
+.table-wrap { overflow-x: auto; }
+
 /* --- Print --- */
 @media print {
   .nav, .footer, .cta-section, .playground, .hero-visual { display: none; }
