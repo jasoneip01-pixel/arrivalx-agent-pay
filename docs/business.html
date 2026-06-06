@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Model — ArrivalX</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.doc-page { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; }
+.doc-page h1 { font-size: 2rem; margin-bottom: 8px; }
+.doc-page h2 { font-size: 1.4rem; margin: 32px 0 12px; color: var(--accent); }
+.doc-page h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+.doc-page p, .doc-page li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
+.doc-page ul, .doc-page ol { padding-left: 20px; margin-bottom: 16px; }
+.doc-page li { margin-bottom: 4px; }
+.doc-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+.doc-page th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
+.doc-page td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.doc-page code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; color: var(--accent); }
+.doc-page hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.doc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); margin-bottom: 32px; font-size: 0.9rem; }
+.doc-back:hover { color: var(--accent); text-decoration: none; }
+.highlight-box { background: var(--accent-dim); border: 1px solid rgba(20,184,166,0.3); border-radius: var(--radius); padding: 20px; margin: 16px 0; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <div class="nav-links">
+    <a href="../index.html#product">Product</a>
+    <a href="../index.html#playground">Playground</a>
+    <a href="../index.html#docs">Docs</a>
+  </div>
+</div></nav>
+
+<main class="doc-page">
+<a href="../index.html#docs" class="doc-back">← Back to Docs</a>
+<h1>💰 Business Model & Economics</h1>
+
+<h2>1. Revenue Model</h2>
+<p>ArrivalX is an infrastructure company. Revenue comes from a small percentage of every transaction flowing through the settlement layer.</p>
+
+<table>
+<tr><th>Revenue Line</th><th>Basis</th><th>Rate</th></tr>
+<tr><td>Agent→API Settlement</td><td>Transaction volume</td><td>0.50%</td></tr>
+<tr><td>Agent→Merchant Settlement</td><td>Transaction volume</td><td>0.80-1.20%</td></tr>
+<tr><td>Agent→Agent Settlement</td><td>Per transaction</td><td>$0.10 + 15bp</td></tr>
+<tr><td>FX Conversion</td><td>Notional</td><td>15bp</td></tr>
+<tr><td>CaaS Platform Fee</td><td>Monthly</td><td>$500-5,000/enterprise</td></tr>
+</table>
+
+<h3>Why These Rates Work</h3>
+<ul>
+<li><strong>Agents:</strong> 0.5% on $0.50 = $0.0025. Irrelevant at machine scale.</li>
+<li><strong>Merchants:</strong> 0.8-1.2% vs. 2.9%+$0.30 for cards. 60-80% cheaper.</li>
+<li><strong>Agent-to-agent:</strong> $0.10 vs. $15-50 SWIFT. 99% cheaper.</li>
+</ul>
+
+<div class="highlight-box">
+<strong>Revenue Mix at Scale</strong>
+<table style="margin:12px 0 0 0">
+<tr><th>Revenue Line</th><th>Y1</th><th>Y3</th></tr>
+<tr><td>Agent→API Settlement</td><td>45%</td><td>35%</td></tr>
+<tr><td>Agent→Merchant Settlement</td><td>25%</td><td>30%</td></tr>
+<tr><td>Agent→Agent Settlement</td><td>15%</td><td>20%</td></tr>
+<tr><td>FX Conversion</td><td>10%</td><td>5%</td></tr>
+<tr><td>CaaS Platform Fee</td><td>5%</td><td>10%</td></tr>
+</table>
+</div>
+
+<hr>
+
+<h2>2. Market Sizing</h2>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
+<tr><td><strong>TAM</strong></td><td>$1.5 trillion</td><td>Juniper Research (2030 autonomous AI commerce)</td></tr>
+<tr><td><strong>SAM</strong></td><td>$150 billion</td><td>Agent payments on crypto rails (10% of TAM)</td></tr>
+<tr><td><strong>SOM</strong></td><td>$1.5 billion</td><td>1% of SAM (4-jurisdiction reach)</td></tr>
+</table>
+
+<h3>Market Signals (2026)</h3>
+<table>
+<tr><th>Metric</th><th>Value</th></tr>
+<tr><td>Stablecoin market cap</td><td>$318B</td></tr>
+<tr><td>Monthly stablecoin volume</td><td>$1.8T</td></tr>
+<tr><td>x402 payments processed</td><td>100M+</td></tr>
+<tr><td>Agentic AI market</td><td>$11B</td></tr>
+<tr><td>Agent payment infra funding</td><td>$2B+ (Q1-Q2 2026)</td></tr>
+</table>
+
+<hr>
+
+<h2>3. Unit Economics</h2>
+<h3>Per Transaction ($1.00 USDC Agent→API)</h3>
+<table>
+<tr><th>Item</th><th>Amount</th><th>% of Revenue</th></tr>
+<tr><td>Revenue</td><td>$0.0050</td><td>100%</td></tr>
+<tr><td>Cobo MPC wallet</td><td>$0.0003</td><td>6%</td></tr>
+<tr><td>Regtank screening</td><td>$0.0002</td><td>4%</td></tr>
+<tr><td>Blockchain gas (Base L2)</td><td>$0.0001</td><td>2%</td></tr>
+<tr><td>FX conversion</td><td>$0.0002</td><td>4%</td></tr>
+<tr><td><strong>Gross Profit</strong></td><td><strong>$0.0042</strong></td><td><strong>84%</strong></td></tr>
+</table>
+
+<h3>At $10M Monthly Volume (Phase 4 target)</h3>
+<table>
+<tr><th>Metric</th><th>Monthly</th><th>Annualized</th></tr>
+<tr><td>Revenue</td><td>$50,000</td><td>$600,000</td></tr>
+<tr><td>COGS</td><td>$8,000</td><td>$96,000</td></tr>
+<tr><td><strong>Gross Profit</strong></td><td><strong>$42,000</strong></td><td><strong>$504,000</strong></td></tr>
+<tr><td>Gross Margin</td><td colspan="2">84%</td></tr>
+<tr><td>Team (8 people)</td><td>$80,000</td><td>$960,000</td></tr>
+<tr><td>Infrastructure</td><td>$5,000</td><td>$60,000</td></tr>
+<tr><td>Compliance/Legal</td><td>$10,000</td><td>$120,000</td></tr>
+<tr><td><strong>Net Burn</strong></td><td><strong>-$53,000</strong></td><td><strong>-$636,000</strong></td></tr>
+</table>
+<p><strong>Breakeven:</strong> $25-30M monthly volume at current rates.</p>
+
+<hr>
+
+<h2>4. Growth Model</h2>
+<h3>Developer-Led Growth (B2D)</h3>
+<ol>
+<li>Open-source SDK → 5-minute integration</li>
+<li>Sandbox free up to $100/month</li>
+<li>Framework partnerships (LangChain, AI2, Codex, MCP)</li>
+<li>x402/MPP compatibility → zero switching cost</li>
+</ol>
+<h3>Network Effects</h3>
+<ul>
+<li>More agents → more volume → better FX rates → more agents</li>
+<li>More protocols → more use cases → more agents → more protocols</li>
+<li>More jurisdictions → more counterparties → more transactions</li>
+</ul>
+
+<hr>
+
+<h2>5. Comparative Advantage</h2>
+<h3>vs. Traditional Payment Processors</h3>
+<table>
+<tr><th>Metric</th><th>Stripe (Card)</th><th>ArrivalX (Agent)</th></tr>
+<tr><td>Per-transaction fee</td><td>2.9% + $0.30</td><td>0.5%</td></tr>
+<tr><td>Micropayment viable?</td><td>❌ ($0.33 min)</td><td>✅ ($0.0025 on $0.50)</td></tr>
+<tr><td>Agent-native?</td><td>❌ (human auth)</td><td>✅ (wallet = keypair)</td></tr>
+<tr><td>Cross-border</td><td>1% + correspondent</td><td>0.15% + crypto rails</td></tr>
+<tr><td>Settlement time</td><td>T+2</td><td>~3 seconds</td></tr>
+<tr><td>Operating hours</td><td>Business days</td><td>24/7/365</td></tr>
+</table>
+
+<hr>
+
+<h2>6. Funding & Valuation</h2>
+<h3>Seed Round Target (M7-M9)</h3>
+<table>
+<tr><th>Parameter</th><th>Target</th></tr>
+<tr><td>Raise</td><td>$5-8M</td></tr>
+<tr><td>Pre-money valuation</td><td>$25-35M</td></tr>
+<tr><td>Use of funds</td><td>Team 60%, Infra 20%, Compliance 20%</td></tr>
+<tr><td>Next-round milestone</td><td>$1M+/mo volume, 500+ devs</td></tr>
+</table>
+
+<h3>Comparable Transactions</h3>
+<table>
+<tr><th>Company</th><th>Round</th><th>Amount</th><th>Valuation</th></tr>
+<tr><td>Sapiom</td><td>Seed</td><td>$15.75M</td><td>~$60M</td></tr>
+<tr><td>Fasset</td><td>Series B</td><td>$51M</td><td>~$200M+</td></tr>
+<tr><td>Ramp</td><td>Series F</td><td>$750M</td><td>$44B</td></tr>
+</table>
+
+<hr>
+
+<h2>7. Risk Factors</h2>
+<table>
+<tr><th>Risk</th><th>Probability</th><th>Impact</th><th>Mitigation</th></tr>
+<tr><td>Stripe/Coinbase competing compliance layer</td><td>Medium</td><td>High</td><td>Be first, seek acquisition</td></tr>
+<tr><td>Regulatory crackdown on crypto MSBs</td><td>Low-Med</td><td>High</td><td>Diversify, pursue EMI licenses</td></tr>
+<tr><td>Agent payment adoption slower than projected</td><td>Medium</td><td>Medium</td><td>CaaS revenue diversifies</td></tr>
+<tr><td>Key partner failure</td><td>Low</td><td>Medium</td><td>Multi-vendor architecture</td></tr>
+<tr><td>Security breach</td><td>Low</td><td>Very High</td><td>Insurance, cold storage, bug bounty</td></tr>
+</table>
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <span>Stable Chain Fintech Limited · June 2026</span>
+  </div>
+</footer>
+</body>
+</html>
