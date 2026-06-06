@@ -1,183 +1,146 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Business Model — ArrivalX</title>
 <link rel="stylesheet" href="../css/style.css">
 <style>
-.doc-page { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; }
-.doc-page h1 { font-size: 2rem; margin-bottom: 8px; }
-.doc-page h2 { font-size: 1.4rem; margin: 32px 0 12px; color: var(--accent); }
-.doc-page h3 { font-size: 1.1rem; margin: 24px 0 8px; }
-.doc-page p, .doc-page li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
-.doc-page ul, .doc-page ol { padding-left: 20px; margin-bottom: 16px; }
-.doc-page li { margin-bottom: 4px; }
-.doc-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
-.doc-page th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
-.doc-page td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
-.doc-page code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; color: var(--accent); }
-.doc-page hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-.doc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); margin-bottom: 32px; font-size: 0.9rem; }
-.doc-back:hover { color: var(--accent); text-decoration: none; }
+.doc-page-inner { max-width: 800px; margin: 0 auto; padding: 0 24px 60px; }
+.doc-page-inner h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 8px; }
+.doc-page-inner h2 { font-size: 1.3rem; margin: 36px 0 12px; color: var(--accent); }
+.doc-page-inner h3 { font-size: 1.05rem; margin: 24px 0 8px; }
+.doc-page-inner p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 10px; }
+.doc-page-inner ul, .doc-page-inner ol { padding-left: 20px; margin-bottom: 16px; color: var(--text-secondary); }
+.doc-page-inner li { margin-bottom: 5px; line-height: 1.6; }
+.doc-page-inner table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+.doc-page-inner th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
+.doc-page-inner td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.doc-page-inner hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.doc-page-inner code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; color: var(--accent); }
 .highlight-box { background: var(--accent-dim); border: 1px solid rgba(20,184,166,0.3); border-radius: var(--radius); padding: 20px; margin: 16px 0; }
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-inner">
+<nav class="nav" id="nav"><div class="nav-inner">
   <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
   <div class="nav-links">
     <a href="../index.html#product">Product</a>
     <a href="../index.html#playground">Playground</a>
     <a href="../index.html#docs">Docs</a>
+    <a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay" target="_blank">GitHub</a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">中文</button>
   </div>
 </div></nav>
 
-<main class="doc-page">
-<a href="../index.html#docs" class="doc-back">← Back to Docs</a>
-<h1>💰 Business Model & Economics</h1>
+<nav class="doc-sub-nav-wrap"><div class="doc-sub-nav">
+  <a href="../index.html"><span class="nav-arrow">←</span> Home</a>
+  <a href="overview.html" data-en="Overview" data-zh="总览">Overview</a>
+  <a href="product.html" data-en="Product" data-zh="产品定义">Product</a>
+  <a href="api.html" data-en="API / SDK" data-zh="API / SDK">API / SDK</a>
+  <a href="business.html" class="active" data-en="Business" data-zh="商业模式">Business</a>
+</div></nav>
 
-<h2>1. Revenue Model</h2>
-<p>ArrivalX is an infrastructure company. Revenue comes from a small percentage of every transaction flowing through the settlement layer.</p>
+<main class="doc-page">
+<div class="doc-page-inner">
+
+<h1 data-en="💰 Business Model & Economics" data-zh="💰 商业模式与经济学">💰 Business Model & Economics</h1>
+
+<h2 data-en="1. Revenue Model" data-zh="1. 收入模型">1. Revenue Model</h2>
+<p data-en="ArrivalX is an infrastructure company. Revenue comes from a small percentage of every transaction flowing through the settlement layer." data-zh="ArrivalX 是基础设施公司。收入来自通过结算层的每一笔交易的小额分成。">ArrivalX is an infrastructure company. Revenue comes from a small percentage of every transaction flowing through the settlement layer.</p>
 
 <table>
-<tr><th>Revenue Line</th><th>Basis</th><th>Rate</th></tr>
-<tr><td>Agent→API Settlement</td><td>Transaction volume</td><td>0.50%</td></tr>
-<tr><td>Agent→Merchant Settlement</td><td>Transaction volume</td><td>0.80-1.20%</td></tr>
-<tr><td>Agent→Agent Settlement</td><td>Per transaction</td><td>$0.10 + 15bp</td></tr>
-<tr><td>FX Conversion</td><td>Notional</td><td>15bp</td></tr>
-<tr><td>CaaS Platform Fee</td><td>Monthly</td><td>$500-5,000/enterprise</td></tr>
+<tr><th data-en="Revenue Line" data-zh="收入线">Revenue Line</th><th data-en="Basis" data-zh="基础">Basis</th><th>Rate</th></tr>
+<tr><td data-en="Agent→API Settlement" data-zh="Agent→API 结算">Agent→API</td><td data-en="Transaction volume" data-zh="交易量">Volume</td><td>0.50%</td></tr>
+<tr><td data-en="Agent→Merchant" data-zh="Agent→商户">Agent→Merchant</td><td data-en="Transaction volume" data-zh="交易量">Volume</td><td>0.80-1.20%</td></tr>
+<tr><td data-en="Agent→Agent" data-zh="Agent→Agent">Agent→Agent</td><td data-en="Per transaction" data-zh="每笔">Per tx</td><td>$0.10 + 15bp</td></tr>
+<tr><td data-en="FX Conversion" data-zh="外汇转换">FX</td><td>Notional</td><td>15bp</td></tr>
+<tr><td data-en="CaaS Platform" data-zh="CaaS 平台费">CaaS</td><td data-en="Monthly" data-zh="月付">Monthly</td><td>$500-5,000</td></tr>
 </table>
 
-<h3>Why These Rates Work</h3>
+<h3 data-en="Why These Rates Work" data-zh="费率为何合理">Why These Rates Work</h3>
 <ul>
-<li><strong>Agents:</strong> 0.5% on $0.50 = $0.0025. Irrelevant at machine scale.</li>
-<li><strong>Merchants:</strong> 0.8-1.2% vs. 2.9%+$0.30 for cards. 60-80% cheaper.</li>
-<li><strong>Agent-to-agent:</strong> $0.10 vs. $15-50 SWIFT. 99% cheaper.</li>
+<li data-en="Agents: 0.5% on $0.50 = $0.0025. Irrelevant at machine scale." data-zh="Agent：$0.50 的 0.5% = $0.0025。在机器规模下微不足道。">Agents: 0.5% on $0.50 = $0.0025. Irrelevant at machine scale.</li>
+<li data-en="Merchants: 0.8-1.2% vs. 2.9%+$0.30 for cards. 60-80% cheaper." data-zh="商户：0.8-1.2% vs. 信用卡 2.9%+$0.30。便宜 60-80%。">Merchants: 0.8-1.2% vs. 2.9%+$0.30 for cards. 60-80% cheaper.</li>
+<li data-en="Agent-to-agent: $0.10 vs. $15-50 SWIFT. 99% cheaper." data-zh="Agent 间结算：$0.10 vs. SWIFT $15-50。便宜 99%。">Agent-to-agent: $0.10 vs. $15-50 SWIFT. 99% cheaper.</li>
 </ul>
 
 <div class="highlight-box">
-<strong>Revenue Mix at Scale</strong>
+<strong data-en="Revenue Mix at Scale" data-zh="规模化后的收入结构">Revenue Mix at Scale</strong>
 <table style="margin:12px 0 0 0">
-<tr><th>Revenue Line</th><th>Y1</th><th>Y3</th></tr>
-<tr><td>Agent→API Settlement</td><td>45%</td><td>35%</td></tr>
-<tr><td>Agent→Merchant Settlement</td><td>25%</td><td>30%</td></tr>
-<tr><td>Agent→Agent Settlement</td><td>15%</td><td>20%</td></tr>
-<tr><td>FX Conversion</td><td>10%</td><td>5%</td></tr>
-<tr><td>CaaS Platform Fee</td><td>5%</td><td>10%</td></tr>
+<tr><th data-en="Revenue Line" data-zh="收入线">Line</th><th>Y1</th><th>Y3</th></tr>
+<tr><td data-en="Agent→API">→API</td><td>45%</td><td>35%</td></tr>
+<tr><td data-en="Agent→Merchant">→Mch</td><td>25%</td><td>30%</td></tr>
+<tr><td data-en="Agent→Agent">→Agent</td><td>15%</td><td>20%</td></tr>
+<tr><td>FX</td><td>10%</td><td>5%</td></tr>
+<tr><td>CaaS</td><td>5%</td><td>10%</td></tr>
 </table>
 </div>
 
 <hr>
 
-<h2>2. Market Sizing</h2>
+<h2 data-en="2. Market Sizing" data-zh="2. 市场规模">2. Market Sizing</h2>
 <table>
-<tr><th>Metric</th><th>Value</th><th>Source</th></tr>
-<tr><td><strong>TAM</strong></td><td>$1.5 trillion</td><td>Juniper Research (2030 autonomous AI commerce)</td></tr>
-<tr><td><strong>SAM</strong></td><td>$150 billion</td><td>Agent payments on crypto rails (10% of TAM)</td></tr>
-<tr><td><strong>SOM</strong></td><td>$1.5 billion</td><td>1% of SAM (4-jurisdiction reach)</td></tr>
+<tr><th data-en="Metric" data-zh="指标">Metric</th><th data-en="Value" data-zh="值">Value</th><th data-en="Source" data-zh="来源">Source</th></tr>
+<tr><td><strong>TAM</strong></td><td data-en="$1.5 trillion" data-zh="1.5 万亿美元">$1.5T</td><td data-en="Juniper Research (2030 autonomous AI commerce)" data-zh="Juniper Research（2030 自主 AI 商业）">Juniper</td></tr>
+<tr><td><strong>SAM</strong></td><td data-en="$150 billion" data-zh="1500 亿美元">$150B</td><td data-en="Agent payments on crypto rails (10% of TAM)" data-zh="加密轨道上的 Agent 支付（TAM 的 10%）">10% TAM</td></tr>
+<tr><td><strong>SOM</strong></td><td data-en="$1.5 billion" data-zh="15 亿美元">$1.5B</td><td data-en="1% of SAM (4-jurisdiction reach)" data-zh="SAM 的 1%（4 司法辖区覆盖）">1% SAM</td></tr>
 </table>
 
-<h3>Market Signals (2026)</h3>
+<h3 data-en="Market Signals (2026)" data-zh="市场信号（2026）">Market Signals (2026)</h3>
 <table>
-<tr><th>Metric</th><th>Value</th></tr>
-<tr><td>Stablecoin market cap</td><td>$318B</td></tr>
-<tr><td>Monthly stablecoin volume</td><td>$1.8T</td></tr>
-<tr><td>x402 payments processed</td><td>100M+</td></tr>
-<tr><td>Agentic AI market</td><td>$11B</td></tr>
-<tr><td>Agent payment infra funding</td><td>$2B+ (Q1-Q2 2026)</td></tr>
-</table>
-
-<hr>
-
-<h2>3. Unit Economics</h2>
-<h3>Per Transaction ($1.00 USDC Agent→API)</h3>
-<table>
-<tr><th>Item</th><th>Amount</th><th>% of Revenue</th></tr>
-<tr><td>Revenue</td><td>$0.0050</td><td>100%</td></tr>
-<tr><td>Cobo MPC wallet</td><td>$0.0003</td><td>6%</td></tr>
-<tr><td>Regtank screening</td><td>$0.0002</td><td>4%</td></tr>
-<tr><td>Blockchain gas (Base L2)</td><td>$0.0001</td><td>2%</td></tr>
-<tr><td>FX conversion</td><td>$0.0002</td><td>4%</td></tr>
-<tr><td><strong>Gross Profit</strong></td><td><strong>$0.0042</strong></td><td><strong>84%</strong></td></tr>
-</table>
-
-<h3>At $10M Monthly Volume (Phase 4 target)</h3>
-<table>
-<tr><th>Metric</th><th>Monthly</th><th>Annualized</th></tr>
-<tr><td>Revenue</td><td>$50,000</td><td>$600,000</td></tr>
-<tr><td>COGS</td><td>$8,000</td><td>$96,000</td></tr>
-<tr><td><strong>Gross Profit</strong></td><td><strong>$42,000</strong></td><td><strong>$504,000</strong></td></tr>
-<tr><td>Gross Margin</td><td colspan="2">84%</td></tr>
-<tr><td>Team (8 people)</td><td>$80,000</td><td>$960,000</td></tr>
-<tr><td>Infrastructure</td><td>$5,000</td><td>$60,000</td></tr>
-<tr><td>Compliance/Legal</td><td>$10,000</td><td>$120,000</td></tr>
-<tr><td><strong>Net Burn</strong></td><td><strong>-$53,000</strong></td><td><strong>-$636,000</strong></td></tr>
-</table>
-<p><strong>Breakeven:</strong> $25-30M monthly volume at current rates.</p>
-
-<hr>
-
-<h2>4. Growth Model</h2>
-<h3>Developer-Led Growth (B2D)</h3>
-<ol>
-<li>Open-source SDK → 5-minute integration</li>
-<li>Sandbox free up to $100/month</li>
-<li>Framework partnerships (LangChain, AI2, Codex, MCP)</li>
-<li>x402/MPP compatibility → zero switching cost</li>
-</ol>
-<h3>Network Effects</h3>
-<ul>
-<li>More agents → more volume → better FX rates → more agents</li>
-<li>More protocols → more use cases → more agents → more protocols</li>
-<li>More jurisdictions → more counterparties → more transactions</li>
-</ul>
-
-<hr>
-
-<h2>5. Comparative Advantage</h2>
-<h3>vs. Traditional Payment Processors</h3>
-<table>
-<tr><th>Metric</th><th>Stripe (Card)</th><th>ArrivalX (Agent)</th></tr>
-<tr><td>Per-transaction fee</td><td>2.9% + $0.30</td><td>0.5%</td></tr>
-<tr><td>Micropayment viable?</td><td>❌ ($0.33 min)</td><td>✅ ($0.0025 on $0.50)</td></tr>
-<tr><td>Agent-native?</td><td>❌ (human auth)</td><td>✅ (wallet = keypair)</td></tr>
-<tr><td>Cross-border</td><td>1% + correspondent</td><td>0.15% + crypto rails</td></tr>
-<tr><td>Settlement time</td><td>T+2</td><td>~3 seconds</td></tr>
-<tr><td>Operating hours</td><td>Business days</td><td>24/7/365</td></tr>
+<tr><th data-en="Metric" data-zh="指标">Metric</th><th data-en="Value" data-zh="值">Value</th></tr>
+<tr><td data-en="Stablecoin market cap" data-zh="稳定币市值">Stablecoin MC</td><td>$318B</td></tr>
+<tr><td data-en="Monthly stablecoin volume" data-zh="月度稳定币交易量">Monthly vol</td><td>$1.8T</td></tr>
+<tr><td data-en="x402 payments processed" data-zh="x402 支付笔数">x402 txns</td><td>100M+</td></tr>
+<tr><td data-en="Agentic AI market" data-zh="Agent AI 市场">Agent AI mkt</td><td>$11B</td></tr>
+<tr><td data-en="Agent payment infra funding" data-zh="Agent 支付基础设施融资">Funding</td><td data-en="$2B+ (Q1-Q2 2026)" data-zh="$2B+（2026 Q1-Q2）">$2B+</td></tr>
 </table>
 
 <hr>
 
-<h2>6. Funding & Valuation</h2>
-<h3>Seed Round Target (M7-M9)</h3>
+<h2 data-en="3. Unit Economics" data-zh="3. 单位经济学">3. Unit Economics</h2>
+<h3 data-en="Per Transaction ($1.00 USDC Agent→API)" data-zh="每笔交易（$1.00 USDC Agent→API）">Per $1.00 USDC Transaction</h3>
 <table>
-<tr><th>Parameter</th><th>Target</th></tr>
-<tr><td>Raise</td><td>$5-8M</td></tr>
-<tr><td>Pre-money valuation</td><td>$25-35M</td></tr>
-<tr><td>Use of funds</td><td>Team 60%, Infra 20%, Compliance 20%</td></tr>
-<tr><td>Next-round milestone</td><td>$1M+/mo volume, 500+ devs</td></tr>
+<tr><th data-en="Item" data-zh="项目">Item</th><th data-en="Amount" data-zh="金额">Amount</th><th data-en="% of Revenue" data-zh="占收入%">% Rev</th></tr>
+<tr><td data-en="Revenue " data-zh="收入 ">Revenue</td><td>$0.0050</td><td>100%</td></tr>
+<tr><td data-en="Cobo MPC wallet" data-zh="Cobo MPC 钱包">Cobo</td><td>$0.0003</td><td>6%</td></tr>
+<tr><td data-en="Regtank screening" data-zh="Regtank 筛查">Screening</td><td>$0.0002</td><td>4%</td></tr>
+<tr><td data-en="Blockchain gas (Base L2)" data-zh="链上 Gas（Base L2）">Gas</td><td>$0.0001</td><td>2%</td></tr>
+<tr><td data-en="FX conversion" data-zh="外汇转换">FX</td><td>$0.0002</td><td>4%</td></tr>
+<tr><td><strong data-en="Gross Profit" data-zh="毛利润">Gross Profit</strong></td><td><strong>$0.0042</strong></td><td><strong>84%</strong></td></tr>
 </table>
 
-<h3>Comparable Transactions</h3>
+<p data-en="Breakeven: $25-30M monthly volume at current rates." data-zh="盈亏平衡点：在当前费率下月交易量达 $25-30M。">Breakeven: $25-30M monthly volume at current rates.</p>
+
+<hr>
+
+<h2 data-en="4. Comparative Advantage" data-zh="4. 比较优势">4. Comparative Advantage</h2>
+<h3 data-en="vs. Traditional Payment Processors" data-zh="对比传统支付处理器">vs. Traditional Payment Processors</h3>
 <table>
-<tr><th>Company</th><th>Round</th><th>Amount</th><th>Valuation</th></tr>
-<tr><td>Sapiom</td><td>Seed</td><td>$15.75M</td><td>~$60M</td></tr>
-<tr><td>Fasset</td><td>Series B</td><td>$51M</td><td>~$200M+</td></tr>
-<tr><td>Ramp</td><td>Series F</td><td>$750M</td><td>$44B</td></tr>
+<tr><th data-en="Metric" data-zh="指标">Metric</th><th data-en="Stripe (Card)" data-zh="Stripe（卡）">Stripe</th><th data-en="ArrivalX (Agent)" data-zh="ArrivalX（Agent）">ArrivalX</th></tr>
+<tr><td data-en="Per-transaction fee" data-zh="单笔费率">Fee</td><td>2.9% + $0.30</td><td>0.5%</td></tr>
+<tr><td data-en="Micropayment viable?" data-zh="支持微支付？">Micropayment</td><td>❌ ($0.33 min)</td><td>✅ ($0.0025 on $0.50)</td></tr>
+<tr><td data-en="Agent-native?" data-zh="Agent 原生？">Agent-native</td><td>❌ (human auth)</td><td>✅ (keypair)</td></tr>
+<tr><td data-en="Cross-border" data-zh="跨境">Cross-border</td><td>1%+</td><td>0.15%+</td></tr>
+<tr><td data-en="Settlement time" data-zh="结算时间">Settlement</td><td>T+2</td><td>~3 seconds</td></tr>
+<tr><td data-en="Operating hours" data-zh="运营时间">Hours</td><td data-en="Business days" data-zh="工作日">Biz days</td><td>24/7/365</td></tr>
 </table>
 
 <hr>
 
-<h2>7. Risk Factors</h2>
+<h2 data-en="5. Risk Factors" data-zh="5. 风险因素">5. Risk Factors</h2>
 <table>
-<tr><th>Risk</th><th>Probability</th><th>Impact</th><th>Mitigation</th></tr>
-<tr><td>Stripe/Coinbase competing compliance layer</td><td>Medium</td><td>High</td><td>Be first, seek acquisition</td></tr>
-<tr><td>Regulatory crackdown on crypto MSBs</td><td>Low-Med</td><td>High</td><td>Diversify, pursue EMI licenses</td></tr>
-<tr><td>Agent payment adoption slower than projected</td><td>Medium</td><td>Medium</td><td>CaaS revenue diversifies</td></tr>
-<tr><td>Key partner failure</td><td>Low</td><td>Medium</td><td>Multi-vendor architecture</td></tr>
-<tr><td>Security breach</td><td>Low</td><td>Very High</td><td>Insurance, cold storage, bug bounty</td></tr>
+<tr><th data-en="Risk" data-zh="风险">Risk</th><th data-en="Prob." data-zh="概率">Prob</th><th data-en="Impact" data-zh="影响">Impact</th><th data-en="Mitigation" data-zh="缓解">Mitigation</th></tr>
+<tr><td data-en="Stripe/Coinbase competes" data-zh="Stripe/Coinbase 竞争">Big tech enters</td><td data-en="Med" data-zh="中">Med</td><td>High</td><td data-en="Be first, seek acquisition" data-zh="先发优势，寻求收购">1st mover</td></tr>
+<tr><td data-en="Regulatory crackdown on crypto MSBs" data-zh="加密 MSB 监管收紧">Crypto MSB risk</td><td data-en="Low-Med" data-zh="低-中">Low-Med</td><td>High</td><td data-en="Diversify, pursue EMI" data-zh="多元化，申请 EMI">EMI</td></tr>
+<tr><td data-en="Slow agent payment adoption" data-zh="Agent 支付采用慢">Slow adoption</td><td data-en="Med" data-zh="中">Med</td><td>Med</td><td data-en="CaaS revenue" data-zh="CaaS 收入多元">CaaS</td></tr>
+<tr><td data-en="Key partner failure" data-zh="关键合作伙伴失效">Partner fail</td><td data-en="Low" data-zh="低">Low</td><td>Med</td><td data-en="Multi-vendor" data-zh="多供应商">Multi</td></tr>
+<tr><td data-en="Security breach" data-zh="安全漏洞">Breach</td><td data-en="Low" data-zh="低">Low</td><td data-en="V.High" data-zh="极高">VH</td><td data-en="Insurance, cold storage" data-zh="保险、冷存储">Insurance</td></tr>
 </table>
+
+</div>
 </main>
 
 <footer class="footer">
@@ -185,5 +148,6 @@
     <span>Stable Chain Fintech Limited · June 2026</span>
   </div>
 </footer>
+<script src="docs.js"></script>
 </body>
 </html>
