@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Integration Guide — ArrivalX</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.doc-page { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; }
+.doc-page h1 { font-size: 2rem; margin-bottom: 8px; }
+.doc-page h2 { font-size: 1.4rem; margin: 32px 0 12px; color: var(--accent); }
+.doc-page h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+.doc-page p, .doc-page li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
+.doc-page ul, .doc-page ol { padding-left: 20px; margin-bottom: 16px; }
+.doc-page li { margin-bottom: 4px; }
+.doc-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+.doc-page th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
+.doc-page td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.doc-page code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; color: var(--accent); }
+.doc-page pre { background: #000; padding: 16px; border-radius: var(--radius-sm); overflow-x: auto; margin: 12px 0; }
+.doc-page pre code { background: none; padding: 0; color: #22c55e; }
+.doc-page hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.doc-page blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; background: var(--accent-dim); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.doc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); margin-bottom: 32px; font-size: 0.9rem; }
+.doc-back:hover { color: var(--accent); text-decoration: none; }
+.endpoint { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; margin: 8px 0; font-family: monospace; font-size: 0.9rem; }
+.method { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; margin-right: 8px; }
+.method.get { background: #22c55e; color: #000; }
+.method.post { background: #3b82f6; color: #fff; }
+.method.patch { background: #f59e0b; color: #000; }
+.method.delete { background: #ef4444; color: #fff; }
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <div class="nav-links">
+    <a href="../index.html#product">Product</a>
+    <a href="../index.html#playground">Playground</a>
+    <a href="../index.html#docs">Docs</a>
+  </div>
+</div></nav>
+
+<main class="doc-page">
+<a href="../index.html#docs" class="doc-back">← Back to Docs</a>
+<h1>🔧 Agent Integration Guide</h1>
+<blockquote>Give your AI agent a bank account in 5 minutes.</blockquote>
+
+<h2>Quickstart</h2>
+
+<h3>1. Install</h3>
+<pre><code>npm install @arrivalx/agent-sdk
+# or
+pip install arrivalx-agent-sdk
+# or
+go get github.com/arrivalx/agent-sdk-go</code></pre>
+
+<h3>2. Get API Key</h3>
+<pre><code>curl -X POST https://api.arrivalx.money/v0/developers/register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "dev@yourcompany.io", "name": "Your Agent Name"}'
+# → {"api_key": "ax_live_...", "developer_id": "dev_..."}</code></pre>
+
+<h3>3. Create Agent Wallet</h3>
+<pre><code>import { ArrivalX } from '@arrivalx/agent-sdk';
+
+const ax = new ArrivalX({ apiKey: process.env.AX_API_KEY });
+
+const wallet = await ax.wallets.create({
+  label: 'my-research-agent',
+  jurisdiction: 'US',
+  spendingLimit: '1000.00',
+});
+
+console.log(wallet.address);
+// → 0x7a9b...3f2c (Cobo MPC, fully managed)</code></pre>
+
+<h3>4. Make a Payment</h3>
+<pre><code>const payment = await wallet.pay({
+  to: 'api.dataprovider.io',
+  amount: '0.50',
+  currency: 'USDC',
+  protocol: 'x402',
+});
+
+console.log(payment.status); // → "settled"</code></pre>
+
+<h3>5. That's It</h3>
+<p>No gas fee management. No key custody. No blockchain RPC endpoints. No compliance paperwork.</p>
+
+<hr>
+
+<h2>API Reference</h2>
+<h3>Authentication</h3>
+<p>All requests require an API key:</p>
+<pre><code>Authorization: Bearer ax_live_YOUR_API_KEY</code></pre>
+<h3>Base URL</h3>
+<pre><code>https://api.arrivalx.money/v0</code></pre>
+
+<h3>Wallets</h3>
+<div class="endpoint"><span class="method post">POST</span> /wallets — Create an agent wallet</div>
+<div class="endpoint"><span class="method get">GET</span> /wallets — List all wallets</div>
+<div class="endpoint"><span class="method get">GET</span> /wallets/:id — Get wallet details</div>
+<div class="endpoint"><span class="method patch">PATCH</span> /wallets/:id — Update wallet config</div>
+<div class="endpoint"><span class="method delete">DELETE</span> /wallets/:id — Archive wallet</div>
+
+<h3>Payments</h3>
+<div class="endpoint"><span class="method post">POST</span> /payments — Initiate payment</div>
+<div class="endpoint"><span class="method get">GET</span> /payments/:id — Get payment status</div>
+<div class="endpoint"><span class="method get">GET</span> /payments — List payments (filterable)</div>
+
+<h3>Payment Status Flow</h3>
+<p><code>processing</code> → <code>screening</code> → <code>routing</code> → <code>settling</code> → <code>settled</code> | <code>failed</code> | <code>blocked</code></p>
+
+<hr>
+
+<h2>Protocol Support</h2>
+<h3>x402 (HTTP 402 Payment Required)</h3>
+<p>ArrivalX acts as a compliant x402 payment processor. Your agent hits a 402 response → ArrivalX pays → retries → returns result. All transparent.</p>
+
+<h3>MPP (Stripe Machine Payments Protocol)</h3>
+<p>For merchant/enterprise agent payments via traditional card networks. Handles USDC → fiat conversion → MPP settlement.</p>
+
+<h3>AP2 (Cobo Agent Payment Protocol)</h3>
+<p>For agent-to-agent direct settlement using Cobo's protocol.</p>
+
+<hr>
+
+<h2>Compliance & Routing</h2>
+<h3>Jurisdiction Routing</h3>
+<table>
+<tr><th>Agent Location</th><th>Counterparty</th><th>Routed Through</th><th>Reason</th></tr>
+<tr><td>US</td><td>US</td><td>🇺🇸 FinCEN MSB</td><td>Domestic, lowest latency</td></tr>
+<tr><td>US</td><td>APAC</td><td>🇭🇰 MSO</td><td>Asia corridor</td></tr>
+<tr><td>APAC</td><td>US</td><td>🇦🇺 DCE</td><td>US-friendly APAC hub</td></tr>
+<tr><td>APAC</td><td>APAC</td><td>🇭🇰 MSO</td><td>Regional efficiency</td></tr>
+<tr><td>CA</td><td>US</td><td>🇨🇦 FINTRAC</td><td>North American redundancy</td></tr>
+</table>
+
+<h3>Compliance Guarantees</h3>
+<table>
+<tr><th>Check</th><th>Method</th></tr>
+<tr><td>KYB</td><td>Developer identity verification (Regtank)</td></tr>
+<tr><td>Agent KYC</td><td>Agent-to-wallet binding + transaction patterns</td></tr>
+<tr><td>Sanctions Screening</td><td>OFAC, UN, EU, HK, AU consolidated lists</td></tr>
+<tr><td>AML/CFT</td><td>Regtank real-time risk scoring</td></tr>
+<tr><td>SAR Filing</td><td>Automatic at risk > 75</td></tr>
+<tr><td>Audit Trail</td><td>Immutable transaction logs</td></tr>
+</table>
+
+<hr>
+
+<h2>SDK Examples</h2>
+<h3>Python</h3>
+<pre><code>from arrivalx import ArrivalX
+
+ax = ArrivalX(api_key="ax_live_...")
+wallet = ax.wallets.create(label="my-python-agent", jurisdiction="US")
+payment = wallet.pay(to="api.dataprovider.io", amount="0.50", currency="USDC")
+print(f"Payment {payment.id}: {payment.status}")</code></pre>
+
+<h3>Go</h3>
+<pre><code>ax := arrivalx.NewClient("ax_live_...")
+wallet, _ := ax.Wallets.Create(arrivalx.CreateWalletParams{
+    Label: "my-go-agent", Jurisdiction: "US",
+})
+payment, _ := wallet.Pay(arrivalx.PayParams{
+    To: "api.service.io", Amount: "1.00", Currency: "USDC",
+})</code></pre>
+
+<h3>Webhook Events</h3>
+<pre><code>{
+  "event": "payment.settled",
+  "data": {
+    "payment_id": "pay_xyz789",
+    "amount": "0.50", "currency": "USDC",
+    "fee": "0.0025", "settlement_amount": "0.4975",
+    "protocol": "x402", "tx_hash": "0x..."
+  }
+}</code></pre>
+
+<hr>
+
+<h2>Rate Limits</h2>
+<table>
+<tr><th>Tier</th><th>Requests/min</th><th>Wallets</th><th>Monthly Volume</th></tr>
+<tr><td>Sandbox</td><td>30</td><td>5</td><td>$100</td></tr>
+<tr><td>Developer</td><td>300</td><td>50</td><td>$10,000</td></tr>
+<tr><td>Business</td><td>1,000</td><td>500</td><td>$100,000</td></tr>
+<tr><td>Enterprise</td><td>Custom</td><td>Custom</td><td>Custom</td></tr>
+</table>
+</main>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <span>API Version: v0 (Beta) · June 2026</span>
+  </div>
+</footer>
+</body>
+</html>
