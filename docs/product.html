@@ -1,161 +1,144 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Definition Spec — ArrivalX</title>
+<title>Product Definition — ArrivalX</title>
 <link rel="stylesheet" href="../css/style.css">
 <style>
-.doc-page { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; }
-.doc-page h1 { font-size: 2rem; margin-bottom: 8px; }
-.doc-page h2 { font-size: 1.4rem; margin: 32px 0 12px; color: var(--accent); }
-.doc-page h3 { font-size: 1.1rem; margin: 24px 0 8px; }
-.doc-page p, .doc-page li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
-.doc-page ul, .doc-page ol { padding-left: 20px; margin-bottom: 16px; }
-.doc-page li { margin-bottom: 4px; }
-.doc-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
-.doc-page th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
-.doc-page td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
-.doc-page code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
-.doc-page pre { background: #000; padding: 16px; border-radius: var(--radius-sm); overflow-x: auto; margin: 12px 0; }
-.doc-page pre code { background: none; padding: 0; }
-.doc-page hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-.doc-page blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 16px 0; background: var(--accent-dim); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
-.doc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); margin-bottom: 32px; font-size: 0.9rem; }
-.doc-back:hover { color: var(--accent); text-decoration: none; }
-.doc-toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 32px; }
-.doc-toc h3 { margin-top: 0 !important; }
-.doc-toc a { display: block; padding: 3px 0; font-size: 0.9rem; }
+.doc-page-inner { max-width: 800px; margin: 0 auto; padding: 0 24px 60px; }
+.doc-page-inner h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 8px; }
+.doc-page-inner h2 { font-size: 1.3rem; margin: 36px 0 12px; color: var(--accent); }
+.doc-page-inner h3 { font-size: 1.05rem; margin: 24px 0 8px; }
+.doc-page-inner p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 10px; }
+.doc-page-inner ul, .doc-page-inner ol { padding-left: 20px; margin-bottom: 16px; color: var(--text-secondary); }
+.doc-page-inner li { margin-bottom: 5px; line-height: 1.6; }
+.doc-page-inner table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+.doc-page-inner th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
+.doc-page-inner td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.doc-page-inner hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.doc-page-inner blockquote { border-left: 3px solid var(--accent); padding: 10px 18px; margin: 16px 0; background: var(--accent-dim); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: var(--text-secondary); }
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-inner">
+<nav class="nav" id="nav"><div class="nav-inner">
   <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
   <div class="nav-links">
     <a href="../index.html#product">Product</a>
     <a href="../index.html#playground">Playground</a>
     <a href="../index.html#docs">Docs</a>
+    <a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay" target="_blank">GitHub</a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">中文</button>
   </div>
 </div></nav>
 
+<nav class="doc-sub-nav-wrap"><div class="doc-sub-nav">
+  <a href="../index.html"><span class="nav-arrow">←</span> Home</a>
+  <a href="overview.html" data-en="Overview" data-zh="总览">Overview</a>
+  <a href="product.html" class="active" data-en="Product" data-zh="产品定义">Product</a>
+  <a href="api.html" data-en="API / SDK" data-zh="API / SDK">API / SDK</a>
+  <a href="business.html" data-en="Business" data-zh="商业模式">Business</a>
+</div></nav>
+
 <main class="doc-page">
-<a href="../index.html#docs" class="doc-back">← Back to Docs</a>
-<h1>📋 Product Definition Specification</h1>
+<div class="doc-page-inner">
 
-<div class="doc-toc">
-<h3>Contents</h3>
-<a href="#elevator">1. Elevator Pitch</a>
-<a href="#problem">2. Problem Statement</a>
-<a href="#definition">3. Product Definition</a>
-<a href="#competitive">4. Competitive Analysis</a>
-<a href="#users">5. Target Users</a>
-<a href="#business">6. Business Model</a>
-<a href="#roadmap">7. Roadmap</a>
-<a href="#falsification">8. Falsification Conditions</a>
-<a href="#acquisition">9. Acquisition Logic</a>
-</div>
+<h1 data-en="📋 Product Definition Specification" data-zh="📋 产品定义说明书">📋 Product Definition Specification</h1>
 
-<h2 id="elevator">1. Elevator Pitch</h2>
-<blockquote>"AI agents are effectively unbanked. $1.5 trillion in autonomous commerce has no compliance layer. ArrivalX is the licensed settlement infrastructure that lets any agent pay anyone, anywhere—with full regulatory compliance. Four live licenses. Working product. 5 lines to integrate."</blockquote>
+<h2 id="elevator" data-en="1. Elevator Pitch" data-zh="1. 电梯演讲">1. Elevator Pitch</h2>
+<blockquote>
+<p data-en="AI agents are effectively unbanked. $1.5 trillion in autonomous commerce has no compliance layer. ArrivalX is the licensed settlement infrastructure that lets any agent pay anyone, anywhere — with full regulatory compliance. Four live licenses. Working product. 5 lines to integrate." data-zh="AI Agent 目前处于"无银行账户"状态。1.5 万亿美元的自主商业活动缺乏合规结算层。ArrivalX 是持牌的结算基础设施——让任意 Agent 在全球范围内完成合规支付。四张生效牌照。可用的产品。5 行代码接入。">AI agents are effectively unbanked. $1.5 trillion in autonomous commerce has no compliance layer. ArrivalX is the licensed settlement infrastructure that lets any agent pay anyone, anywhere — with full regulatory compliance. Four live licenses. Working product. 5 lines to integrate.</p>
+</blockquote>
 
-<h2 id="problem">2. Problem Statement</h2>
-<h3>Current State</h3>
-<p>Every payment rail in production today assumes a <strong>human</strong> is authorizing the transaction. Credit cards require cardholder verification (3DS, CVV, biometrics). Bank transfers require human-initiated KYC and manual authorization. Payment processors require multi-factor authentication from a person.</p>
-<p>AI agents <strong>cannot</strong> open bank accounts. They cannot pass KYC. They cannot click "Confirm" in a banking app. Yet they need to pay for API access, compute resources, data, and services from other agents.</p>
+<h2 id="problem" data-en="2. Problem Statement" data-zh="2. 问题陈述">2. Problem Statement</h2>
+<h3 data-en="Current State" data-zh="现状">Current State</h3>
+<p data-en="Every payment rail in production today assumes a human is authorizing the transaction. Credit cards require cardholder verification (3DS, CVV, biometrics). Bank transfers require human-initiated KYC and manual authorization. Payment processors require multi-factor authentication from a person." data-zh="目前所有支付通道都默认由人类授权交易。信用卡需要持卡人验证（3DS、CVV、生物识别）。银行转账需要人工发起 KYC 和手动授权。支付处理器需要人的多因素认证。">Every payment rail in production today assumes a human is authorizing the transaction. Credit cards require cardholder verification (3DS, CVV, biometrics). Bank transfers require human-initiated KYC and manual authorization. Payment processors require multi-factor authentication from a person.</p>
+<p data-en="AI agents cannot open bank accounts. They cannot pass KYC. They cannot click 'Confirm' in a banking app. Yet they need to pay for API access, compute resources, data, and services from other agents." data-zh="AI Agent 无法开设银行账户。无法通过 KYC。无法在银行应用中点击"确认"。但它们需要支付 API 费用、计算资源、数据和其他 Agent 的服务。">AI agents cannot open bank accounts. They cannot pass KYC. They cannot click 'Confirm' in a banking app. Yet they need to pay for API access, compute resources, data, and services from other agents.</p>
 
-<h3>The Gap</h3>
-<p>Protocols exist (x402, Stripe MPP, AP2) but nobody provides the <strong>compliance settlement layer</strong> — multi-jurisdiction, licensed, with fiat on/off ramps.</p>
+<h3 data-en="The Gap" data-zh="市场空白">The Gap</h3>
+<p data-en="Protocols exist (x402, Stripe MPP, AP2) but nobody provides the compliance settlement layer — multi-jurisdiction, licensed, with fiat on/off ramps." data-zh="支付协议已经存在（x402、Stripe MPP、AP2），但没有人提供合规结算层——多司法辖区、持牌、带法币出入金的完整方案。">Protocols exist (x402, Stripe MPP, AP2) but nobody provides the compliance settlement layer — multi-jurisdiction, licensed, with fiat on/off ramps.</p>
 
-<h3>Why ArrivalX</h3>
-<p>ArrivalX holds <strong>4 money transmission licenses</strong> (AU DCE, US MSB, HK MSO, CA MSB). These are exactly the license types needed for agent payment settlement—not deposit-taking (which agents don't need), but money transmission and currency exchange (which agents need constantly).</p>
+<h3 data-en="Why ArrivalX" data-zh="为什么是 ArrivalX">Why ArrivalX</h3>
+<p data-en="ArrivalX holds 4 money transmission licenses (AU DCE, US MSB, HK MSO, CA MSB). These are exactly the license types needed for agent payment settlement — not deposit-taking (which agents don't need), but money transmission and currency exchange (which agents need constantly)." data-zh="ArrivalX 持有 4 张资金传输牌照（澳大利亚 DCE、美国 MSB、香港 MSO、加拿大 MSB）。这正是 Agent 支付结算所需的牌照类型——非吸储（Agent 不需要），而是资金传输和货币兑换（Agent 长期需要）。">ArrivalX holds 4 money transmission licenses (AU DCE, US MSB, HK MSO, CA MSB). These are exactly the license types needed for agent payment settlement — not deposit-taking (which agents don't need), but money transmission and currency exchange (which agents need constantly).</p>
 
 <hr>
 
-<h2 id="definition">3. Product Definition</h2>
-<h3>3.1 Core Product</h3>
-<p><strong>ArrivalX Agent Payment Gateway</strong> — a protocol-agnostic, compliance-first settlement infrastructure.</p>
+<h2 id="definition" data-en="3. Product Definition" data-zh="3. 产品定义">3. Product Definition</h2>
+<h3 data-en="3.1 Core Product" data-zh="3.1 核心产品">3.1 Core Product</h3>
+<p data-en="ArrivalX Agent Payment Gateway — a protocol-agnostic, compliance-first settlement infrastructure." data-zh="ArrivalX Agent Payment Gateway — 协议无关、合规优先的结算基础设施。">ArrivalX Agent Payment Gateway — a protocol-agnostic, compliance-first settlement infrastructure.</p>
 
-<h3>3.2 Key Capabilities</h3>
+<h3 data-en="3.2 Key Capabilities" data-zh="3.2 核心能力">3.2 Key Capabilities</h3>
 <table>
-<tr><th>Capability</th><th>Description</th></tr>
-<tr><td>x402 Gateway</td><td>Receive HTTP 402 requests, verify payment, settle in USDC</td></tr>
-<tr><td>MPP Adapter</td><td>Integrate with Stripe MPP for card-network agent payments</td></tr>
-<tr><td>AP2 Bridge</td><td>Agent-to-agent settlement via Cobo's AP2 protocol</td></tr>
-<tr><td>Compliance Router</td><td>Auto-route transactions through optimal licensed jurisdiction</td></tr>
-<tr><td>Agent Identity Binding</td><td>Link developer identity → agent → wallet → compliance profile</td></tr>
-<tr><td>AML/CFT Screening</td><td>Real-time Regtank integration, automatic SAR filing</td></tr>
-<tr><td>Fiat On/Off Ramp</td><td>USDC ↔ USD/EUR/HKD/CAD settlement</td></tr>
-<tr><td>Unified SDK</td><td>Python/JS/Go libraries, 5-line integration</td></tr>
+<tr><th data-en="Capability" data-zh="能力">Capability</th><th data-en="Description" data-zh="描述">Description</th></tr>
+<tr><td>x402 Gateway</td><td data-en="Receive HTTP 402 requests, verify payment, settle in USDC" data-zh="接收 HTTP 402 请求，验证支付，以 USDC 结算">Receive HTTP 402 requests, verify payment, settle in USDC</td></tr>
+<tr><td>MPP Adapter</td><td data-en="Integrate with Stripe MPP for card-network agent payments" data-zh="接入 Stripe MPP，支持卡网络 Agent 支付">Integrate with Stripe MPP for card-network agent payments</td></tr>
+<tr><td>AP2 Bridge</td><td data-en="Agent-to-agent settlement via Cobo's AP2 protocol" data-zh="通过 Cobo AP2 协议实现 Agent 间结算">Agent-to-agent settlement via Cobo's AP2 protocol</td></tr>
+<tr><td data-en="Compliance Router" data-zh="合规路由器">Compliance Router</td><td data-en="Auto-route transactions through optimal licensed jurisdiction" data-zh="自动将交易路由至最优持牌司法辖区">Auto-route transactions through optimal licensed jurisdiction</td></tr>
+<tr><td data-en="Agent Identity Binding" data-zh="Agent 身份绑定">Agent Identity Binding</td><td data-en="Link developer identity → agent → wallet → compliance profile" data-zh="链接开发者身份 → Agent → 钱包 → 合规档案">Link developer identity → agent → wallet → compliance profile</td></tr>
+<tr><td data-en="AML/CFT Screening" data-zh="AML/CFT 筛查">AML/CFT Screening</td><td data-en="Real-time Regtank integration, automatic SAR filing" data-zh="实时 Regtank 集成，自动提交可疑活动报告">Real-time Regtank integration, automatic SAR filing</td></tr>
+<tr><td data-en="Fiat On/Off Ramp" data-zh="法币出入金">Fiat On/Off Ramp</td><td data-en="USDC ↔ USD/EUR/HKD/CAD settlement" data-zh="USDC ↔ 美元/欧元/港币/加元结算">USDC ↔ USD/EUR/HKD/CAD settlement</td></tr>
+<tr><td data-en="Unified SDK" data-zh="统一 SDK">Unified SDK</td><td data-en="Python/JS/Go libraries, 5-line integration" data-zh="Python/JS/Go 库，5 行代码接入">Python/JS/Go libraries, 5-line integration</td></tr>
 </table>
 
-<h3>3.3 What ArrivalX Is NOT</h3>
+<h3 data-en="3.3 What ArrivalX Is NOT" data-zh="3.3 ArrivalX 不是什么">3.3 What ArrivalX Is NOT</h3>
 <ul>
-<li>❌ A blockchain or L2</li>
-<li>❌ A new payment protocol (we support existing protocols)</li>
-<li>❌ A consumer neobank or wallet app</li>
-<li>❌ A deposit-taking institution (and we don't need to be)</li>
+<li data-en="❌ A blockchain or L2" data-zh="❌ 不是区块链或 L2">❌ A blockchain or L2</li>
+<li data-en="❌ A new payment protocol (we support existing protocols)" data-zh="❌ 不是新支付协议（我们支持现有协议）">❌ A new payment protocol (we support existing protocols)</li>
+<li data-en="❌ A consumer neobank or wallet app" data-zh="❌ 不是消费级新银行或钱包应用">❌ A consumer neobank or wallet app</li>
+<li data-en="❌ A deposit-taking institution (and we don't need to be)" data-zh="❌ 不是吸储机构（也不需要是）">❌ A deposit-taking institution (and we don't need to be)</li>
 </ul>
 
 <hr>
 
-<h2 id="competitive">4. Competitive Analysis</h2>
-<h3>4.1 Positioning Matrix</h3>
+<h2 id="competitive" data-en="4. Competitive Analysis" data-zh="4. 竞争分析">4. Competitive Analysis</h2>
+<h3 data-en="4.1 Positioning Matrix" data-zh="4.1 定位矩阵">4.1 Positioning Matrix</h3>
 <table>
-<tr><th>Player</th><th>Protocol</th><th>Wallet</th><th>Compliance</th><th>Fiat Ramp</th><th>Licenses</th></tr>
-<tr><td><strong>ArrivalX</strong></td><td>Multi (x402/MPP/AP2)</td><td>Cobo MPC</td><td>✅ Multi</td><td>✅ 4 corridors</td><td>4 live</td></tr>
-<tr><td>Coinbase x402</td><td>x402 only</td><td>CDP</td><td>❌</td><td>❌</td><td>—</td></tr>
-<tr><td>Stripe MPP</td><td>MPP only</td><td>—</td><td>❌</td><td>Via Stripe</td><td>—</td></tr>
-<tr><td>MoonPay Agents</td><td>—</td><td>Non-custodial</td><td>❌</td><td>❌ Crypto only</td><td>—</td></tr>
-<tr><td>Sapiom</td><td>Custom</td><td>—</td><td>❌</td><td>❌</td><td>None (Seed)</td></tr>
-<tr><td>AWS AgentCore</td><td>x402</td><td>Via Coinbase</td><td>❌</td><td>❌</td><td>—</td></tr>
+<tr><th>Player</th><th data-en="Protocol" data-zh="协议">Protocol</th><th>Wallet</th><th data-en="Compliance" data-zh="合规">Compliance</th><th data-en="Fiat Ramp" data-zh="法币">Fiat Ramp</th><th data-en="Licenses" data-zh="牌照">Licenses</th></tr>
+<tr><td><strong>ArrivalX</strong></td><td data-en="Multi (x402/MPP/AP2)" data-zh="多协议">Multi</td><td data-en="Cobo MPC" data-zh="Cobo MPC">Cobo MPC</td><td>✅ Multi</td><td>✅ 4</td><td data-en="4 live" data-zh="4 张生效">4 live</td></tr>
+<tr><td data-en="Coinbase x402" data-zh="Coinbase">Coinbase x402</td><td>x402 only</td><td>CDP</td><td>❌</td><td>❌</td><td>—</td></tr>
+<tr><td data-en="Stripe MPP" data-zh="Stripe">Stripe MPP</td><td>MPP only</td><td>—</td><td>❌</td><td data-en="Via Stripe" data-zh="通过 Stripe">Via Stripe</td><td>—</td></tr>
+<tr><td data-en="MoonPay" data-zh="MoonPay">MoonPay Agents</td><td>—</td><td data-en="Non-custodial" data-zh="非托管">Non-custodial</td><td>❌</td><td data-en="Crypto only" data-zh="仅加密">Crypto only</td><td>—</td></tr>
+<tr><td>Sapiom</td><td>Custom</td><td>—</td><td>❌</td><td>❌</td><td data-en="None (Seed)" data-zh="无（种子轮）">None</td></tr>
+<tr><td data-en="AWS AgentCore" data-zh="AWS">AWS AgentCore</td><td>x402</td><td data-en="Via Coinbase" data-zh="通过 Coinbase">Via Coinbase</td><td>❌</td><td>❌</td><td>—</td></tr>
 </table>
 
-<h3>4.2 Moat Analysis</h3>
+<h3 data-en="4.2 Moat Analysis" data-zh="4.2 护城河分析">4.2 Moat Analysis</h3>
 <table>
-<tr><th>Moat Type</th><th>Strength</th><th>Time to Replicate</th></tr>
-<tr><td>Regulatory (4 licenses)</td><td>🔴 High</td><td>12-18 months</td></tr>
-<tr><td>Multi-protocol integration</td><td>🟡 Medium</td><td>3-6 months</td></tr>
-<tr><td>Compliance engine</td><td>🟡 Medium</td><td>4-8 months</td></tr>
-<tr><td>Developer ecosystem</td><td>🟢 Low (not yet built)</td><td>2-4 months</td></tr>
+<tr><th data-en="Moat Type" data-zh="护城河类型">Moat Type</th><th data-en="Strength" data-zh="强度">Strength</th><th data-en="Time to Replicate" data-zh="复制时间">Time to Replicate</th></tr>
+<tr><td data-en="Regulatory (4 licenses)" data-zh="监管（4 张牌照）">Regulatory (4 licenses)</td><td data-en="🔴 High" data-zh="🔴 高">🔴 High</td><td data-en="12-18 months" data-zh="12-18 个月">12-18 months</td></tr>
+<tr><td data-en="Multi-protocol integration" data-zh="多协议集成">Multi-protocol integration</td><td data-en="🟡 Medium" data-zh="🟡 中">🟡 Medium</td><td data-en="3-6 months" data-zh="3-6 个月">3-6 months</td></tr>
+<tr><td data-en="Compliance engine" data-zh="合规引擎">Compliance engine</td><td data-en="🟡 Medium" data-zh="🟡 中">🟡 Medium</td><td data-en="4-8 months" data-zh="4-8 个月">4-8 months</td></tr>
+<tr><td data-en="Developer ecosystem" data-zh="开发者生态">Developer ecosystem</td><td data-en="🟢 Low (not yet built)" data-zh="🟢 低（尚未建立）">🟢 Low (not yet built)</td><td data-en="2-4 months" data-zh="2-4 个月">2-4 months</td></tr>
 </table>
-<p><strong>Primary moat:</strong> Regulatory licenses. Code can be copied. Licenses cannot.</p>
+<p data-en="Primary moat: Regulatory licenses. Code can be copied. Licenses cannot." data-zh="核心护城河：监管牌照。代码可复制。牌照不可复制。">Primary moat: Regulatory licenses. Code can be copied. Licenses cannot.</p>
 
 <hr>
 
-<h2 id="users">5. Target Users</h2>
-<h3>Primary: AI Agent Developers</h3>
-<ul><li>Building agents on LangChain, AI2, Codex, MCP. Need agents to pay for APIs, compute, data. Currently using manual pre-funding or nothing. Pain: agents hit paywalls and stop.</li></ul>
-<h3>Secondary: API/Service Providers</h3>
-<ul><li>SaaS tools, data APIs, compute providers. Want to monetize agent traffic without managing KYC. Pain: agents can't sign up for paid plans.</li></ul>
-<h3>Tertiary: Enterprise Platforms</h3>
-<ul><li>Companies deploying agent fleets internally. Need spending controls, audit trails, compliance. Pain: no off-the-shelf agent payment governance.</li></ul>
-
-<hr>
-
-<h2 id="roadmap">7. Roadmap</h2>
+<h2 id="roadmap" data-en="5. Roadmap" data-zh="5. 路线图">5. Roadmap</h2>
 <table>
-<tr><th>Phase</th><th>Timeline</th><th>Key Deliverables</th><th>Milestone</th></tr>
-<tr><td>1 · MVP</td><td>M1-M3</td><td>Agent Payment API, x402 Gateway, Agent KYB</td><td>100 developers testing</td></tr>
-<tr><td>2 · Multi-Protocol</td><td>M4-M6</td><td>MPP Adapter, AP2 Bridge, Fiat Off-ramp</td><td>First real agent-agent payment</td></tr>
-<tr><td>3 · Ecosystem</td><td>M7-M9</td><td>SDK release, Framework integrations, Seed round ($5-8M)</td><td>500+ devs, $1M+/mo volume</td></tr>
-<tr><td>4 · Scale</td><td>M10-M12</td><td>CaaS, Enterprise dashboard, New licenses</td><td>$10M+/mo volume, 50+ enterprise</td></tr>
+<tr><th>Phase</th><th data-en="Timeline" data-zh="时间线">Timeline</th><th data-en="Key Deliverables" data-zh="关键交付">Key Deliverables</th><th>Milestone</th></tr>
+<tr><td data-en="1 · MVP" data-zh="1 · MVP">1 · MVP</td><td>M1-M3</td><td data-en="Payment API, x402 Gateway, Agent KYB" data-zh="支付 API、x402 网关、Agent KYB">API, x402, KYB</td><td data-en="100 devs testing" data-zh="100 开发者测试">100 devs</td></tr>
+<tr><td data-en="2 · Multi-Protocol" data-zh="2 · 多协议">2 · Multi</td><td>M4-M6</td><td data-en="MPP Adapter, AP2 Bridge, Fiat Off-ramp" data-zh="MPP 适配器、AP2 桥、法币出金">MPP, AP2, Fiat</td><td data-en="First agent-agent payment" data-zh="首笔 Agent 间支付">1st A2A</td></tr>
+<tr><td data-en="3 · Ecosystem" data-zh="3 · 生态">3 · Ecosystem</td><td>M7-M9</td><td data-en="SDK release, Framework integrations, Seed $5-8M" data-zh="SDK 发布、框架集成、种子轮 5-8M">SDK, Integrations</td><td data-en="500+ devs, $1M+/mo" data-zh="500+ 开发者、月交易 $1M+">500+ devs</td></tr>
+<tr><td data-en="4 · Scale" data-zh="4 · 规模化">4 · Scale</td><td>M10-M12</td><td data-en="CaaS, Enterprise dashboard, New licenses" data-zh="CaaS、企业面板、新牌照">CaaS, Enterprise</td><td data-en="$10M+/mo, 50+ enterprise" data-zh="月交易 $10M+、50+ 企业">$10M+/mo</td></tr>
 </table>
 
 <hr>
 
-<h2 id="falsification">8. Falsification Conditions</h2>
-<p>This thesis is <strong>falsified</strong> if any of the following occur within 6 months:</p>
+<h2 id="falsification" data-en="6. Falsification Conditions" data-zh="6. 证伪条件">6. Falsification Conditions</h2>
+<p data-en="This thesis is falsified if any of the following occur within 6 months:" data-zh="如果以下任一情况在 6 个月内发生，本逻辑即被证伪：">This thesis is falsified if any of the following occur within 6 months:</p>
 <ol>
-<li>Stripe or Coinbase launches a licensed settlement layer covering ≥3 jurisdictions</li>
-<li>Agent payment volume on x402/MPP stagnates (no 2x growth QoQ)</li>
-<li>Regulatory change makes crypto-native money transmission infeasible in ≥2 of our 4 jurisdictions</li>
-<li>No organic developer interest (≤10 API key requests in first month of public beta)</li>
+<li data-en="Stripe or Coinbase launches a licensed settlement layer covering ≥3 jurisdictions" data-zh="Stripe 或 Coinbase 推出覆盖 ≥3 个司法辖区的持牌结算层">Stripe or Coinbase launches a licensed settlement layer covering ≥3 jurisdictions</li>
+<li data-en="Agent payment volume on x402/MPP stagnates (no 2x growth QoQ)" data-zh="x402/MPP 上的 Agent 支付量停滞（无季度环比 2 倍增长）">Agent payment volume stagnates (no 2x growth QoQ)</li>
+<li data-en="Regulatory change makes crypto-native money transmission infeasible in ≥2 jurisdictions" data-zh="监管变化导致 ≥2 个司法辖区的加密资金传输不可行">Regulatory change blocks crypto-native MT in ≥2 jurisdictions</li>
+<li data-en="No organic developer interest (≤10 API key requests in first month of public beta)" data-zh="无有机开发者兴趣（公开测试首月 API 密钥申请 ≤10）">No organic developer interest (≤10 API keys in first beta month)</li>
 </ol>
 
-<hr>
+<h2 id="acquisition" data-en="7. Acquisition Logic" data-zh="7. 收购逻辑">7. Acquisition Logic</h2>
+<p data-en="If ArrivalX proves PMF for the agent compliance settlement layer, the most likely exit is acquisition by Stripe, Coinbase, or Ramp. Target: 18-24 months to acquisition signal." data-zh="如果 ArrivalX 证实了 Agent 合规结算层的 PMF，最可能的退出路径是被 Stripe、Coinbase 或 Ramp 收购。目标：18-24 个月出现收购信号。">If ArrivalX proves PMF for the agent compliance settlement layer, the most likely exit is acquisition by Stripe, Coinbase, or Ramp. Target: 18-24 months to acquisition signal.</p>
 
-<h2 id="acquisition">9. Acquisition Logic</h2>
-<p>If ArrivalX proves PMF for the agent compliance settlement layer, the most likely exit is acquisition by Stripe, Coinbase, or Ramp. Target: <strong>18-24 months</strong> to acquisition signal.</p>
+</div>
 </main>
 
 <footer class="footer">
@@ -164,5 +147,6 @@
     <span>🇦🇺 DCE · 🇺🇸 MSB · 🇭🇰 MSO · 🇨🇦 MSB</span>
   </div>
 </footer>
+<script src="docs.js"></script>
 </body>
 </html>
