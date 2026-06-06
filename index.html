@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArrivalX — Settlement Layer for the Agent Economy</title>
+<meta name="description" content="Licensed settlement infrastructure for AI agent payments. x402-compatible, multi-jurisdiction compliance, 5-line SDK integration.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'><text y='28' font-size='28'>⚡</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">Arrival<span class="logo-accent">X</span></a>
+    <div class="nav-links">
+      <a href="#product">Product</a>
+      <a href="#playground">Playground</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#compliance">Compliance</a>
+      <a href="#docs">Docs</a>
+      <button class="lang-toggle" onclick="toggleLang()" id="langBtn">中文</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      <span data-en="Licensed in 4 jurisdictions" data-zh="四司法辖区持牌">Licensed in 4 jurisdictions</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="gradient-text" data-en="Settlement Layer" data-zh="Agent 经济的">Settlement Layer</span>
+      <br>
+      <span data-en="for the Agent Economy" data-zh="合规结算层">for the Agent Economy</span>
+    </h1>
+    <p class="hero-subtitle" data-en="AI agents are effectively unbanked. $1.5 trillion in autonomous commerce has no compliance layer. ArrivalX is the licensed settlement infrastructure that lets any agent pay anyone, anywhere—with full regulatory compliance." data-zh="AI Agent 没有银行账户。$1.5 万亿的自主商业缺少合规层。ArrivalX 是持牌结算基础设施，让任何 Agent 在任何地方支付给任何人——全部合规。">
+      AI agents are effectively unbanked. $1.5 trillion in autonomous commerce has no compliance layer. ArrivalX is the licensed settlement infrastructure that lets any agent pay anyone, anywhere—with full regulatory compliance.
+    </p>
+    <div class="hero-cta">
+      <a href="#playground" class="btn-primary" data-en="Try the Playground" data-zh="试用 Playground">Try the Playground</a>
+      <a href="#docs" class="btn-secondary" data-en="Read the Docs" data-zh="阅读文档">Read the Docs</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-value">4</span>
+        <span class="stat-label" data-en="Live Licenses" data-zh="持牌司法辖区">Live Licenses</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">3</span>
+        <span class="stat-label" data-en="Protocols Supported" data-zh="兼容协议">Protocols Supported</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">5</span>
+        <span class="stat-label" data-en="Lines to Integrate" data-zh="行代码接入">Lines to Integrate</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">$1.5T</span>
+        <span class="stat-label" data-en="Addressable Market" data-zh="可寻址市场">Addressable Market</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <span class="dot green"></span>
+        <span class="dot yellow"></span>
+        <span class="dot red"></span>
+        <span class="hero-card-title">ArrivalX Agent Gateway</span>
+      </div>
+      <div class="hero-card-body">
+        <div class="code-line"><span class="code-comment">// 5 lines to enable agent payments</span></div>
+        <div class="code-line"><span class="code-keyword">import</span> { ArrivalX } <span class="code-keyword">from</span> <span class="code-string">'@arrivalx/agent-sdk'</span>;</div>
+        <div class="code-line"></div>
+        <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">ax</span> = <span class="code-keyword">new</span> ArrivalX({ apiKey: process.env.AX_KEY });</div>
+        <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">wallet</span> = <span class="code-keyword">await</span> ax.wallets.create({ label: <span class="code-string">'my-agent'</span> });</div>
+        <div class="code-line"><span class="code-keyword">await</span> wallet.pay({ to: <span class="code-string">'merchant@api.io'</span>, amount: <span class="code-string">'0.50'</span>, currency: <span class="code-string">'USDC'</span> });</div>
+        <div class="code-line"><span class="code-comment">// ✅ Settled. Compliant. 4 jurisdictions.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product -->
+<section class="section" id="product">
+  <h2 class="section-title" data-en="What ArrivalX Does" data-zh="ArrivalX 做什么">What ArrivalX Does</h2>
+  <p class="section-subtitle" data-en="We don't write new protocols. We are the compliance settlement layer that makes all protocols work in the real world." data-zh="我们不写新协议。我们是让所有协议在真实世界中合规运作的结算层。">
+    We don't write new protocols. We are the compliance settlement layer that makes all protocols work in the real world.
+  </p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🔌</div>
+      <h3 data-en="Protocol-Agnostic Gateway" data-zh="协议无关网关">Protocol-Agnostic Gateway</h3>
+      <p data-en="One API. x402, MPP, AP2—all supported. Your agent uses whatever protocol the counterparty requires. We handle the translation." data-zh="一个 API。x402、MPP、AP2 全部支持。你的 Agent 用对方要求的任何协议，我们做翻译。">
+        One API. x402, MPP, AP2—all supported. Your agent uses whatever protocol the counterparty requires. We handle the translation.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3 data-en="Multi-Jurisdiction Compliance" data-zh="多司法辖区合规">Multi-Jurisdiction Compliance</h3>
+      <p data-en="Every transaction is routed through the optimal licensed jurisdiction. Real-time AML/CFT screening, automatic SAR filing. Regulators see a compliant money transmitter—not a gray-zone crypto exchange." data-zh="每笔交易经过最优持牌司法辖区路由。实时 AML/CFT 筛查，自动 SAR 申报。监管看到的是合规的资金传输商——不是灰色地带的交易所。">
+        Every transaction is routed through the optimal licensed jurisdiction. Real-time AML/CFT screening, automatic SAR filing.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💱</div>
+      <h3 data-en="Fiat On/Off Ramp" data-zh="法币出入金">Fiat On/Off Ramp</h3>
+      <p data-en="USDC today. USD, EUR, HKD, CAD tomorrow. Agents settle in stablecoins. Merchants receive fiat. The conversion happens in the compliance layer—invisible to both sides." data-zh="今天 USDC，明天 USD/EUR/HKD/CAD。Agent 用稳定币结算，商户收法币。转换在合规层发生——双方无感。">
+        USDC today. USD, EUR, HKD, CAD tomorrow. Agents settle in stablecoins. Merchants receive fiat. Invisible to both sides.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h3 data-en="5-Line SDK" data-zh="5 行代码 SDK">5-Line SDK</h3>
+      <p data-en="Import, create wallet, pay. That's it. No blockchain knowledge required. No gas fee management. No key custody nightmares. We built the boring stuff so you can build the future." data-zh="导入，创建钱包，支付。就这些。不需要区块链知识，不管 gas fee，不用操心密钥托管。我们做好了无聊的部分，你去创造未来。">
+        Import, create wallet, pay. That's it. No blockchain knowledge required. No gas fee management. No key custody nightmares.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Playground -->
+<section class="section section-alt" id="playground">
+  <h2 class="section-title" data-en="Developer Playground" data-zh="开发者 Playground">Developer Playground</h2>
+  <p class="section-subtitle" data-en="Simulate an x402 agent payment in real time. See how ArrivalX routes, screens, and settles—all in one flow." data-zh="实时模拟 x402 Agent 支付。看看 ArrivalX 如何路由、筛查、结算——一条龙。">
+    Simulate an x402 agent payment in real time. See how ArrivalX routes, screens, and settles.
+  </p>
+
+  <div class="playground">
+    <div class="playground-left">
+      <div class="pg-step" id="pgStep1">
+        <div class="pg-step-header">
+          <span class="pg-step-num">1</span>
+          <span data-en="Agent initiates payment" data-zh="Agent 发起支付">Agent initiates payment</span>
+        </div>
+        <div class="pg-input-group">
+          <label data-en="Payment Amount (USDC)" data-zh="支付金额 (USDC)">Payment Amount (USDC)</label>
+          <input type="number" id="pgAmount" value="0.50" step="0.01" min="0.01" placeholder="0.50">
+        </div>
+        <div class="pg-input-group">
+          <label data-en="Counterparty" data-zh="交易对手方">Counterparty</label>
+          <select id="pgCounterparty">
+            <option value="api">API Service (api.dataprovider.io)</option>
+            <option value="compute">Compute Provider (gpu.rent)</option>
+            <option value="agent">Another Agent (agent.market)</option>
+            <option value="saas">SaaS Tool (saas.vendor.io)</option>
+          </select>
+        </div>
+        <div class="pg-input-group">
+          <label data-en="Agent Jurisdiction" data-zh="Agent 所在司法辖区">Agent Jurisdiction</label>
+          <select id="pgJurisdiction">
+            <option value="US">United States</option>
+            <option value="AU">Australia</option>
+            <option value="HK">Hong Kong</option>
+            <option value="CA">Canada</option>
+          </select>
+        </div>
+        <button class="btn-primary" onclick="runSimulation()" id="simBtn" data-en="Run Payment Simulation" data-zh="运行支付模拟">Run Payment Simulation</button>
+      </div>
+
+      <div class="pg-step hidden" id="pgStep2">
+        <div class="pg-step-header">
+          <span class="pg-step-num">2</span>
+          <span data-en="x402 Handshake" data-zh="x402 握手">x402 Handshake</span>
+        </div>
+        <div class="pg-log" id="pgLog"></div>
+      </div>
+    </div>
+
+    <div class="playground-right">
+      <div class="pg-visual" id="pgVisual">
+        <div class="pg-visual-placeholder" id="pgVisualPlaceholder">
+          <div class="pg-viz-icon">🔄</div>
+          <p data-en="Run the simulation to see the payment flow" data-zh="运行模拟查看支付流程">Run the simulation to see the payment flow</p>
+        </div>
+        <div class="pg-visual-flow hidden" id="pgVisualFlow">
+          <div class="flow-node agent-node" id="flowAgent">
+            <span class="flow-icon">🤖</span>
+            <span class="flow-label">Agent</span>
+          </div>
+          <div class="flow-arrow" id="flowArrow1">→</div>
+          <div class="flow-node ax-node" id="flowAX">
+            <span class="flow-icon">⚡</span>
+            <span class="flow-label">ArrivalX</span>
+          </div>
+          <div class="flow-arrow" id="flowArrow2">→</div>
+          <div class="flow-node merchant-node" id="flowMerchant">
+            <span class="flow-icon">🏪</span>
+            <span class="flow-label" id="flowMerchantLabel">Merchant</span>
+          </div>
+        </div>
+        <div class="pg-compliance-badges hidden" id="pgBadges">
+          <div class="compliance-badge" id="badgeScreening">🔍 Screening</div>
+          <div class="compliance-badge" id="badgeRoute">🌐 Route</div>
+          <div class="compliance-badge" id="badgeSettle">✅ Settle</div>
+        </div>
+        <div class="pg-result hidden" id="pgResult"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Architecture -->
+<section class="section" id="architecture">
+  <h2 class="section-title" data-en="Architecture" data-zh="产品架构">Architecture</h2>
+  <div class="arch-diagram">
+    <div class="arch-layer arch-l3">
+      <div class="arch-layer-label">L3 · Agent Payment SDK & API</div>
+      <div class="arch-modules">
+        <div class="arch-module" data-en="x402 Gateway" data-zh="x402 网关">x402 Gateway</div>
+        <div class="arch-module" data-en="MPP Adapter" data-zh="MPP 适配器">MPP Adapter</div>
+        <div class="arch-module" data-en="AP2 Bridge" data-zh="AP2 桥接">AP2 Bridge</div>
+        <div class="arch-module" data-en="Unified SDK" data-zh="统一 SDK">Unified SDK</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓</div>
+    <div class="arch-layer arch-l2 highlight">
+      <div class="arch-layer-label">L2 · Compliance Settlement Engine ⚡ Core IP</div>
+      <div class="arch-modules">
+        <div class="arch-module" data-en="Jurisdiction Router" data-zh="司法辖区路由">Jurisdiction Router</div>
+        <div class="arch-module" data-en="Agent Identity Binding" data-zh="Agent 身份绑定">Agent Identity Binding</div>
+        <div class="arch-module" data-en="AML/CFT Screening" data-zh="AML/CFT 筛查">AML/CFT Screening</div>
+        <div class="arch-module" data-en="Fiat Settlement" data-zh="法币结算">Fiat Settlement</div>
+      </div>
+    </div>
+    <div class="arch-arrow">↓</div>
+    <div class="arch-layer arch-l1">
+      <div class="arch-layer-label">L1 · Licensed Money Transmission</div>
+      <div class="arch-modules">
+        <div class="arch-module">🇦🇺 AUSTRAC DCE</div>
+        <div class="arch-module">🇺🇸 FinCEN MSB</div>
+        <div class="arch-module">🇭🇰 HK MSO</div>
+        <div class="arch-module">🇨🇦 FINTRAC MSB</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Compliance -->
+<section class="section section-alt" id="compliance">
+  <h2 class="section-title" data-en="Compliance Infrastructure" data-zh="合规基础设施">Compliance Infrastructure</h2>
+  <div class="compliance-grid">
+    <div class="compliance-card">
+      <h3>🇦🇺 Australia DCE</h3>
+      <p data-en="Digital Currency Exchange registration with AUSTRAC. Enables fiat-crypto conversion and cross-border settlement through APAC corridors." data-zh="AUSTRAC 数字币兑换注册。支持法币-加密货币兑换和亚太走廊跨境结算。">Digital Currency Exchange registration with AUSTRAC. Enables fiat-crypto conversion and cross-border settlement through APAC corridors.</p>
+    </div>
+    <div class="compliance-card">
+      <h3>🇺🇸 United States MSB</h3>
+      <p data-en="Money Services Business registration with FinCEN. Covers money transmission across all 50 states with federal AML/CFT compliance." data-zh="FinCEN 货币服务商注册。覆盖全美 50 州资金传输，联邦级 AML/CFT 合规。">Money Services Business registration with FinCEN. Covers money transmission across all 50 states with federal AML/CFT compliance.</p>
+    </div>
+    <div class="compliance-card">
+      <h3>🇭🇰 Hong Kong MSO</h3>
+      <p data-en="Money Service Operator license from HK Customs. Gateway to Greater China and Southeast Asian agent payment corridors." data-zh="香港海关金钱服务经营者牌照。大中华区和东南亚 Agent 支付走廊的入口。">Money Service Operator license from HK Customs. Gateway to Greater China and Southeast Asian agent payment corridors.</p>
+    </div>
+    <div class="compliance-card">
+      <h3>🇨🇦 Canada MSB</h3>
+      <p data-en="Money Services Business registration with FINTRAC. Provides North American redundancy—dual coverage with US MSB for uninterrupted service." data-zh="FINTRAC 货币服务商注册。北美双覆盖——与 US MSB 形成冗余，保障服务不中断。">Money Services Business registration with FINTRAC. North American dual coverage with US MSB for uninterrupted service.</p>
+    </div>
+  </div>
+
+  <div class="partners-section">
+    <h3 data-en="Compliance & Security Partners" data-zh="合规与安全合作伙伴">Compliance & Security Partners</h3>
+    <div class="partners-grid">
+      <div class="partner">
+        <strong>Cobo</strong>
+        <span>MPC Wallet Infrastructure</span>
+      </div>
+      <div class="partner">
+        <strong>Regtank</strong>
+        <span>KYB/KYC & AML Screening</span>
+      </div>
+      <div class="partner">
+        <strong>Beosin</strong>
+        <span>Smart Contract Auditing</span>
+      </div>
+      <div class="partner">
+        <strong>HashKey Global</strong>
+        <span>Licensed Liquidity</span>
+      </div>
+      <div class="partner">
+        <strong>WSPN</strong>
+        <span>Stablecoin Payment Network</span>
+      </div>
+      <div class="partner">
+        <strong>Man Kun Law</strong>
+        <span>Regulatory Counsel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Docs Quick Links -->
+<section class="section" id="docs">
+  <h2 class="section-title" data-en="Documentation" data-zh="技术文档">Documentation</h2>
+  <div class="docs-grid">
+    <a href="docs/PRODUCT.md" class="doc-card" target="_blank">
+      <div class="doc-icon">📋</div>
+      <h3 data-en="Product Definition Spec" data-zh="产品定义说明书">Product Definition Spec</h3>
+      <p data-en="Positioning, competitive analysis, business model, roadmap, and unit economics." data-zh="定位、竞品分析、商业模式、路线图、单位经济学。">Positioning, competitive analysis, business model, roadmap, and unit economics.</p>
+    </a>
+    <a href="docs/API.md" class="doc-card" target="_blank">
+      <div class="doc-icon">🔧</div>
+      <h3 data-en="Agent Integration Guide" data-zh="Agent 集成指南">Agent Integration Guide</h3>
+      <p data-en="5-minute quickstart, API reference, route rules, compliance table, extension guide." data-zh="5 分钟快速开始，API 参考，路由规则，合规表，扩展指南。">5-minute quickstart, API reference, route rules, compliance table, extension guide.</p>
+    </a>
+    <a href="docs/BUSINESS.md" class="doc-card" target="_blank">
+      <div class="doc-icon">💰</div>
+      <h3 data-en="Business Model & Economics" data-zh="商业模式与经济学">Business Model & Economics</h3>
+      <p data-en="Revenue streams, fee structure, TAM/SAM/SOM, unit economics, and comparative advantage." data-zh="收入流、费率结构、市场规模、单位经济学与比较优势。">Revenue streams, fee structure, TAM/SAM/SOM, unit economics, and comparative advantage.</p>
+    </a>
+    <a href="docs/README.md" class="doc-card" target="_blank">
+      <div class="doc-icon">📖</div>
+      <h3 data-en="Project Overview" data-zh="项目总览">Project Overview</h3>
+      <p data-en="Architecture overview, tech stack, contribution guide, and dual-repo deployment setup." data-zh="架构总览、技术栈、贡献指南、双仓部署配置。">Architecture overview, tech stack, contribution guide, and dual-repo deployment setup.</p>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section">
+  <h2 data-en="Ready to give your agents a bank account?" data-zh="准备好给你的 Agent 一个银行账户了吗？">Ready to give your agents a bank account?</h2>
+  <p data-en="The agent economy runs 24/7. Your payment infrastructure should too." data-zh="Agent 经济 7×24 运行。你的支付基础设施也该如此。">The agent economy runs 24/7. Your payment infrastructure should too.</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-primary" data-en="Request Early Access" data-zh="申请早期接入">Request Early Access</a>
+    <a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay" class="btn-secondary" target="_blank" data-en="View on GitHub" data-zh="在 GitHub 查看">View on GitHub</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo">Arrival<span class="logo-accent">X</span></span>
+      <p data-en="Settlement layer for the agent economy. Licensed. Compliant. 5 lines of code." data-zh="Agent 经济的合规结算层。持牌。合规。5 行代码接入。">Settlement layer for the agent economy. Licensed. Compliant. 5 lines of code.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <strong data-en="Product" data-zh="产品">Product</strong>
+        <a href="#playground">Playground</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#compliance">Compliance</a>
+      </div>
+      <div>
+        <strong data-en="Developers" data-zh="开发者">Developers</strong>
+        <a href="docs/API.md">API Reference</a>
+        <a href="docs/README.md">Overview</a>
+      </div>
+      <div>
+        <strong data-en="Company" data-zh="公司">Company</strong>
+        <a href="docs/PRODUCT.md">Product Spec</a>
+        <a href="docs/BUSINESS.md">Business Model</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Stable Chain Fintech Limited</span>
+    <span>🇦🇺 DCE · 🇺🇸 MSB · 🇭🇰 MSO · 🇨🇦 MSB</span>
+    <span>support@arrivalx.money</span>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
