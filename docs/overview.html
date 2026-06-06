@@ -1,87 +1,125 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Overview — ArrivalX</title>
 <link rel="stylesheet" href="../css/style.css">
 <style>
-.doc-page { max-width: 800px; margin: 0 auto; padding: 100px 24px 60px; }
-.doc-page h1 { font-size: 2rem; margin-bottom: 8px; }
-.doc-page h2 { font-size: 1.4rem; margin: 32px 0 12px; color: var(--accent); }
-.doc-page h3 { font-size: 1.1rem; margin: 24px 0 8px; }
-.doc-page p, .doc-page li { color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
-.doc-page ul, .doc-page ol { padding-left: 20px; margin-bottom: 16px; }
-.doc-page li { margin-bottom: 4px; }
-.doc-page table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
-.doc-page th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
-.doc-page td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
-.doc-page code { background: var(--bg-card); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; color: var(--accent); }
-.doc-page hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-.doc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); margin-bottom: 32px; font-size: 0.9rem; }
-.doc-back:hover { color: var(--accent); text-decoration: none; }
+.doc-page-inner { max-width: 800px; margin: 0 auto; padding: 0 24px 60px; }
+.doc-page-inner h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 8px; }
+.doc-page-inner h2 { font-size: 1.3rem; margin: 36px 0 12px; color: var(--accent); }
+.doc-page-inner h3 { font-size: 1.05rem; margin: 24px 0 8px; }
+.doc-page-inner p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 10px; }
+.doc-page-inner ul, .doc-page-inner ol { padding-left: 20px; margin-bottom: 16px; color: var(--text-secondary); }
+.doc-page-inner li { margin-bottom: 5px; line-height: 1.6; }
+.doc-page-inner table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+.doc-page-inner th { background: var(--bg-card); padding: 10px 14px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--border); }
+.doc-page-inner td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+.doc-page-inner hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.doc-page-inner blockquote { border-left: 3px solid var(--accent); padding: 10px 18px; margin: 16px 0; background: var(--accent-dim); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: var(--text-secondary); }
+.doc-cardlinks { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.doc-cardlinks a { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-decoration: none; transition: var(--transition); }
+.doc-cardlinks a:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+.doc-cardlinks a .icon { font-size: 1.5rem; margin-bottom: 6px; }
+.doc-cardlinks a strong { display: block; color: var(--text-primary); margin-bottom: 4px; }
+.doc-cardlinks a span { font-size: 0.85rem; color: var(--text-muted); }
+@media (max-width: 600px) { .doc-cardlinks { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-inner">
+<nav class="nav" id="nav"><div class="nav-inner">
   <a href="../index.html" class="logo">Arrival<span class="logo-accent">X</span></a>
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
   <div class="nav-links">
     <a href="../index.html#product">Product</a>
     <a href="../index.html#playground">Playground</a>
     <a href="../index.html#docs">Docs</a>
+    <a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay" target="_blank">GitHub</a>
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">中文</button>
   </div>
 </div></nav>
 
+<nav class="doc-sub-nav-wrap"><div class="doc-sub-nav">
+  <a href="../index.html"><span class="nav-arrow">←</span> Home</a>
+  <a href="overview.html" class="active" data-en="Overview" data-zh="总览">Overview</a>
+  <a href="product.html" data-en="Product" data-zh="产品定义">Product</a>
+  <a href="api.html" data-en="API / SDK" data-zh="API / SDK">API / SDK</a>
+  <a href="business.html" data-en="Business" data-zh="商业模式">Business</a>
+</div></nav>
+
 <main class="doc-page">
-<a href="../index.html" class="doc-back">← Back to Home</a>
-<h1>🚀 ArrivalX — Settlement Layer for the Agent Economy</h1>
+<div class="doc-page-inner">
 
-<blockquote>x402-compatible · Multi-Jurisdiction Licensed · 5-line SDK</blockquote>
+<h1 data-en="🚀 ArrivalX Overview" data-zh="🚀 ArrivalX 项目总览">🚀 ArrivalX Overview</h1>
+<blockquote>
+<p data-en="x402-compatible · Multi-Jurisdiction Licensed · 5-line SDK" data-zh="x402 兼容 · 多司法辖区持牌 · 5 行代码 SDK">x402-compatible · Multi-Jurisdiction Licensed · 5-line SDK</p>
+</blockquote>
 
-<h2>What is ArrivalX?</h2>
-<p>AI agents are effectively <strong>unbanked</strong>. They cannot open bank accounts, pass KYC, or authorize payments — yet they need to pay for API access, compute, data, and other agents.</p>
-<p>ArrivalX is the <strong>licensed settlement infrastructure</strong> that solves this. Four live money transmission licenses (AU DCE, US MSB, HK MSO, CA MSB). Protocol-agnostic (x402, MPP, AP2). Compliance-first. 5 lines to integrate.</p>
+<h2 data-en="What is ArrivalX?" data-zh="ArrivalX 是什么？">What is ArrivalX?</h2>
+<p data-en="AI agents are effectively unbanked. They cannot open bank accounts, pass KYC, or authorize payments — yet they need to pay for API access, compute, data, and other agents." data-zh="AI Agent 目前处于"无银行账户"状态。无法开设银行账户、通过 KYC 或授权支付——但它们需要支付 API、计算、数据和其他 Agent 的费用。">AI agents are effectively unbanked. They cannot open bank accounts, pass KYC, or authorize payments — yet they need to pay for API access, compute, data, and other agents.</p>
+<p data-en="ArrivalX is the licensed settlement infrastructure that solves this. Four live money transmission licenses (AU DCE, US MSB, HK MSO, CA MSB). Protocol-agnostic (x402, MPP, AP2). Compliance-first. 5 lines to integrate." data-zh="ArrivalX 是解决这一问题的持牌结算基础设施。四张生效牌照（澳大利亚 DCE、美国 MSB、香港 MSO、加拿大 MSB）。协议无关（x402、MPP、AP2）。合规优先。5 行代码接入。">ArrivalX is the licensed settlement infrastructure that solves this. Four live money transmission licenses. Protocol-agnostic. Compliance-first. 5 lines to integrate.</p>
 
-<h2>Documentation</h2>
+<h2 data-en="Documentation" data-zh="文档导航">Documentation</h2>
+<div class="doc-cardlinks">
+  <a href="product.html">
+    <div class="icon">📋</div>
+    <strong data-en="Product Definition" data-zh="产品定义">Product Definition</strong>
+    <span data-en="Positioning, competitors, roadmap, falsification" data-zh="定位、竞品、路线图、证伪条件">Positioning, competitors, roadmap</span>
+  </a>
+  <a href="api.html">
+    <div class="icon">🔧</div>
+    <strong data-en="Integration Guide" data-zh="集成指南">Integration Guide</strong>
+    <span data-en="5-min quickstart, API ref, SDK, compliance" data-zh="5 分钟快速开始、API 参考、SDK、合规">Quickstart, API, SDK, compliance</span>
+  </a>
+  <a href="business.html">
+    <div class="icon">💰</div>
+    <strong data-en="Business Model" data-zh="商业模式">Business Model</strong>
+    <span data-en="Revenue, unit economics, TAM, risks" data-zh="收入、单位经济学、市场规模、风险">Revenue, economics, TAM, risks</span>
+  </a>
+  <a href="../index.html">
+    <div class="icon">🏠</div>
+    <strong data-en="Live Demo" data-zh="在线演示">Live Demo</strong>
+    <span data-en="Interactive x402 payment simulation" data-zh="交互式 x402 支付模拟">Interactive playground</span>
+  </a>
+</div>
+
+<hr>
+
+<h2 data-en="Key Links" data-zh="关键链接">Key Links</h2>
 <table>
-<tr><th>Document</th><th>What's In It</th></tr>
-<tr><td><a href="product.html">📋 Product Definition</a></td><td>Elevator pitch, competitive analysis, roadmap, falsification conditions, acquisition logic</td></tr>
-<tr><td><a href="api.html">🔧 Agent Integration Guide</a></td><td>5-minute quickstart, full API reference, SDK examples, protocol support, compliance guarantees</td></tr>
-<tr><td><a href="business.html">💰 Business Model</a></td><td>Revenue model, unit economics, growth model, TAM/SAM/SOM, funding strategy, risk factors</td></tr>
+<tr><th data-en="Resource" data-zh="资源">Resource</th><th>URL</th></tr>
+<tr><td data-en="🌐 Live Site" data-zh="🌐 线上站点">Live Site</td><td><a href="https://jasoneip01-pixel.github.io/arrivalx-agent-pay/">arrivalx-agent-pay</a></td></tr>
+<tr><td data-en="🔒 Source Code" data-zh="🔒 源码仓">Source</td><td><a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay-source">private source</a></td></tr>
+<tr><td data-en="🌐 Public Repo" data-zh="🌐 公开仓">Public</td><td><a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay">public deploy</a></td></tr>
 </table>
 
-<h2>Key Links</h2>
+<h2 data-en="Tech Stack" data-zh="技术栈">Tech Stack</h2>
 <table>
-<tr><th>Resource</th><th>URL</th></tr>
-<tr><td>🌐 Live Site</td><td><a href="https://jasoneip01-pixel.github.io/arrivalx-agent-pay/">jasoneip01-pixel.github.io/arrivalx-agent-pay</a></td></tr>
-<tr><td>📦 Source Code</td><td><a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay-source">github.com/jasoneip01-pixel/arrivalx-agent-pay-source</a></td></tr>
-<tr><td>🌐 Public Repo</td><td><a href="https://github.com/jasoneip01-pixel/arrivalx-agent-pay">github.com/jasoneip01-pixel/arrivalx-agent-pay</a></td></tr>
-</table>
-
-<h2>Tech Stack</h2>
-<table>
-<tr><th>Layer</th><th>Technology</th></tr>
-<tr><td>Settlement</td><td>USDC (Circle) · Base L2 · Solana</td></tr>
-<tr><td>Wallet Infrastructure</td><td>Cobo MPC · Fireblocks</td></tr>
+<tr><th data-en="Layer" data-zh="层">Layer</th><th data-en="Technology" data-zh="技术">Technology</th></tr>
+<tr><td data-en="Settlement" data-zh="结算">Settlement</td><td>USDC (Circle) · Base L2 · Solana</td></tr>
+<tr><td data-en="Wallet Infra" data-zh="钱包基础设施">Wallet</td><td>Cobo MPC · Fireblocks</td></tr>
 <tr><td>Compliance</td><td>Regtank · Sumsub</td></tr>
-<tr><td>Blockchain Data</td><td>Elliptic · Chainalysis</td></tr>
-<tr><td>Fiat On/Off Ramp</td><td>ClearBank · BCB Group</td></tr>
-<tr><td>Agent Protocols</td><td>x402 · Stripe MPP · Cobo AP2</td></tr>
+<tr><td data-en="Blockchain Intel" data-zh="链上情报">Intel</td><td>Elliptic · Chainalysis</td></tr>
+<tr><td data-en="Fiat Ramp" data-zh="法币出入金">Fiat</td><td>ClearBank · BCB Group</td></tr>
+<tr><td data-en="Agent Protocols" data-zh="Agent 协议">Protocols</td><td>x402 · Stripe MPP · Cobo AP2</td></tr>
 </table>
 
-<h2>Licenses</h2>
+<h2 data-en="Licenses" data-zh="牌照">Licenses</h2>
 <table>
-<tr><th>Jurisdiction</th><th>License</th><th>Regulator</th></tr>
-<tr><td>🇦🇺 Australia</td><td>Digital Currency Exchange (DCE)</td><td>AUSTRAC</td></tr>
-<tr><td>🇺🇸 United States</td><td>Money Services Business (MSB)</td><td>FinCEN</td></tr>
-<tr><td>🇭🇰 Hong Kong</td><td>Money Service Operator (MSO)</td><td>HK C&amp;ED</td></tr>
-<tr><td>🇨🇦 Canada</td><td>Money Service Business (MSB)</td><td>FINTRAC</td></tr>
+<tr><th data-en="Jurisdiction" data-zh="司法辖区">Jurisdiction</th><th>License</th><th>Regulator</th></tr>
+<tr><td>🇦🇺 Australia</td><td data-en="Digital Currency Exchange (DCE)" data-zh="数字货币交易所">DCE</td><td>AUSTRAC</td></tr>
+<tr><td>🇺🇸 United States</td><td data-en="Money Services Business (MSB)" data-zh="货币服务业务">MSB</td><td>FinCEN</td></tr>
+<tr><td>🇭🇰 Hong Kong</td><td data-en="Money Service Operator (MSO)" data-zh="货币服务运营商">MSO</td><td>HK C&amp;ED</td></tr>
+<tr><td>🇨🇦 Canada</td><td data-en="Money Service Business (MSB)" data-zh="货币服务业务">MSB</td><td>FINTRAC</td></tr>
 </table>
 
 <hr>
 
-<h2>Team</h2>
-<p>Stable Chain Fintech Limited. Founded 2022. 8 engineers and compliance specialists across Sydney, Singapore, and Hong Kong.</p>
+<h2 data-en="Team" data-zh="团队">Team</h2>
+<p data-en="Stable Chain Fintech Limited. Founded 2022. 8 engineers and compliance specialists across Sydney, Singapore, and Hong Kong." data-zh="Stable Chain Fintech Limited。成立于 2022 年。8 名工程师和合规专家，分布悉尼、新加坡、香港。">Stable Chain Fintech Limited. Founded 2022. 8 engineers and compliance specialists across Sydney, Singapore, and Hong Kong.</p>
+
+</div>
 </main>
 
 <footer class="footer">
@@ -90,5 +128,6 @@
     <span>🇦🇺 DCE · 🇺🇸 MSB · 🇭🇰 MSO · 🇨🇦 MSB</span>
   </div>
 </footer>
+<script src="docs.js"></script>
 </body>
 </html>
