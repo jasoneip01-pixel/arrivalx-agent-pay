@@ -61,6 +61,33 @@
 }
 @media (max-width: 860px) { .demo-layout { grid-template-columns: 1fr; } }
 
+/* Tablet: 2-col scenario cards */
+@media (max-width: 767px) {
+  .scenario-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .scenario-card { padding: 10px 12px; }
+  .scenario-card .sc-title { font-size: 0.82rem; }
+  .scenario-card .sc-desc { font-size: 0.7rem; }
+  .demo-container { padding: 0 12px 40px; }
+  .demo-page { padding-top: 60px; }
+}
+/* Phone: single column scenarios, tighter everything */
+@media (max-width: 600px) {
+  .scenario-grid { grid-template-columns: 1fr; }
+  .demo-controls { flex-direction: column; }
+  .demo-controls select { width: 100%; }
+  .demo-controls input { width: 100%; }
+  .demo-controls button { width: 100%; }
+  .flow-panel { padding: 12px; min-height: 300px; }
+  .output-panel { padding: 12px; }
+  .flow-step { padding: 8px 10px; font-size: 0.75rem; }
+  .demo-log { font-size: 0.68rem; min-height: 180px; max-height: 300px; padding: 8px; }
+  .scenario-card .sc-desc { white-space: normal; }
+  .fee-table { font-size: 0.72rem; }
+  .scenario-banner { font-size: 0.78rem; padding: 10px 14px; }
+  .route-node { font-size: 0.68rem; padding: 3px 8px; }
+  .demo-result { font-size: 0.75rem; padding: 10px 12px; }
+}
+
 /* Left panel - flow viz */
 .flow-panel {
   background: var(--card-bg);
@@ -672,7 +699,7 @@ function renderFeeTable(s) {
   html += '<tr class="total"><td>' + t('Total Fees', '总费用') + '</td><td>' +
     (totalPct > 0 ? totalPct.toFixed(1) + '%' : '') + (totalPct > 0 && totalUsd > 0 ? ' + ' : '') +
     (totalUsd > 0 ? '$' + totalUsd.toFixed(2) : '') + '</td></tr>';
-  html += '</table>';
+  html += '</table></div>';
   container.innerHTML = html;
 }
 
